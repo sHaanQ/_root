@@ -40,9 +40,15 @@ sudo tar -xvzf modules.tar.gz -C ../lib
 https://help.github.com/articles/error-permission-denied-publickey/
 
 --------------------
+One time for each project
+--------------------
+git init
+git remote add origin git@github.com:bhargav89/raspberry-pi.git
+
+--------------------
 [git push]
 --------------------
 git add README.md
 git commit -m "first commit"
-git remote add origin git@github.com:bhargav89/raspberry-pi.git
 git push -u origin master
+
