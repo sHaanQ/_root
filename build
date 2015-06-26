@@ -24,8 +24,8 @@ cd ../tools/mkimage/
 mv kernel.img /media/bhargav/boot/
 
 cd /elements/raspberry-pi/modules/lib
-tar -cvzf modules.tar.gz ./lib/
-mv modules.tar.gz /media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77//tmp/
+tar -cvzf modules.tar.gz *
+mv modules.tar.gz /media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/tmp/
 
 --------------------
 [Get into SD card]
