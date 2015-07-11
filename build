@@ -4,8 +4,9 @@
 
 git clone https://github.com/raspberrypi/tools
 git clone https://github.com/raspberrypi/linux
+https://github.com/raspberrypi/firmware.git
 
-export PATH=$PATH:/elements/raspberry-pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+export PATH=$PATH:/data/raspberry-pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
 
 cd linux
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcmrpi_defconfig
@@ -23,7 +24,7 @@ cd ../tools/mkimage/
 ./imagetool-uncompressed.py  ../../linux/arch/arm/boot/zImage 
 mv kernel.img /media/bhargav/boot/
 
-cd /elements/raspberry-pi/modules/lib
+cd /data/raspberry-pi/modules/lib
 tar -cvzf modules.tar.gz *
 mv modules.tar.gz /media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/tmp/
 
