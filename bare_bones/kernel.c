@@ -4,6 +4,15 @@
 #include <stddef.h>
 #include <stdint.h>
  
+uint32_t encode_base_64(uint8_t *encoded, const char *src, uint32_t len);
+
+struct frame {
+	uint8_t start_byte;
+	uint16_t data_length;
+	uint8_t *data;
+	uint8_t crc;
+};
+
 static inline void __raw_writel(uint32_t reg, uint32_t data)
 {
 	*(volatile uint32_t *)reg = data;
@@ -70,8 +79,8 @@ void uart_init()
 {
 	// Disable UART0.
 	__raw_writel(UART0_CR, 0x00000000);
-	// Setup the GPIO pin 14 && 15.
  
+	// Setup the GPIO pin 14 && 15.
 	// Disable pull up/down for all GPIO pins & delay for 150 cycles.
 	__raw_writel(GPPUD, 0x00000000);
 	delay(150);
@@ -137,7 +146,8 @@ extern "C" /* Use C linkage for kernel_main. */
 #endif
 void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 {
-	uint8_t c;
+	uint8_t /*c,*/ packet[260], encoded[260];
+	uint32_t cnt = 0;
 
 	(void) r0;
 	(void) r1;
@@ -146,9 +156,29 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	uart_init();
 	uart_puts("Hello, kernel World !! \r\n");
  
-	while ( true ) {
+/*
+	while ( c != '\n' ) {
 		c = uart_getc();
-		uart_putc(c+2);
+		uart_putc(c+1);
 	}
+*/
+	packet[0] = uart_getc(); // Start byte
+	packet[1] = uart_getc(); // MSByte of length
+	packet[2] = uart_getc(); // LSByte of length
+
+	// Put the number together, MSB-LSB to get the data length
+
+	while ((cnt < )) {
+		packet[cnt] = uart_getc();
+		cnt++;
+	}
+	
+	uart_puts("-----------\r\n"`);
+	uart_puts((const char*)packet);
+	uart_puts("--------------------\r\n"`);
+	encode_base_64(encoded, (const char *)packet, cnt);
+	uart_puts((const char*)encoded);
+
+	while(1);
 }
 
