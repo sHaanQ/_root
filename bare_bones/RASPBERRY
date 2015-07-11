@@ -1,0 +1,116 @@
+
+#
+# Raspberry Pi learnings
+#
+
+--------------------------------------------------------------
+How does Pi boot ?
+--------------------------------------------------------------
+Source : http://raspberrypi.stackexchange.com/questions/10489/how-does-raspberry-pi-boot
+
+Bare metal code : https://github.com/dwelch67/raspberrypi
+
+1. When the Raspberry Pi is first turned on, the ARM core is off, and the GPU core is on. 
+   At this point the SDRAM is disabled.
+2. The GPU starts executing the first stage bootloader (ROM code), which is stored in ROM 
+   on the SoC. The first stage bootloader reads the SD card, and loads the second stage 
+   bootloader (bootcode.bin) into the L2 cache, and runs it.
+3. bootcode.bin enables SDRAM, and reads the third stage bootloader (loader.bin) from 
+   the SD card into RAM, and runs it.
+4. loader.bin reads the GPU firmware (start.elf).
+5. start.elf reads config.txt, cmdline.txt and kernel.img, and at last the ARM cpu is 
+   started running that kernel image.
+
+loader.bin doesn't do much. It can handle .elf files, and so is needed to load start.elf
+at the top of memory (ARM uses SDRAM from address zero). There is a plan to add elf 
+loading support to bootcode.bin, which would make loader.bin unnecessary, but it's a low 
+priority (I guess it might save you 100ms on boot).
+
+
+--------------------------------------------------------------
+Making our own minimalistic kernel
+--------------------------------------------------------------
+
+We need three input files:
+	* boot.s - kernel entry point that sets up the processor environment
+	* kernel.c - your actual kernel routines
+	* linker.ld - for linking the above files
+
+-------------------------------------
+boot.S - Booting the Operating System
+-------------------------------------
+
+The section ".text.boot" will be used in the linker script to place the boot.S as 
+the very first thing in our kernel image. The code initializes a minimum C environment, 
+which means having a stack and zeroing the BSS segment, before calling the kernel_main function.
+
+Note that the code avoids using r0-r2 so the remain valid for the kernel_main call.
+
+You can then assemble boot.S using:
+arm-none-eabi-gcc -mcpu=arm1176jzf-s -fpic -ffreestanding -c boot.S -o boot.o
+
+---------------------
+Kernel Implementation 
+---------------------
+
+The GPU bootloader passes arguments to the kernel via r0-r2 and the boot.S makes sure 
+to preserve those 3 registers.
+
+They are the first 3 arguments in a C function call. 
+	- The argument r0 contains a code for the device the rpi was booted from. 
+	  This is generally 0 but its actual value depends on the firmware of the board. 
+	- r1 contains the 'ARM Linux Machine Type' which for the rpi is 3138 (0xc42) 
+	  identifying the bcm2708 cpu. A full list of ARM Machine Types is available from 
+	  http://www.arm.linux.org.uk/developer/machines/. 
+	- r2 contains the address of the ATAGs.
+
+Compile it using:
+arm-none-eabi-gcc -mcpu=arm1176jzf-s -fpic -ffreestanding -std=gnu99 -c kernel.c -o kernel.o -O2 -Wall -Wextra
+
+------------------
+Linking the Kernel
+------------------
+
+We can now assemble boot.s and compile kernel.c. This produces two object files 
+that each contain part of the kernel. 
+
+To create the full and final kernel we will have to link these object files into the 
+final kernel program, usable by the bootloader. When developing user-space programs, 
+your toolchain ships with default scripts for linking such programs. 
+
+However, these are unsuitable for kernel development and we need to provide our own
+customized linker script. 
+
+Create a linker.ld:
+
+	- ENTRY(_start) declares the entry point for the kernel image.
+	  The symbol (_start) was declared in the boot.S file.
+	- SECTIONS declares sections. It decides where the bits and pieces of our code and data
+	  go and also sets a few symbols that help us track the size of each section.
+	- The "." denotes the current address so the first line tells the linker to set the current
+	  address to 0x8000, where the kernel starts. The current address is automatically
+	  incremented when the linker adds data. The second line then creates a symbol "__start" 
+	  and sets it to the current address.
+	- Further reading @ http://wiki.osdev.org/Raspberry_Pi_Bare_Bones
+
+You can then link your kernel using:
+arm-none-eabi-gcc -T linker.ld -o myos.elf -ffreestanding -O2 -nostdlib boot.o kernel.o
+arm-none-eabi-objcopy myos.elf -O binary myos.bin
+
+
+arm-none-eabi-objcopy :
+This utility is used to copy binary files (and possibly preform transformations on them 
+in the process). We use it to copy our linked program into an IMG file.
+
+Further reading @ https://rpidev.wordpress.com/
+
+---------------------------------------
+Copy the myos.bin to the boot partition
+---------------------------------------
+
+cp myos.bin /media/bhargav/boot/kernel.img
+sync
+umount /media/bhargav/*
+
+
+
