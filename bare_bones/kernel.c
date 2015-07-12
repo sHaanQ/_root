@@ -96,13 +96,25 @@ void uart_init()
 	// Clear pending interrupts.
 	__raw_writel(UART0_ICR, 0x7FF);
  
-	// Set integer & fractional part of baud rate.
-	// Divider = UART_CLOCK/(16 * Baud)
-	// Fraction part register = (Fractional part * 64) + 0.5
-	// UART_CLOCK = 3000000; Baud = 115200.
- 
-	// Divider = 3000000 / (16 * 115200) = 1.627 = ~1.
-	// Fractional part register = (.627 * 64) + 0.5 = 40.6 = ~40.
+
+	/*
+	 * The IBRD and FBRD registers specify the baud rate.
+	 *
+	 * The baud rate divisor is calculated as follows:
+	 * Baud rate divisor BAUDDIV = (FUARTCLK/(16*Baud rate))
+	 * where FUARTCLK is the UART reference clock frequency.
+	 *
+	 * UART_CLOCK = 3,000,000; Baud = 115200.
+	 * IBRD = int(3,000,000/(16*115,200)) = int(1.627) = 1
+	 * FBRD = round(0.627*64) = 40
+	 *
+	 * Why 64 ? FBRD is 6bits, muliplying the fractional part by 64
+	 * gets you closest to the REQUIRED baud rate.
+	 *
+	 * Baud rate =  (80 MHz)/(16* (m+n/64))
+	 * m = interger part, n = fractional part
+	 *
+	 */
 	__raw_writel(UART0_IBRD, 1);
 	__raw_writel(UART0_FBRD, 40);
  
