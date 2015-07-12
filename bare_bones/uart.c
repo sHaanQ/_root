@@ -12,12 +12,12 @@
  */
 
 
-#if !defined(__cplusplus)
 #include <stdbool.h>
-#endif
 #include <stddef.h>
 #include <stdint.h>
-#include <uart.h>
+#include "uart.h"
+
+#define DEBUG 1
  
 static inline void __raw_writel(uint32_t reg, uint32_t data)
 {
@@ -44,7 +44,7 @@ size_t strlen(const char* str)
 	return ret;
 }
  
-void uart_init()
+void uart_init(void)
 {
 	// Disable UART0.
 	__raw_writel(UART0_CR, 0x00000000);
@@ -97,18 +97,26 @@ void uart_init()
 	__raw_writel(UART0_CR, (1 << 0) | (1 << 8) | (1 << 9));
 }
  
+/*
+ * @func: UART read
+ *
+ */
+unsigned char uart_getc(void)
+{
+    // Wait for UART to have recieved something.
+    while ( __raw_readl(UART0_FR) & (1 << 4) ) { }
+    return __raw_readl(UART0_DR);
+}
+ 
+/*
+ * @func: UART write
+ *
+ */
 void uart_putc(unsigned char byte)
 {
 	// Wait for UART to become ready to transmit.
 	while ( __raw_readl(UART0_FR) & (1 << 5) ) { }
 	__raw_writel(UART0_DR, byte);
-}
- 
-unsigned char uart_getc()
-{
-    // Wait for UART to have recieved something.
-    while ( __raw_readl(UART0_FR) & (1 << 4) ) { }
-    return __raw_readl(UART0_DR);
 }
  
 void uart_write(const unsigned char* buffer, size_t size)
@@ -119,17 +127,14 @@ void uart_write(const unsigned char* buffer, size_t size)
  
 void uart_puts(const char* str)
 {
-	uart_write((const unsigned char*) str, strlen(str));
+	uart_write((const unsigned char*)str, strlen(str));
 }
  
-#if defined(__cplusplus)
-extern "C" /* Use C linkage for kernel_main. */
-#endif
 void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 {
 	struct frame fr;
-	uint8_t /*c,*/ packet[260], encoded[260], data[255];
-	uint8_t cnt = 0, len = 0, data_len[2];
+	uint8_t /*c,*/ debug[260], encoded[260], data[255];
+	uint8_t cnt, data_len[2];
 
 	(void) r0;
 	(void) r1;
@@ -138,13 +143,8 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	uart_init();
 	uart_puts("Hello, kernel World !! \r\n");
  
-/*
-	while ( c != '\n' ) {
-		c = uart_getc();
-		uart_putc(c+1);
-	}
-*/
 retransmit:
+	cnt = 0;
 	fr.start_byte = uart_getc();
 
 	// Read the data length, MSB-LSB to get the data length
@@ -152,13 +152,13 @@ retransmit:
 	data_len[1] = uart_getc();
 	fr.data_length = ascii_to_length(data_len);
 
-#if 1
-	packet[0] = fr.start_byte; // Start byte
-	packet[1] = data_len[0]; // MSByte of length
-	packet[2] = data_len[1]; // LSByte of length
+#if DEBUG
+	debug[0] = fr.start_byte; // Start byte
+	debug[1] = data_len[0]; // MSByte of length
+	debug[2] = data_len[1]; // LSByte of length
 
-//	len =  ascii_to_length(&(packet[1]));//(packet[1] << 8) | packet[2];
-	uart_puts((const char *)packet);
+//	len =  ascii_to_length(&(debug[1]));//(debug[1] << 8) | debug[2];
+	uart_puts((const char *)debug);
 #endif
 
 	if (fr.start_byte != '$') {
@@ -176,12 +176,13 @@ retransmit:
 		cnt++;
 	}
 	
-	uart_puts("\n-----------\r\n");
+	uart_puts("\r\n-----------\r\n");
 	uart_puts((const char*)fr.data);
-	uart_puts("\n--------------------\r\n");
+	uart_puts("\r\n-----------\r\n");
 	encode_base_64(encoded, (const char *)fr.data, cnt);
 	uart_puts((const char*)encoded);
+	uart_puts("\r\n-----------\r\n");
 
-	while(1);
+	goto retransmit;
 }
 
