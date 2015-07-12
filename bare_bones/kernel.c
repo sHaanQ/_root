@@ -5,6 +5,7 @@
 #include <stdint.h>
  
 uint32_t encode_base_64(uint8_t *encoded, const char *src, uint32_t len);
+uint8_t ascii_to_length(uint8_t *ascii_text);
 
 struct frame {
 	uint8_t start_byte;
@@ -105,7 +106,7 @@ void uart_init()
 	__raw_writel(UART0_IBRD, 1);
 	__raw_writel(UART0_FBRD, 40);
  
-	// Enable FIFO & 8 bit data transmissio (1 stop bit, no parity).
+	// Enable FIFO & 8 bit data transmission (1 stop bit, no parity).
 	__raw_writel(UART0_LCRH, (1 << 4) | (1 << 5) | (1 << 6));
  
 	// Mask all interrupts.
@@ -146,8 +147,9 @@ extern "C" /* Use C linkage for kernel_main. */
 #endif
 void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 {
-	uint8_t /*c,*/ packet[260], encoded[260];
-	uint32_t cnt = 0;
+	struct frame fr;
+	uint8_t /*c,*/ packet[260], encoded[260], data[255];
+	uint8_t cnt = 0, len = 0, data_len[2];
 
 	(void) r0;
 	(void) r1;
@@ -162,21 +164,42 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 		uart_putc(c+1);
 	}
 */
-	packet[0] = uart_getc(); // Start byte
-	packet[1] = uart_getc(); // MSByte of length
-	packet[2] = uart_getc(); // LSByte of length
+retransmit:
+	fr.start_byte = uart_getc();
 
-	// Put the number together, MSB-LSB to get the data length
+	// Read the data length, MSB-LSB to get the data length
+	data_len[0] = uart_getc();
+	data_len[1] = uart_getc();
+	fr.data_length = ascii_to_length(data_len);
 
-	while ((cnt < )) {
-		packet[cnt] = uart_getc();
+#if 1
+	packet[0] = fr.start_byte; // Start byte
+	packet[1] = data_len[0]; // MSByte of length
+	packet[2] = data_len[1]; // LSByte of length
+
+//	len =  ascii_to_length(&(packet[1]));//(packet[1] << 8) | packet[2];
+	uart_puts((const char *)packet);
+#endif
+
+	if (fr.start_byte != '$') {
+		uart_puts("\nFrame dropped !! Invalid start byte \r\n");
+		uart_puts("Requesting re-transmission \r\n");
+		goto retransmit;
+	}
+
+	/* allocate memory */
+	fr.data = data;
+
+	// Recieve data bytes from Host system
+	while ((cnt < fr.data_length)) {
+		fr.data[cnt] = uart_getc();
 		cnt++;
 	}
 	
-	uart_puts("-----------\r\n"`);
-	uart_puts((const char*)packet);
-	uart_puts("--------------------\r\n"`);
-	encode_base_64(encoded, (const char *)packet, cnt);
+	uart_puts("\n-----------\r\n");
+	uart_puts((const char*)fr.data);
+	uart_puts("\n--------------------\r\n");
+	encode_base_64(encoded, (const char *)fr.data, cnt);
 	uart_puts((const char*)encoded);
 
 	while(1);
