@@ -31,6 +31,9 @@ uint32_t encode_base_64(uint8_t *encoded, const char *src, uint32_t len)
 	printf("%s %s\n", encoded, src);
 #endif
 
+	if (!len)
+		return 1;
+
 	p = encoded;
 
 	for (i = 0; i < len - 2; i += 3) {
@@ -56,7 +59,6 @@ uint32_t encode_base_64(uint8_t *encoded, const char *src, uint32_t len)
 		*p++ = '=';
 	}
 
-	*p++ = '\0';
 	return (p - encoded);
 }
 

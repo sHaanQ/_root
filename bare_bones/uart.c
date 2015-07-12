@@ -11,13 +11,14 @@
  *
  */
 
-
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include "uart.h"
 
-#define DEBUG 1
+#define DEBUG			1
+#define HEADER_SIZE		3 	/* Packet Header size (Start + Data Length) */
+#define FRAME_LENGTH	260 /* Total size of the packet */
  
 static inline void __raw_writel(uint32_t reg, uint32_t data)
 {
@@ -39,9 +40,18 @@ static inline void delay(int32_t count)
 size_t strlen(const char* str)
 {
 	size_t ret = 0;
-	while ( str[ret] != 0 )
+	while (str[ret] != 0)
 		ret++;
 	return ret;
+}
+
+void memset(uint8_t *str, size_t size)
+{
+	uint32_t cnt = 0;
+	while (cnt < size) {
+		str[cnt] = 0;
+		cnt++;
+	}
 }
  
 void uart_init(void)
@@ -133,8 +143,8 @@ void uart_puts(const char* str)
 void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 {
 	struct frame fr;
-	uint8_t /*c,*/ debug[260], encoded[260], data[255];
-	uint8_t cnt, data_len[2];
+	uint8_t debug[HEADER_SIZE], encoded[FRAME_LENGTH], data[255];
+	uint8_t cnt, data_len[2], error;
 
 	(void) r0;
 	(void) r1;
@@ -144,9 +154,11 @@ void kernel_main(uint32_t r0, uint32_t r1, uint32_t atags)
 	uart_puts("Hello, kernel World !! \r\n");
  
 retransmit:
-	cnt = 0;
-	fr.start_byte = uart_getc();
+	cnt = error = 0;
+	memset(data, FRAME_LENGTH);
+	memset(encoded, FRAME_LENGTH);
 
+	fr.start_byte = uart_getc();
 	// Read the data length, MSB-LSB to get the data length
 	data_len[0] = uart_getc();
 	data_len[1] = uart_getc();
@@ -156,16 +168,21 @@ retransmit:
 	debug[0] = fr.start_byte; // Start byte
 	debug[1] = data_len[0]; // MSByte of length
 	debug[2] = data_len[1]; // LSByte of length
-
-//	len =  ascii_to_length(&(debug[1]));//(debug[1] << 8) | debug[2];
 	uart_puts((const char *)debug);
+	uart_puts("\r\n");
 #endif
 
 	if (fr.start_byte != '$') {
 		uart_puts("\nFrame dropped !! Invalid start byte \r\n");
 		uart_puts("Requesting re-transmission \r\n");
-		goto retransmit;
+		error = 1;
+	} else if ((fr.start_byte == '$') && (!fr.data_length)) {
+		uart_puts("\nInvalid data length\r\n");
+		error = 1;
 	}
+
+	if (error)
+	  goto retransmit;
 
 	/* allocate memory */
 	fr.data = data;
@@ -176,12 +193,16 @@ retransmit:
 		cnt++;
 	}
 	
-	uart_puts("\r\n-----------\r\n");
+	uart_puts("\r\n----TX-ed frame-----\r\n");
+	uart_putc(fr.start_byte);
+	uart_puts((const char*)data_len);
 	uart_puts((const char*)fr.data);
-	uart_puts("\r\n-----------\r\n");
+	uart_puts("\r\n----RX-ed frame------\r\n");
 	encode_base_64(encoded, (const char *)fr.data, cnt);
+	uart_putc(fr.start_byte);
+	uart_puts((const char*)data_len);
 	uart_puts((const char*)encoded);
-	uart_puts("\r\n-----------\r\n");
+	uart_puts("\r\n---------------------\r\n");
 
 	goto retransmit;
 }

@@ -33,6 +33,8 @@ uint8_t ascii_to_length(uint8_t *ascii_text)
         bcd_value = (0xa + ascii_text[0] - 'A')  << 4;
     else if (ascii_text[0] >= 'a' && ascii_text[0] <= 'f')
         bcd_value = (0xa + ascii_text[0] - 'a')  << 4;
+	else
+		bcd_value = 0;
 
     // LSB
     if(ascii_text[1] >= '0' && ascii_text[1] <= '9')
@@ -41,6 +43,8 @@ uint8_t ascii_to_length(uint8_t *ascii_text)
         bcd_value |= (0xa + ascii_text[1] - 'A');
     else if (ascii_text[1] >= 'a' && ascii_text[1] <= 'f')
         bcd_value |= (0xa + ascii_text[1] - 'a');
+	else
+		bcd_value = 0;
 
 	return bcd_value;
 }
