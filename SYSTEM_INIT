@@ -16,9 +16,15 @@ mkdir ../modules
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=../modules/ modules
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=../modules/ modules_install
 
---------------------
-[SD card setup]
---------------------
+--------------------------------------------------
+[SD card setup] - Using the raspbian wheezy image
+--------------------------------------------------
+sudo dd bs=4M if=2015-05-05-raspbian-wheezy.img of=/dev/sdb
+sync
+
+-------------------------------------------
+[SD card setup] - Building a custom kernel
+-------------------------------------------
 
 cd ../tools/mkimage/
 ./imagetool-uncompressed.py  ../../linux/arch/arm/boot/zImage 
@@ -52,4 +58,6 @@ git remote add origin git@github.com:bhargav89/raspberry-pi.git
 git add README.md
 git commit -m "first commit"
 git push -u origin master
+
+
 
