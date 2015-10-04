@@ -1,0 +1,17 @@
+[.....]
+
+UART + GPIO driver
+
+GPIO function selector is used to define the operation of the general-purpose I/O pins.
+GPFSEL[0-5] maps all 54 GPIOs.
+
+Each Register handles 10 GPIOs and are split as follows
+
+Example:
+GPFSEL0
+
+Bit  -> 31-30 29-27 26-24 23-21 20-18 17-15 14-12 11-9 8-6 5-3 2-0
+GPIO -> RSVD    9     8     7     6     5     4     3   2   1   0
+
+
+
