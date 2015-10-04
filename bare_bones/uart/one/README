@@ -6,8 +6,11 @@ The UART driver does the following:
 
 The packet format for both directions shall be as follows
 
-Byte -> |	0	 |  1   |  2   |  3.....(2+<data-len>)  |  3+<data-len>  |
+        ------------------------------------------------------------------
+Byte -> |   0    |  1   |  2   |  3.....(2+<data-len>)  |  3+<data-len>  |
+        ------------------------------------------------------------------
 Data -> |   $    | <data-len>  |         <data>         |  <8-bit CRC>   |
+        ------------------------------------------------------------------
 
 <data> shall represent an ASCII string stored as 8-bit unsigned characters
 <data-len> represents the length of <data> stored as an MSB first 16-bit number
