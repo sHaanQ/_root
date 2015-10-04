@@ -26,11 +26,11 @@ static inline uint32_t GPIO_FUNCTION_SELECT(uint32_t gpio)
 		case 20 ... 29:
 			return GPFSEL2;
 		case 30 ... 39:
-			return GPFSEL2;
+			return GPFSEL3;
 		case 40 ... 49:
-			return GPFSEL2;
+			return GPFSEL4;
 		case 50 ... 53:
-			return GPFSEL2;
+			return GPFSEL5;
 		default:
 			uart_puts("[....] I don't have record of that GPIO number u specified \r\n");	
 			return 0;
