@@ -228,9 +228,10 @@ echo 'kernel=u-boot.bin' > /media/bhargav/boot/config.txt
 3. Raspberry Pi 2 bootstrap
 ---------------------------
 
-1. Format a micro-SD card with a legacy (PC/MBR/BIOS/legacy) partition table -- Raspberry Pi 2's ROM doesn't support GPT.
-2. Create a FAT32 partition [boot partition]; this will hold bootloaders, A/B kernels and initrds, U-Boot config and script.
-       Copy files in this directory in the partition.
+1. Format a micro-SD card with a legacy (PC/MBR/BIOS/legacy) partition table -- Raspberry Pi 2's 
+   ROM doesn't support GPT.
+2. Create a FAT32 partition [boot partition]; this will hold bootloaders, A/B kernels and initrds, 
+   U-Boot config and script. Copy files in this directory in the partition.
 3. Boot Raspberry Pi 2 and get to the U-Boot prompt (press enter on serial console).
 
 Run these U-Boot commands:
@@ -264,17 +265,24 @@ bootcode.bin and start.elf are SPL bits from:
 https://github.com/raspberrypi/firmware/tree/master/boot
 and is available under LICENCE.broadcom.
 
-Following files were extracted from https://launchpad.net/~p-pisati/+archive/ubuntu/misc/+files/linux-image-3.19.1-2-generic-bcm2709_3.19.1-2.2_armhf.deb
+Following files were extracted from 
 - zImage is boot/vmlinuz-3.19.1-2-generic-bcm2709
 - bcm2836-rpi-2-b.dtb is lib/firmware/3.19.1-2-generic-bcm2709/device-tree/bcm2709-rpi-2-b.dtb
 
-kernel7.img is u-boot.bin as built from github:swarren/u-boot with Ubuntu's arm-linux-gnueabihf cross-compiler as follows:
+kernel7.img is u-boot.bin as built from github:swarren/u-boot with Ubuntu's
+arm-linux-gnueabihf cross-compiler as follows:
 
 boot.env is a saveenv U-Boot environment (binary format) with:
 mmc_boot changed from:
 if mmc dev ${devnum}; then setenv devtype mmc; run scan_dev_for_boot_part; fi
 to:
-if mmc dev ${devnum}; then setenv devtype mmc; if run loadbootenv; then echo Loaded environment from ${bootenv}; run importbootenv; fi; if test -n "$uenvcmd"; then echo Running uenvcmd ...; run uenvcmd; fi; run scan_dev_for_boot_part; fi
+if mmc dev ${devnum}; then setenv devtype mmc; if run loadbootenv; 
+then echo Loaded environment from ${bootenv}; 
+run importbootenv; fi; if test -n "$uenvcmd"; 
+then echo Running uenvcmd ...; run uenvcmd; 
+fi; 
+run scan_dev_for_boot_part; 
+fi
 and defined:
 bootenv=uEnv.txt
 loadbootenv=load ${devtype} ${devnum} ${loadaddr} ${bootenv}
