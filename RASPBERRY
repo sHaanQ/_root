@@ -1,46 +1,104 @@
-#
-# Raspberry Pi learnings
-#
 
---------------------------------------------------------------
+     ____  ____  _
+    |  _ \|  _ \(_)
+    | |_) | |_) | |
+    |  _ <|  __/| |
+    |_| \_\_|   |_|
+
+
+Getting started
+===============
+
+1. Cloning tools and code
+2. Preparing SD card
+
+1. Cloning tools and code
+-------------------------
+
+git clone https://github.com/raspberrypi/tools
+git clone https://github.com/raspberrypi/linux
+https://github.com/raspberrypi/firmware.git
+
+export PATH=$PATH:/data/raspberry-pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+
+cd linux
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcmrpi_defconfig
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
+
+mkdir ../modules
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=../modules/ modules
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=../modules/ modules_install
+
+2.1 SD card setup - Using the raspbian wheezy image
+---------------------------------------------------
+sudo dd bs=4M if=2015-05-05-raspbian-wheezy.img of=/dev/sdb
+sync
+
+2.2 SD card setup - Building a custom kernel
+--------------------------------------------
+
+cd ../tools/mkimage/
+./imagetool-uncompressed.py  ../../linux/arch/arm/boot/zImage
+mv kernel.img /media/bhargav/boot/
+
+cd /data/raspberry-pi/modules/lib
+tar -cvzf modules.tar.gz *
+mv modules.tar.gz /media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/tmp/
+
+Git repository
+==============
+
+1. Generating SSH keys
+------------------
+https://help.github.com/articles/error-permission-denied-publickey/
+
+2. Initialize repository
+-------------------------
+git init
+git remote add origin git@github.com:bhargav89/RPi.git
+
+3. Committing to the repo
+-------------------------
+git add README
+git commit -m "first commit"
+git push -u origin master
+
+
 How does Pi boot ?
---------------------------------------------------------------
+==================
 Source : http://raspberrypi.stackexchange.com/questions/10489/how-does-raspberry-pi-boot
-
 Bare metal code : https://github.com/dwelch67/raspberrypi
 
-1. When the Raspberry Pi is first turned on, the ARM core is off, and the GPU core is on. 
+1. When the Raspberry Pi is first turned on, the ARM core is off, and the GPU core is on.
    At this point the SDRAM is disabled.
-2. The GPU starts executing the first stage bootloader (ROM code), which is stored in ROM 
-   on the SoC. The first stage bootloader reads the SD card, and loads the second stage 
+2. The GPU starts executing the first stage bootloader (ROM code), which is stored in ROM
+   on the SoC. The first stage bootloader reads the SD card, and loads the second stage
    bootloader (bootcode.bin) into the L2 cache, and runs it.
-3. bootcode.bin enables SDRAM, and reads the third stage bootloader (loader.bin) from 
+3. bootcode.bin enables SDRAM, and reads the third stage bootloader (loader.bin) from
    the SD card into RAM, and runs it.
 4. loader.bin reads the GPU firmware (start.elf).
-5. start.elf reads config.txt, cmdline.txt and kernel.img, and at last the ARM cpu is 
+5. start.elf reads config.txt, cmdline.txt and kernel.img, and at last the ARM cpu is
    started running that kernel image.
 
 loader.bin doesn't do much. It can handle .elf files, and so is needed to load start.elf
-at the top of memory (ARM uses SDRAM from address zero). There is a plan to add elf 
-loading support to bootcode.bin, which would make loader.bin unnecessary, but it's a low 
+at the top of memory (ARM uses SDRAM from address zero). There is a plan to add elf
+loading support to bootcode.bin, which would make loader.bin unnecessary, but it's a low
 priority (I guess it might save you 100ms on boot).
 
-
---------------------------------------------------------------
 Making our own minimalistic kernel
---------------------------------------------------------------
+==================================
 
 We need three input files:
-	* boot.s - kernel entry point that sets up the processor environment
-	* kernel.c - your actual kernel routines
-	* linker.ld - for linking the above files
+    1. boot.s - kernel entry point that sets up the processor environment
+    2. kernel.c - your actual kernel routines
+    3. linker.ld - for linking the above files
+    4. Booting the kernel
 
--------------------------------------
-boot.S - Booting the Operating System
--------------------------------------
+1. boot.S - Booting the Operating System
+----------------------------------------
 
-The section ".text.boot" will be used in the linker script to place the boot.S as 
-the very first thing in our kernel image. The code initializes a minimum C environment, 
+The section ".text.boot" will be used in the linker script to place the boot.S as
+the very first thing in our kernel image. The code initializes a minimum C environment,
 which means having a stack and zeroing the BSS segment, before calling the kernel_main function.
 
 Note that the code avoids using r0-r2 so the remain valid for the kernel_main call.
@@ -48,49 +106,73 @@ Note that the code avoids using r0-r2 so the remain valid for the kernel_main ca
 You can then assemble boot.S using:
 arm-none-eabi-gcc -mcpu=arm1176jzf-s -fpic -ffreestanding -c boot.S -o boot.o
 
----------------------
-Kernel Implementation 
----------------------
+2. Kernel Implementation
+------------------------
 
-The GPU bootloader passes arguments to the kernel via r0-r2 and the boot.S makes sure 
+The GPU bootloader passes arguments to the kernel via r0-r2 and the boot.S makes sure
 to preserve those 3 registers.
 
-They are the first 3 arguments in a C function call. 
-	- The argument r0 contains a code for the device the rpi was booted from. 
-	  This is generally 0 but its actual value depends on the firmware of the board. 
-	- r1 contains the 'ARM Linux Machine Type' which for the rpi is 3138 (0xc42) 
-	  identifying the bcm2708 cpu. A full list of ARM Machine Types is available from 
-	  http://www.arm.linux.org.uk/developer/machines/. 
-	- r2 contains the address of the ATAGs.
+They are the first 3 arguments in a C function call.
+    - The argument r0 contains a code for the device the rpi was booted from.
+      This is generally 0 but its actual value depends on the firmware of the board.
+    - r1 contains the 'ARM Linux Machine Type' which for the rpi is 3138 (0xc42)
+      identifying the bcm2708 cpu. A full list of ARM Machine Types is available from
+      http://www.arm.linux.org.uk/developer/machines/.
+    - r2 contains the address of the ATAGs.
 
 Compile it using:
 arm-none-eabi-gcc -mcpu=arm1176jzf-s -fpic -ffreestanding -std=gnu99 -c kernel.c -o kernel.o -O2 -Wall -Wextra
 
-------------------
-Linking the Kernel
-------------------
+3. Linking the Kernel
+---------------------
 
-We can now assemble boot.s and compile kernel.c. This produces two object files 
-that each contain part of the kernel. 
+We can now assemble boot.s and compile kernel.c. This produces two object files
+that each contain part of the kernel.
 
-To create the full and final kernel we will have to link these object files into the 
-final kernel program, usable by the bootloader. When developing user-space programs, 
-your toolchain ships with default scripts for linking such programs. 
+To create the full and final kernel we will have to link these object files into the
+final kernel program, usable by the bootloader. When developing user-space programs,
+your toolchain ships with default scripts for linking such programs.
 
 However, these are unsuitable for kernel development and we need to provide our own
-customized linker script. 
+customized linker script.
 
 Create a linker.ld:
 
-	- ENTRY(_start) declares the entry point for the kernel image.
-	  The symbol (_start) was declared in the boot.S file.
-	- SECTIONS declares sections. It decides where the bits and pieces of our code and data
-	  go and also sets a few symbols that help us track the size of each section.
-	- The "." denotes the current address so the first line tells the linker to set the current
-	  address to 0x8000, where the kernel starts. The current address is automatically
-	  incremented when the linker adds data. The second line then creates a symbol "__start" 
-	  and sets it to the current address.
-	- Further reading @ http://wiki.osdev.org/Raspberry_Pi_Bare_Bones
+    - ENTRY(_start) declares the entry point for the kernel image.
+      The symbol (_start) was declared in the boot.S file.
+
+    - SECTIONS declares sections. It decides where the bits and pieces of our code and data
+      go and also sets a few symbols that help us track the size of each section.
+
+    - The "." denotes the current address so the first line tells the linker to set the current
+      address to 0x8000, where the kernel starts. The current address is automatically
+      incremented when the linker adds data. The second line then creates a symbol "__start"
+      and sets it to the current address.
+
+    - After that sections are defined for text (code), read-only data, read-write data and BSS
+      (0 initialized memory). Other than the name the sections are identical so lets just look
+      at one of them.
+
+         __text_start = .;
+        .text : {
+            KEEP(*(.text.boot))
+            *(.text)
+        }
+        . = ALIGN(4096); /* align to page size */
+        __text_end = .;
+
+    - The first line creates a __text_start symbol for the section. The second line opens a .text
+      section for the output file which gets closed in the fifth line. Lines 3 and 4 declare what
+      sections from the input files will be placed inside the output .text section.
+        In our case ".text.boot" is to be placed first followed by the more general ".text". ".text.boot"
+      is only used in boot.S and ensures that it ends up at the beginning of the kernel image. ".text"
+      then contains all the remaining code
+
+    - Any data added by the linker automatically increments the current addrress ("."). In line 6
+      we explicitly increment it so that it is aligned to a 4096 byte boundary (which is the page
+      size for the RPi). And last line 7 creates a __text_end symbol so we know where the section ends.
+
+    - Further reading @ http://wiki.osdev.org/Raspberry_Pi_Bare_Bones
 
 You can then link your kernel using:
 arm-none-eabi-gcc -T linker.ld -o myos.elf -ffreestanding -O2 -nostdlib boot.o kernel.o
@@ -98,18 +180,106 @@ arm-none-eabi-objcopy myos.elf -O binary myos.bin
 
 
 arm-none-eabi-objcopy :
-This utility is used to copy binary files (and possibly preform transformations on them 
+This utility is used to copy binary files (and possibly preform transformations on them
 in the process). We use it to copy our linked program into an IMG file.
 
 Further reading @ https://rpidev.wordpress.com/
 
----------------------------------------
-Copy the myos.bin to the boot partition
----------------------------------------
+4. Booting the Kernel
+---------------------
 
 cp myos.bin /media/bhargav/boot/kernel.img
 sync
 umount /media/bhargav/*
 
+            ****
+      ____  ____  _   ____
+     |  _ \|  _ \(_) |___ \
+     | |_) | |_) | |   __) |
+     |  _ <|  __/| |  / __/
+     |_| \_\_|   |_| |_____|
 
+
+Raspberry Pi 2
+===============
+
+1. Kernel compilation
+---------------------
+
+--- Raspbian toolchain didn't work on one ocasion.
+--- I guess it's specific to raspbian kernel sources.
+export PATH=$PATH:~/rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/
+
+make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- bcm2709_defconfig
+make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi-
+
+> Copy the zImage to the boot partition (flags=boot,lba)
+
+2. u-boot compilation
+---------------------
+
+git clone git://git.denx.de/u-boot.git
+
+make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- rpi_2_defconfig
+make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi-
+
+echo 'kernel=u-boot.bin' > /media/bhargav/boot/config.txt
+
+3. Raspberry Pi 2 bootstrap
+---------------------------
+
+1. Format a micro-SD card with a legacy (PC/MBR/BIOS/legacy) partition table -- Raspberry Pi 2's ROM doesn't support GPT.
+2. Create a FAT32 partition [boot partition]; this will hold bootloaders, A/B kernels and initrds, U-Boot config and script.
+       Copy files in this directory in the partition.
+3. Boot Raspberry Pi 2 and get to the U-Boot prompt (press enter on serial console).
+
+Run these U-Boot commands:
+       set fdtfile bcm2709-rpi-2-b.dtb
+       setenv bootargs "earlyprintk console=tty0 console=ttyAMA0 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait noinitrd"
+       saveenv
+
+       mmc dev 0
+       setenv zImage "fatload mmc 0:1 ${kernel_addr_r} zImage"
+       setenv devtree "fatload mmc 0:1 ${fdt_addr_r} ${fdtfile}"
+       setenv up "bootz ${kernel_addr_r} - ${fdt_addr_r}"
+       saveenv
+
+       run zImage
+       run devtree
+       run up
+
+This should boot up to the linux kernel.
+
+
+Booting Snappy ubuntu on RPi 2
+==============================
+wget http://people.canonical.com/~platform/snappy/raspberrypi2/ubuntu-15.04-snappy-armhf-rpi2.img.xz
+xzcat ubuntu-15.04-snappy-armhf-rpi2.img.xz | sudo dd of=/dev/sdc bs=32M
+sync
+
+Recreating snappy ubuntu files
+==============================
+
+bootcode.bin and start.elf are SPL bits from:
+https://github.com/raspberrypi/firmware/tree/master/boot
+and is available under LICENCE.broadcom.
+
+Following files were extracted from https://launchpad.net/~p-pisati/+archive/ubuntu/misc/+files/linux-image-3.19.1-2-generic-bcm2709_3.19.1-2.2_armhf.deb
+- zImage is boot/vmlinuz-3.19.1-2-generic-bcm2709
+- bcm2836-rpi-2-b.dtb is lib/firmware/3.19.1-2-generic-bcm2709/device-tree/bcm2709-rpi-2-b.dtb
+
+kernel7.img is u-boot.bin as built from github:swarren/u-boot with Ubuntu's arm-linux-gnueabihf cross-compiler as follows:
+
+boot.env is a saveenv U-Boot environment (binary format) with:
+mmc_boot changed from:
+if mmc dev ${devnum}; then setenv devtype mmc; run scan_dev_for_boot_part; fi
+to:
+if mmc dev ${devnum}; then setenv devtype mmc; if run loadbootenv; then echo Loaded environment from ${bootenv}; run importbootenv; fi; if test -n "$uenvcmd"; then echo Running uenvcmd ...; run uenvcmd; fi; run scan_dev_for_boot_part; fi
+and defined:
+bootenv=uEnv.txt
+loadbootenv=load ${devtype} ${devnum} ${loadaddr} ${bootenv}
+importbootenv=
+importbootenv=echo Importing environment from mmc ...; env import -t -r $loadaddr $filesize
+
+            ****
 
