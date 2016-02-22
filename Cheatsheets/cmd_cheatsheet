@@ -72,7 +72,7 @@ Inside (parted) prompt
        3       1145044992B  2218786815B  1073741824B  primary  ext4
        4       2218786816B  3899654143B  1680867328B  primary  ext4
 
-sudo mount -o loop,ro,offset=4194304 /home/bks6kor/vmshare/rpi/ubuntu-15.04-snappy-armhf-rpi2.img /tmp/ubuntu-snappy/
+sudo mount -o loop,ro,offset=4194304 ~/rpi/ubuntu-15.04-snappy-armhf-rpi2.img /tmp/ubuntu-snappy/
 
 
 git commands
