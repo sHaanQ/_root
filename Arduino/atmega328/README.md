@@ -3,18 +3,19 @@
 
 ### Variations in signature
 
-ATmega328-PU - 0x1E 0x95 0x14 (PDIP)  
-ATmega328P - 0x1E 0x95 0x0F (TQFP)
+*ATmega328-PU - 0x1E 0x95 0x14 (PDIP)  
+ATmega328P - 0x1E 0x95 0x0F (TQFP)*
 
 ### Flashing Bootloader
 
 Patch the arduino-1.6.x/hardware/arduino/boards.txt file (Refer the boards.patch)
 
-To burn the bootloader:
+To burn the bootloader:   
+
 1. Upload the ArduinoISP sketch onto your Arduino board /screens/Pro-Mini_ISP.png.  
-*Board: Arduino Uno or Pro-Mini  
-Processor: ATmega328 (5V, 16 MHz)   
-Programmer: AVRISP mkII*
+*Board: Arduino Uno or Pro-Mini      
+Processor: ATmega328 (5V, 16 MHz)     
+Programmer: AVRISP mkII*   
 2. Wire up the Arduino board and microcontroller as shown in /screens/bootload-wiring-XTAL.png
 3. Connect a LED betwwen IO-13 (PIN-19) and GND
 4. Apply settings as shown in /screens/bootload-settings.png  
@@ -28,6 +29,7 @@ the bootloader (only if successfully done).
 Unwire the Arduino. Make connections as shown in /screens/sketch-upload-connections.png
 
 To Flash Sketches:
+
 1. Apply settings as shown in /screens/sketch-upload-settings.png  
 *Board: ATmega328-PU on breadboard (...)  
 Programmer: AVRISP mkII*
