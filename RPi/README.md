@@ -7,7 +7,7 @@
     |_| \_\_|   |_|
     </pre>
 
-# *Getting started*
+# *Raspberry Pi generic*
 
 ## 1. Cloning tools and code
 
@@ -207,16 +207,7 @@ We use it to copy our linked program into an IMG file.
 `sync`   
 `umount /media/bhargav/*`
 
-            ****
-      ____  ____  _   ____
-     |  _ \|  _ \(_) |___ \
-     | |_) | |_) | |   __) |
-     |  _ <|  __/| |  / __/
-     |_| \_\_|   |_| |_____|
-
-
-Raspberry Pi 2
-===============
+# *Raspberry Pi 2, Model B*
 
 1. Kernel compilation
 ---------------------
