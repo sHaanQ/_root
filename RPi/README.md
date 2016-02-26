@@ -1,24 +1,45 @@
 
+<pre>
      ____  ____  _
     |  _ \|  _ \(_)
     | |_) | |_) | |
     |  _ <|  __/| |
     |_| \_\_|   |_|
+    </pre>
 
+# *Getting started*
 
-Getting started
-===============
+## 1. Cloning tools and code
 
-1. Cloning tools and code
-2. Preparing SD card
-
-1. Cloning tools and code
--------------------------
-
+Get the ARM Toolchain
+```
 git clone https://github.com/raspberrypi/tools
-git clone https://github.com/raspberrypi/linux
-https://github.com/raspberrypi/firmware.git
+```
 
+Get the Kernel sources 
+```
+git clone https://github.com/raspberrypi/linux
+```
+
+The bootloader and other configs
+```
+https://github.com/raspberrypi/firmware.git
+```
+
+## 2. SD card setup 
+The Raspberry Pi will not boot without a properly formatted SD Card, containing the bootloader and a suitable operating system.
+
+### 2.1 Using the raspbian wheezy image
+Writing the Raspbian image to your SD card
+
+```
+sudo dd bs=4M if=2015-05-05-raspbian-wheezy.img of=/dev/sdb
+sync
+```
+
+### 2.2 Building a custom kernel
+
+```
 export PATH=$PATH:/data/raspberry-pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
 
 cd linux
@@ -29,14 +50,6 @@ mkdir ../modules
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=../modules/ modules
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=../modules/ modules_install
 
-2.1 SD card setup - Using the raspbian wheezy image
----------------------------------------------------
-sudo dd bs=4M if=2015-05-05-raspbian-wheezy.img of=/dev/sdb
-sync
-
-2.2 SD card setup - Building a custom kernel
---------------------------------------------
-
 cd ../tools/mkimage/
 ./imagetool-uncompressed.py  ../../linux/arch/arm/boot/zImage
 mv kernel.img /media/bhargav/boot/
@@ -44,30 +57,28 @@ mv kernel.img /media/bhargav/boot/
 cd /data/raspberry-pi/modules/lib
 tar -cvzf modules.tar.gz *
 mv modules.tar.gz /media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/tmp/
+```
 
-Git repository
-==============
+## 3. Git repository
 
-1. Generating SSH keys
-------------------
-https://help.github.com/articles/error-permission-denied-publickey/
 
-2. Initialize repository
--------------------------
+### 3.1 Generating SSH keys
+
+[Generating SSH keys involves the following steps](https://help.github.com/categories/ssh/)
+
+### 3.2 Initialize repository
+```
 git init
 git remote add origin git@github.com:bhargav89/RPi.git
-
-3. Committing to the repo
--------------------------
+```
+### 3.3 Committing to the repo
+```
 git add README
 git commit -m "first commit"
 git push -u origin master
+```
 
-
-How does Pi boot ?
-==================
-Source : http://raspberrypi.stackexchange.com/questions/10489/how-does-raspberry-pi-boot
-Bare metal code : https://github.com/dwelch67/raspberrypi
+## 4. How does Pi boot ?
 
 1. When the Raspberry Pi is first turned on, the ARM core is off, and the GPU core is on.
    At this point the SDRAM is disabled.
@@ -85,46 +96,46 @@ at the top of memory (ARM uses SDRAM from address zero). There is a plan to add 
 loading support to bootcode.bin, which would make loader.bin unnecessary, but it's a low
 priority (I guess it might save you 100ms on boot).
 
-Making our own minimalistic kernel
-==================================
+[Source](http://raspberrypi.stackexchange.com/questions/10489/how-does-raspberry-pi-boot)   
+[Bare metal examples](https://github.com/dwelch67/raspberrypi)
+
+## 5. Making our own minimalistic kernel
+
 
 We need three input files:
-    1. boot.s - kernel entry point that sets up the processor environment
-    2. kernel.c - your actual kernel routines
-    3. linker.ld - for linking the above files
-    4. Booting the kernel
+1. `boot.s` - kernel entry point that sets up the processor environment
+2. `kernel.c` - your actual kernel routines
+3. `linker.ld` - for linking the above files
+4. Booting the kernel
 
-1. boot.S - Booting the Operating System
-----------------------------------------
+### 5.1 boot.S - Booting the Operating System
 
-The section ".text.boot" will be used in the linker script to place the boot.S as
+The section `.text.boot` will be used in the linker script to place the `boot.S` as
 the very first thing in our kernel image. The code initializes a minimum C environment,
-which means having a stack and zeroing the BSS segment, before calling the kernel_main function.
+which means having a stack and zeroing the BSS segment, before calling the `kernel_main` function.
 
-Note that the code avoids using r0-r2 so the remain valid for the kernel_main call.
+Note that the code avoids using `r0-r2` so the remain valid for the `kernel_main` call.
 
 You can then assemble boot.S using:
-arm-none-eabi-gcc -mcpu=arm1176jzf-s -fpic -ffreestanding -c boot.S -o boot.o
+`arm-none-eabi-gcc -mcpu=arm1176jzf-s -fpic -ffreestanding -c boot.S -o boot.o`
 
-2. Kernel Implementation
-------------------------
+### 5.2 Kernel Implementation
 
-The GPU bootloader passes arguments to the kernel via r0-r2 and the boot.S makes sure
+The GPU bootloader passes arguments to the kernel via `r0-r2` and the `boot.S` makes sure
 to preserve those 3 registers.
 
 They are the first 3 arguments in a C function call.
-    - The argument r0 contains a code for the device the rpi was booted from.
-      This is generally 0 but its actual value depends on the firmware of the board.
-    - r1 contains the 'ARM Linux Machine Type' which for the rpi is 3138 (0xc42)
-      identifying the bcm2708 cpu. A full list of ARM Machine Types is available from
-      http://www.arm.linux.org.uk/developer/machines/.
-    - r2 contains the address of the ATAGs.
+* The argument `r0` contains a code for the device the rpi was booted from.
+This is generally `0` but its actual value depends on the firmware of the board.
+* `r1` contains the `ARM Linux Machine Type` which for the `rpi` is `3138 (0xc42)`
+identifying the `bcm2708 cpu`. A full list of ARM Machine Types is available from
+http://www.arm.linux.org.uk/developer/machines/.
+* `r2` contains the address of the `ATAGs`.
 
-Compile it using:
-arm-none-eabi-gcc -mcpu=arm1176jzf-s -fpic -ffreestanding -std=gnu99 -c kernel.c -o kernel.o -O2 -Wall -Wextra
+Compile it using:   
+`arm-none-eabi-gcc -mcpu=arm1176jzf-s -fpic -ffreestanding -std=gnu99 -c kernel.c -o kernel.o -O2 -Wall -Wextra`
 
-3. Linking the Kernel
----------------------
+### 5.3 Linking the Kernel
 
 We can now assemble boot.s and compile kernel.c. This produces two object files
 that each contain part of the kernel.
@@ -136,61 +147,66 @@ your toolchain ships with default scripts for linking such programs.
 However, these are unsuitable for kernel development and we need to provide our own
 customized linker script.
 
-Create a linker.ld:
+Create a `linker.ld`:
 
-    - ENTRY(_start) declares the entry point for the kernel image.
-      The symbol (_start) was declared in the boot.S file.
+* `ENTRY(_start)` declares the entry point for the kernel image.
+The symbol `(_start)` was declared in the `boot.S` file.
 
-    - SECTIONS declares sections. It decides where the bits and pieces of our code and data
-      go and also sets a few symbols that help us track the size of each section.
+* SECTIONS declares sections. It decides where the bits and pieces of our code and data
+go and also sets a few symbols that help us track the size of each section.
 
-    - The "." denotes the current address so the first line tells the linker to set the current
-      address to 0x8000, where the kernel starts. The current address is automatically
-      incremented when the linker adds data. The second line then creates a symbol "__start"
-      and sets it to the current address.
+* The "." denotes the current address so the first line tells the linker to set the current
+address to `0x8000`, where the kernel starts. The current address is automatically
+incremented when the linker adds data. The second line then creates a symbol `__start`
+and sets it to the current address.
 
-    - After that sections are defined for text (code), read-only data, read-write data and BSS
-      (0 initialized memory). Other than the name the sections are identical so lets just look
-      at one of them.
+* After that sections are defined for text (code), read-only data, read-write data and BSS
+(0 initialized memory). Other than the name the sections are identical so lets just look
+at one of them.
 
-         __text_start = .;
-        .text : {
-            KEEP(*(.text.boot))
-            *(.text)
-        }
-        . = ALIGN(4096); /* align to page size */
-        __text_end = .;
+```
+__text_start = .;
+.text : {
+KEEP(*(.text.boot))
+*(.text)
+}
+. = ALIGN(4096); /* align to page size */
+__text_end = .;
+```
 
-    - The first line creates a __text_start symbol for the section. The second line opens a .text
-      section for the output file which gets closed in the fifth line. Lines 3 and 4 declare what
-      sections from the input files will be placed inside the output .text section.
-        In our case ".text.boot" is to be placed first followed by the more general ".text". ".text.boot"
-      is only used in boot.S and ensures that it ends up at the beginning of the kernel image. ".text"
-      then contains all the remaining code
+* The first line creates a `__text_start` symbol for the section. The second line opens a `.text`
+section for the output file which gets closed in the fifth line. Lines 3 and 4 declare what
+sections from the input files will be placed inside the output `.text` section.
+In our case `.text.boot` is to be placed first followed by the more general `.text`. `.text.boot`
+is only used in `boot.S` and ensures that it ends up at the beginning of the kernel image. `.text`
+then contains all the remaining code
 
-    - Any data added by the linker automatically increments the current addrress ("."). In line 6
-      we explicitly increment it so that it is aligned to a 4096 byte boundary (which is the page
-      size for the RPi). And last line 7 creates a __text_end symbol so we know where the section ends.
+* Any data added by the linker automatically increments the current addrress ("."). In line 6
+we explicitly increment it so that it is aligned to a 4096 byte boundary (which is the page
+size for the RPi). And last line 7 creates a `__text_end` symbol so we know where the section ends.
 
-    - Further reading @ http://wiki.osdev.org/Raspberry_Pi_Bare_Bones
+* What are the `__text_start` and `__text_end` for and why use page alignment ?   
+ The 2 symbols can be used in the kernel source and the linker will then place the correct addresses into the binary.   
+ As an example the `__bss_start` and `__bss_end` are used in `boot.S`. But you can also use the symbols from C by declaring them extern first.   
+ *After all sections are declared the `__end` symbol is created. If you ever want to know how large your kernel is at runtime you can use `__start` and `__end` to find out.*
+ 
+ You can then link your kernel using:   
+`arm-none-eabi-gcc -T linker.ld -o myos.elf -ffreestanding -O2 -nostdlib boot.o kernel.o`   
+`arm-none-eabi-objcopy myos.elf -O binary myos.bin`
 
-You can then link your kernel using:
-arm-none-eabi-gcc -T linker.ld -o myos.elf -ffreestanding -O2 -nostdlib boot.o kernel.o
-arm-none-eabi-objcopy myos.elf -O binary myos.bin
-
-
-arm-none-eabi-objcopy :
+`arm-none-eabi-objcopy`   
 This utility is used to copy binary files (and possibly preform transformations on them
-in the process). We use it to copy our linked program into an IMG file.
+in the process).    
+We use it to copy our linked program into an IMG file.
 
-Further reading @ https://rpidev.wordpress.com/
+[Further reading](http://wiki.osdev.org/Raspberry_Pi_Bare_Bones)
+[Reference Link-2](https://rpidev.wordpress.com/)
 
-4. Booting the Kernel
----------------------
+### 5.4 Booting the Kernel
 
-cp myos.bin /media/bhargav/boot/kernel.img
-sync
-umount /media/bhargav/*
+`cp myos.bin /media/bhargav/boot/kernel.img`   
+`sync`   
+`umount /media/bhargav/*`
 
             ****
       ____  ____  _   ____
