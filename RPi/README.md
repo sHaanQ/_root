@@ -1,13 +1,25 @@
+## *Raspberry Pi generic*
+1. [Cloning tools and code](#1-cloning-tools-and-code)
+2. [SD card setup](#2-sd-card-setup)   
+	2.1 [Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)   
+	2.2 [Building a custom kernel](#22-building-a-custom-kernel)
+3. [Setting up a Git repository](#3-setting-up-a-git-repository)   
+    3.1 [Generating SSH keys](#31-generating-ssh-keys)   
+    3.2 [Initialize repository](#32-initialize-repository)   
+    3.3 [Committing to the repo](#33-committing-to-the-repo)   
+4. [How does Pi boot](#4-how-does-pi-boot)  
+5. [Making our own minimalistic kernel](#5-making-our-own-minimalistic-kernel)   
+	5.1 [Booting the Operating System](#51-booting-the-operating-system)   
+	5.2 [Kernel Implementation](#52-kernel-implementation)   
+	5.3 [Linking the Kernel](#53-linking-the-kernel)    
+	5.4 [Booting the Kernel](#54-booting-the-kernel)
 
-<pre>
-     ____  ____  _
-    |  _ \|  _ \(_)
-    | |_) | |_) | |
-    |  _ <|  __/| |
-    |_| \_\_|   |_|
-    </pre>
-
-# *Raspberry Pi generic*
+## *Raspberry Pi 2, Model B*
+1. [Kernel compilation](#1-kernel-compilation)
+2. [u-boot compilation](#2-u-boot-compilation) 
+3. [Raspberry Pi 2 bootstrap](#3-raspberry-pi-2-bootstrap)
+4. [Booting Snappy ubuntu on RPi 2](#4-booting-snappy-ubuntu-on-rpi-2)   
+	4.1 [Recreating snappy ubuntu files](#41-recreating-snappy-ubuntu-files)
 
 ## 1. Cloning tools and code
 
@@ -59,7 +71,7 @@ tar -cvzf modules.tar.gz *
 mv modules.tar.gz /media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/tmp/
 ```
 
-## 3. Git repository
+## 3. Setting up a Git repository
 
 
 ### 3.1 Generating SSH keys
@@ -78,7 +90,7 @@ git commit -m "first commit"
 git push -u origin master
 ```
 
-## 4. How does Pi boot ?
+## 4. How does Pi boot
 
 1. When the Raspberry Pi is first turned on, the ARM core is off, and the GPU core is on.
    At this point the SDRAM is disabled.
@@ -108,7 +120,7 @@ We need three input files:
 3. `linker.ld` - for linking the above files
 4. Booting the kernel
 
-### 5.1 boot.S - Booting the Operating System
+### 5.1 Booting the Operating System
 
 The section `.text.boot` will be used in the linker script to place the `boot.S` as
 the very first thing in our kernel image. The code initializes a minimum C environment,
@@ -198,8 +210,8 @@ This utility is used to copy binary files (and possibly preform transformations 
 in the process).    
 We use it to copy our linked program into an IMG file.
 
-[Further reading](http://wiki.osdev.org/Raspberry_Pi_Bare_Bones)
-[Reference Link-2](https://rpidev.wordpress.com/)
+[Further reading](http://wiki.osdev.org/Raspberry_Pi_Bare_Bones)     
+[Reference Link](https://rpidev.wordpress.com/)
 
 ### 5.4 Booting the Kernel
 
@@ -207,32 +219,35 @@ We use it to copy our linked program into an IMG file.
 `sync`   
 `umount /media/bhargav/*`
 
+Put the SD card into the Pi. It should work.
+
 # *Raspberry Pi 2, Model B*
 
-1. Kernel compilation
----------------------
+## 1. Kernel compilation
 
---- Raspbian toolchain didn't work on one ocasion.
---- I guess it's specific to raspbian kernel sources.
-export PATH=$PATH:~/rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/
+* Raspbian toolchain didn't work on one ocasion.   
+* I guess it's specific to raspbian kernel sources.   
+`export PATH=$PATH:~/rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/`
 
-make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- bcm2709_defconfig
-make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi-
+`make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- bcm2709_defconfig`   
+`make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi-`
 
-> Copy the zImage to the boot partition (flags=boot,lba)
+*Copy the zImage to the boot partition (flags=boot,lba)*
 
-2. u-boot compilation
----------------------
+## 2. u-boot compilation
 
+```
 git clone git://git.denx.de/u-boot.git
 
 make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- rpi_2_defconfig
 make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi-
 
 echo 'kernel=u-boot.bin' > /media/bhargav/boot/config.txt
+```
 
-3. Raspberry Pi 2 bootstrap
----------------------------
+[RPi U-boot](http://elinux.org/RPi_U-Boot)
+
+## 3. Raspberry Pi 2 bootstrap
 
 1. Format a micro-SD card with a legacy (PC/MBR/BIOS/legacy) partition table -- Raspberry Pi 2's 
    ROM doesn't support GPT.
@@ -240,7 +255,8 @@ echo 'kernel=u-boot.bin' > /media/bhargav/boot/config.txt
    U-Boot config and script. Copy files in this directory in the partition.
 3. Boot Raspberry Pi 2 and get to the U-Boot prompt (press enter on serial console).
 
-Run these U-Boot commands:
+Run these U-Boot commands
+```
        set fdtfile bcm2709-rpi-2-b.dtb
        setenv bootargs "earlyprintk console=tty0 console=ttyAMA0 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait noinitrd"
        saveenv
@@ -254,31 +270,33 @@ Run these U-Boot commands:
        run zImage
        run devtree
        run up
+```
 
 This should boot up to the linux kernel.
 
 
-Booting Snappy ubuntu on RPi 2
-==============================
+## 4. Booting Snappy ubuntu on RPi 2
+
+```
 wget http://people.canonical.com/~platform/snappy/raspberrypi2/ubuntu-15.04-snappy-armhf-rpi2.img.xz
 xzcat ubuntu-15.04-snappy-armhf-rpi2.img.xz | sudo dd of=/dev/sdc bs=32M
 sync
+```
 
-Recreating snappy ubuntu files
-==============================
+### 4.1 Recreating snappy ubuntu files
 
-bootcode.bin and start.elf are SPL bits from:
-https://github.com/raspberrypi/firmware/tree/master/boot
-and is available under LICENCE.broadcom.
+
+[bootcode.bin and start.elf are SPL bits and is available under LICENCE.broadcom](https://github.com/raspberrypi/firmware/tree/master/boot)
 
 Following files were extracted from 
 - zImage is boot/vmlinuz-3.19.1-2-generic-bcm2709
 - bcm2836-rpi-2-b.dtb is lib/firmware/3.19.1-2-generic-bcm2709/device-tree/bcm2709-rpi-2-b.dtb
 
-kernel7.img is u-boot.bin as built from github:swarren/u-boot with Ubuntu's
-arm-linux-gnueabihf cross-compiler as follows:
+`kernel7.img` is `u-boot.bin` as built from (https://github:swarren/u-boot) with Ubuntu's `arm-linux-gnueabihf` cross-compiler.
 
-boot.env is a saveenv U-Boot environment (binary format) with:
+[Reference-only]   
+```
+boot.env is a saveenv U-Boot environment (binary format) with:   
 mmc_boot changed from:
 if mmc dev ${devnum}; then setenv devtype mmc; run scan_dev_for_boot_part; fi
 to:
@@ -294,6 +312,5 @@ bootenv=uEnv.txt
 loadbootenv=load ${devtype} ${devnum} ${loadaddr} ${bootenv}
 importbootenv=
 importbootenv=echo Importing environment from mmc ...; env import -t -r $loadaddr $filesize
-
-            ****
+```
 
