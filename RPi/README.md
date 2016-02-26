@@ -292,7 +292,7 @@ Following files were extracted from
 - zImage is boot/vmlinuz-3.19.1-2-generic-bcm2709
 - bcm2836-rpi-2-b.dtb is lib/firmware/3.19.1-2-generic-bcm2709/device-tree/bcm2709-rpi-2-b.dtb
 
-`kernel7.img` is `u-boot.bin` as built from (https://github:swarren/u-boot) with Ubuntu's `arm-linux-gnueabihf` cross-compiler.
+`kernel7.img` is `u-boot.bin` as built from [swarren/u-boot](https://github:swarren/u-boot) with Ubuntu's `arm-linux-gnueabihf` cross-compiler.
 
 [Reference-only]   
 ```
