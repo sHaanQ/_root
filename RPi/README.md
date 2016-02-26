@@ -128,8 +128,7 @@ They are the first 3 arguments in a C function call.
 * The argument `r0` contains a code for the device the rpi was booted from.
 This is generally `0` but its actual value depends on the firmware of the board.
 * `r1` contains the `ARM Linux Machine Type` which for the `rpi` is `3138 (0xc42)`
-identifying the `bcm2708 cpu`. A full list of ARM Machine Types is available from
-http://www.arm.linux.org.uk/developer/machines/.
+identifying the `bcm2708 cpu`. Full list of [ARM Machine Types](http://www.arm.linux.org.uk/developer/machines/).
 * `r2` contains the address of the `ATAGs`.
 
 Compile it using:   
@@ -194,7 +193,7 @@ size for the RPi). And last line 7 creates a `__text_end` symbol so we know wher
 `arm-none-eabi-gcc -T linker.ld -o myos.elf -ffreestanding -O2 -nostdlib boot.o kernel.o`   
 `arm-none-eabi-objcopy myos.elf -O binary myos.bin`
 
-`arm-none-eabi-objcopy`   
+* `arm-none-eabi-objcopy`   
 This utility is used to copy binary files (and possibly preform transformations on them
 in the process).    
 We use it to copy our linked program into an IMG file.
