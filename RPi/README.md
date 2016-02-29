@@ -16,7 +16,7 @@
 
 ## *Raspberry Pi 2, Model B*
 1. [Kernel compilation](#1-kernel-compilation)
-2. [u-boot compilation](#2-u-boot-compilation) 
+2. [U-Boot compilation](#2-u-boot-compilation) 
 3. [Raspberry Pi 2 bootstrap](#3-raspberry-pi-2-bootstrap)
 4. [Booting Snappy ubuntu on RPi 2](#4-booting-snappy-ubuntu-on-rpi-2)   
 	4.1 [Recreating snappy ubuntu files](#41-recreating-snappy-ubuntu-files)
@@ -234,7 +234,7 @@ Put the SD card into the Pi. It should work.
 
 *Copy the zImage to the boot partition (flags=boot,lba)*
 
-## 2. u-boot compilation
+## 2. U-Boot compilation
 
 ```
 git clone git://git.denx.de/u-boot.git
@@ -245,7 +245,7 @@ make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi-
 echo 'kernel=u-boot.bin' > /media/bhargav/boot/config.txt
 ```
 
-[RPi U-boot](http://elinux.org/RPi_U-Boot)
+[RPi U-Boot](http://elinux.org/RPi_U-Boot)
 
 ## 3. Raspberry Pi 2 bootstrap
 
