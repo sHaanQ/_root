@@ -1,8 +1,9 @@
 ## *Raspberry Pi generic*
 1. [Cloning tools and code](#1-cloning-tools-and-code)
 2. [SD card setup](#2-sd-card-setup)   
-	2.1 [Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)   
-	2.2 [Building a custom kernel](#22-building-a-custom-kernel)
+	2.1 [Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)	   
+	2.2	[Cloning SD cards](#22-cloning-sd-cards)	
+	2.3 [Building a custom kernel](#23-building-a-custom-kernel)	
 3. [Setting up a Git repository](#3-setting-up-a-git-repository)   
     3.1 [Generating SSH keys](#31-generating-ssh-keys)   
     3.2 [Initialize repository](#32-initialize-repository)   
@@ -45,15 +46,24 @@ The Raspberry Pi will not boot without a properly formatted SD Card, containing 
 Writing the Raspbian image to your SD card
 
 ```
-sudo dd bs=4M if=2015-05-05-raspbian-wheezy.img of=/dev/sdb
+sudo dd bs=1M if=2015-05-05-raspbian-wheezy.img of=/dev/sdb
 sync
 ```
-
-### 2.2 Building a custom kernel
+### 2.2 Cloning SD cards
+Cloning a 4GB SD card into a 8GB SD card
 
 ```
-export PATH=$PATH:/data/raspberry-pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+time sudo dd bs=64K conv=sync,noerror if=/dev/sdc of=/dev/sdb
+```
 
+### 2.3 Building a custom kernel
+
+Export the toolchain
+```
+export PATH=$PATH:/data/raspberry-pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+```
+Raspberry Pi 1
+```
 cd linux
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcmrpi_defconfig
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
@@ -70,6 +80,24 @@ cd /data/raspberry-pi/modules/lib
 tar -cvzf modules.tar.gz *
 mv modules.tar.gz /media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/tmp/
 ```
+
+Raspberry Pi 2
+```
+cd linux
+KERNEL=kernel7
+make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- bcm2709_defconfig
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs -j 4
+
+sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/ modules_install
+
+sudo scripts/mkknlimg arch/arm/boot/zImage /media/bhargav/boot/$KERNEL.img
+sudo cp arch/arm/boot/dts/*.dtb /media/bhargav/boot/
+sudo cp arch/arm/boot/dts/overlays/*.dtb* /mnt/fat32/overlays/
+
+sudo umount /media/bhargav/*
+
+```
+
 
 ## 3. Setting up a Git repository
 
@@ -226,7 +254,7 @@ Put the SD card into the Pi. It should work.
 ## 1. Kernel compilation
 
 * Raspbian toolchain didn't work on one ocasion.   
-* I guess it's specific to raspbian kernel sources.   
+* I guess it's specific to raspbian kernel sources (must verify this claim). 	
 `export PATH=$PATH:~/rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/`
 
 `make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- bcm2709_defconfig`   
