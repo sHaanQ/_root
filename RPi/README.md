@@ -92,7 +92,7 @@ sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/media/bh
 
 sudo scripts/mkknlimg arch/arm/boot/zImage /media/bhargav/boot/$KERNEL.img
 sudo cp arch/arm/boot/dts/*.dtb /media/bhargav/boot/
-sudo cp arch/arm/boot/dts/overlays/*.dtb* /mnt/fat32/overlays/
+sudo cp arch/arm/boot/dts/overlays/*.dtb* /media/bhargav/boot/
 
 sudo umount /media/bhargav/*
 
