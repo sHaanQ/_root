@@ -16,7 +16,7 @@ To burn the bootloader:
 *Board: Arduino Uno or Pro-Mini      
 Processor: ATmega328 (5V, 16 MHz)     
 Programmer: AVRISP mkII*   
-2. Wire up the Arduino board and microcontroller as shown in /screens/bootload-wiring-XTAL.png
+2. Wire up the Arduino board and microcontroller similar to /screens/bootload-wiring-XTAL.png [Refer: Connections](connections)
 3. Connect a LED betwwen IO-13 (PIN-19) and GND
 4. Apply settings as shown in /screens/bootload-settings.png  
 *Board: ATmega328-PU on breadboard (...)  
@@ -41,6 +41,55 @@ setting from Tools->Board menu (blink-twice.png)
 *Board: Arduino Uno or Pro-Mini  
 Processor: ATmega328 (3.3V, 8 MHz)  
 Programmer: AVRISP mkII*
+
+### Connections
+
+1. Pin assignments
+
+	Pro Mini 	| ATMega328  |
+    :----------:|:----------:|
+ 	 10			| 1			 |
+ 	 11			| 17	     | 
+ 	 12			| 18		 |
+ 	 13			| 19		 |        	
+     
+
+2. USB-TTL connections
+
+	Pro Mini | USB-TTL  |
+ 	:----------:|:---------------:|
+ 	 TxD    	| White lead	  |
+	 RxD      	| Green lead	  | 
+ 	 GND     	| BreadBoard, GND |
+ 	 Vcc 		| BreadBoard, Vcc |
+
+3. ATMega328 Connections   
+LED between I/O-13 and GND  
+Short Pin Number 7 and 20 to Vcc  
+Short Pin Number 8 and 22 to GND  
+
+<pre>
+												
+									  Vcc
+     9               10                +
+     +                +                |
+     |                |                |
+     |      16MHz     |               +++
+     |     +----+     |               | |10K
+     +-----+XTAL+-----+               +++
+     |     +----+     |                |
+     |                |                |
+     |                |                +PIN 1
+22pF |                |22pF
+   +---+            +---+
+    +-+              +-+
+     |                |
+     |                |
+     +                +
+
+</pre>
+
+
 
 
 ### Handling Signature Problems (Obsolete)
