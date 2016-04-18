@@ -7,18 +7,28 @@ Linux kernel
 ============
 
 > Get .config of running kernel
-       zcat /proc/config.gz > running.config
-       cat /boot/config
-       cat /boot/config-$(uname -r)
+		zcat /proc/config.gz > running.config
+		cat /boot/config
+		cat /boot/config-$(uname -r)
 
 > Compile and install x86 linux kernel on ubuntu PC
-       make x86_64_defconfig
-       make modules_install
-       make install
+		make x86_64_defconfig
+		make modules_install
+		make install
 
-       >> To change name of the kernel, in the Top level //kernel/Makefile
-              EXTRAVERSION = -batman-0.8.9
+		>> To change name of the kernel, in the Top level //kernel/Makefile
+			  EXTRAVERSION = -batman-0.8.9
 
+> Removing the kernel
+		Remove following files/dirs
+		/boot/vmlinuz-4.6.0-rc1-00190-g05cf807
+		/boot/initrd-vmlinuz-4.6.0-rc1-00190-g05cf807
+		/boot/System-map-vmlinuz-4.6.0-rc1-00190-g05cf807
+		/boot/config-4.6.0-rc1-00190-g05cf807
+		/lib/modules/4.6.0-rc1-00190-g05cf807/
+		Update grub configuration file /etc/grub.conf or /boot/grub/menu.lst to point to correct kernel version.
+			sudo update-grub
+	
 grep and find
 =============
 
@@ -93,6 +103,9 @@ git commands
 
 > [ Remove commit msg and keep the files added in staging area ]
 	git reset --soft HEAD~
+
+> [There is no tracking information for the current branch.]
+	git pull https://kernel.googlesource.com/pub/scm/linux/kernel/git/torvalds/linux master
 
 converting video to mp3 - avconv video converter
 ================================================
