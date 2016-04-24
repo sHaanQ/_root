@@ -67,6 +67,18 @@ grep and find
 
 make -j4 | tee build_log
 
+rsync
+=====
+> [Recursion and want to preserve almost everything]
+rsync -ah --info=progress2 --partial /media/42C0-312A/softwares/ ./Public/
+
+> [If you are getting permissions error while copying]
+	> [File by file progress and stats]
+	rsync -rltzuv --progress --stats /media/42C0-312A/camera/ ~/Camera
+
+	> [Outputs statistics based on the whole transfer, rather than individual files]
+	rsync -rltzu --info=progress2 -h --partial /media/42C0-312A/documents/ ./Documents/
+
 opening .img file [SO]
 ======================
 
