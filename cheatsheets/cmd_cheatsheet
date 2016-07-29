@@ -321,3 +321,6 @@ Generate sound on PC
 speaker-test -c2 -t wav -l 4
 
 
+Set Minicom width
+=================
+stty cols 140 rows 60
