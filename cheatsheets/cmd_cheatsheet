@@ -263,6 +263,12 @@ cat
        cat << ! >> /data/documents/cheatsheet
        allows me to type until I press ! and hit enter
 
+chown
+=====
+
+> Change the file so it is owned by root
+	sudo chown root:root /etc/systemd/system/tightvncserver.service
+
 tar
 ===
 
