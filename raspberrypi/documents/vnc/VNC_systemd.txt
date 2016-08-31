@@ -42,5 +42,5 @@
 		$ sudo systemctl enable tightvncserver.service
  7. Reboot. Check if VNCserver is listed in the running units
 		$ systemctl list-units | grep vnc
-		   tightvncserver.service                                                                          loaded active running   TightVNC remote desktop server
+		   tightvncserver.service     loaded active running   TightVNC remote desktop server
 
