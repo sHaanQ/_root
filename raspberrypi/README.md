@@ -280,7 +280,8 @@ echo 'kernel=u-boot.bin' > /media/bhargav/boot/config.txt
 1. Format a micro-SD card with a legacy (PC/MBR/BIOS/legacy) partition table -- Raspberry Pi 2's 
    ROM doesn't support GPT.
 2. Create a FAT32 partition [boot partition]; this will hold bootloaders, A/B kernels and initrds, 
-   U-Boot config and script. Copy files in this directory in the partition.
+   U-Boot config and script. Copy files (bcm2709-rpi-2-b.dtb, bootcode.bin, start.elf, fixup.dat, u-boot.bin, zImage) 
+   in this directory in the partition.
 3. Boot Raspberry Pi 2 and get to the U-Boot prompt (press enter on serial console).
 
 Run these U-Boot commands

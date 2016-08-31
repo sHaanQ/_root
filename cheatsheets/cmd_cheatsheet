@@ -105,6 +105,9 @@ Inside (parted) prompt
 
 sudo mount -o loop,ro,offset=4194304 ~/rpi/ubuntu-15.04-snappy-armhf-rpi2.img /tmp/ubuntu-snappy/
 
+Symbolic links
+==============
+sudo ln -s ~/eagle-7.5.0/bin/eagle /usr/bin/eagle
 
 git commands
 ============
@@ -269,6 +272,12 @@ cat
        cat << ! >> /data/documents/cheatsheet
        allows me to type until I press ! and hit enter
 
+chown
+=====
+
+> Change the file so it is owned by root
+	sudo chown root:root /etc/systemd/system/tightvncserver.service
+
 tar
 ===
 
@@ -327,3 +336,6 @@ Generate sound on PC
 speaker-test -c2 -t wav -l 4
 
 
+Set Minicom width
+=================
+stty cols 140 rows 60
