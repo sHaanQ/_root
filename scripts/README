@@ -1,0 +1,12 @@
+What these scripts do
+
+1. cscope-setup.sh
+	Sets up cscope with vim. Navigate source code using shortcuts provided
+	in cscope_maps.vim.
+
+	How-To
+	------
+	 > Copy the script to your source code directory and execute it
+	 > Run `source ~/.bashrc`
+	 > Try browsing source code
+
