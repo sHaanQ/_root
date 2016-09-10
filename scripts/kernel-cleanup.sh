@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Remove following files/dirs
-
 function usage(){
 	echo "Usage: $0 kernel-version"
 	echo "Ex: $0 4.6"
@@ -9,6 +7,8 @@ function usage(){
 }
 
 function cleanup(){
+
+	# Remove following files/dirs
 
 	local VERSION=$1
 	sudo echo "Cleaning all $VERSION version's of linux"
