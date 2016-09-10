@@ -10,3 +10,7 @@ What these scripts do
 	 > Run `source ~/.bashrc`
 	 > Try browsing source code
 
+2. kernel-cleanup.sh
+	Remove old installed kernels on ubuntu
+	Usage: ./kernel-cleanup.sh <kernel-version-to-remove>
+
