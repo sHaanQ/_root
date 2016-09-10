@@ -203,6 +203,15 @@ Wget
 -U will send a "User-Agent"
 for i in {01..96}; do wget -U firefox "http://www.impactscan.org/slides/xrayct/img0${i}.gif"; done
 
+> [Recursively fetch a directory]
+	wget --user-agent="User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0" --recursive --no-parent --reject "index.html*" --accept "*.mkv" http://blah-blah/one/two/abc/s01/
+
+> [Resume an interrupted download]
+	wget --user-agent="User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0" -c -r --no-parent --reject "index.html*" -A "*.mkv" http://blah-blah/one/two/abc/s01/
+
+> [Get from links]
+	wget -c --user-agent="User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0" -i links
+
 Terminator
 ==========
 
