@@ -31,13 +31,13 @@ function cleanup(){
 
 	echo "lib/modules"
 	if [ -d /lib/modules/$VERSION* ]; then
-		sudo rm -rf /lib/modules/$VERSION* 
+		sudo rm -rf /lib/modules/$VERSION*
 		echo CLEANED
-	else 
+	else
 		echo SKIPPED
 		break
 	fi
-		
+
 	echo "updating grub"
 	sudo update-grub
 }
@@ -46,7 +46,7 @@ if [ -z "$1" ]; then
 	echo "No argument supplied"
 	usage
 	exit 1
-fi 
+fi
 
 while true; do
     read -p "This script can brick ur system, Do you wish to continue? " yn
