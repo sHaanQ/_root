@@ -30,12 +30,12 @@ function cleanup(){
 	if [ $? -eq 0 ]; then echo CLEANED; else echo SKIPPED; fi
 
 	echo "lib/modules"
-	if [ ! -z `ls -l /lib/modules/$VERSION*`]; then
-		sudo rm -rf /lib/modules/$VERSION*
-		echo "CLEANED"
-	else
-		echo "SKIPPED"
-		break;
+	if [ -d /lib/modules/$VERSION* ]; then
+		sudo rm -rf /lib/modules/$VERSION* 
+		echo CLEANED
+	else 
+		echo SKIPPED
+		break
 	fi
 		
 	echo "updating grub"
