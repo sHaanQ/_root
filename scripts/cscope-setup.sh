@@ -37,7 +37,7 @@ if [ ! -f ~/.vim/plugin/cscope_maps.vim ]; then
 fi
 
 if [ ! -f ~/.vimrc ]; then
-   # Control will enter here if $DIRECTORY doesn't exist.
+   # Control will enter here if file doesn't exist.
    echo "creating ~/.vimrc file"
    touch ~/.vimrc
 fi
