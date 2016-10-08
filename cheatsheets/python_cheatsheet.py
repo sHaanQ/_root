@@ -150,7 +150,19 @@
 		greeting = "Hello "
 		name = "D. Y."
 		welcome = greeting + name
+		
+		print "Spam" + " and" + " eggs"
+			This will print I have 2 coconuts!
 
+
+		print "I have " + str(2) + " coconuts!"
+		
+		"""
+		The str() method converts non-strings into strings. In the above example, 
+		you convert the number 2 into a string and then you concatenate the strings
+		together just like in the previous exercise.
+		"""
+		
 	#[Sub-String]
 		s = "Charlie"
 
