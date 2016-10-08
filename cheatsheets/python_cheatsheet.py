@@ -185,6 +185,13 @@
 	in string form.
 	But, "input" will evaluate whatever you entered and the result of evaluation will be returned
 	"""
+	
+	name = raw_input("What is your name?")
+	quest = raw_input("What is your quest?")
+	color = raw_input("What is your favorite color?")
+
+	print "Ah, so your name is %s, your quest is %s, " \
+	"and your favorite color is %s." % (name, quest, color)
 
 #[Comparators]
 
