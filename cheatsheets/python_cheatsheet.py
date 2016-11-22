@@ -13,6 +13,12 @@
 	print "Let's not go to %s. 'Tis a silly %s." % (string_1, string_2)
 	print 'This isn\'t flying, this is falling with style!'
 
+	#[Printing a List]
+		name = ["bhargav", "bhargi", "berg"]
+		id = [1, 2, 3]
+		for i in id:
+			print "My name is {0}. ID {1}".format(name[i-1], id[i-1])
+
 #[Functions]
 
 	def shout(phrase):
@@ -22,7 +28,7 @@
 			return "Can you speak up?"
 
 	shout("I'M INTERESTED IN SHOUTING")
-	
+
 	def count_small(numbers):
 	    total = 0
 	    for n in numbers:
@@ -161,19 +167,19 @@
 		greeting = "Hello "
 		name = "D. Y."
 		welcome = greeting + name
-		
+
 		print "Spam" + " and" + " eggs"
 			This will print I have 2 coconuts!
 
 
 		print "I have " + str(2) + " coconuts!"
-		
+
 		"""
-		The str() method converts non-strings into strings. In the above example, 
+		The str() method converts non-strings into strings. In the above example,
 		you convert the number 2 into a string and then you concatenate the strings
 		together just like in the previous exercise.
 		"""
-		
+
 	#[Sub-String]
 		s = "Charlie"
 
@@ -182,14 +188,18 @@
 
 		print s[1:4]
 		# will print "har"
-		
+
 	#[String Looping]
 		"""
-		Strings are like lists with characters as elements. 
+		Strings are like lists with characters as elements.
 		You can loop through strings the same way you loop through lists
 		"""
 		for letter in "Codecademy":
 		    print letter
+
+		for x in S: print(x, end=' ') # Iterate over a string
+		...
+		l u m b e r j a c k
 
 		# Empty lines to make the output pretty
 		print
@@ -215,7 +225,7 @@
 	in string form.
 	But, "input" will evaluate whatever you entered and the result of evaluation will be returned
 	"""
-	
+
 	name = raw_input("What is your name?")
 	quest = raw_input("What is your quest?")
 	color = raw_input("What is your favorite color?")
@@ -271,8 +281,6 @@
 	'''
 
 	zoo_animals = ["pangolin", "cassowary", "sloth", "Optimus"];
-	# One animal is missing!
-
 	if len(zoo_animals) > 3:
 		print "The first animal at the zoo is the " + zoo_animals[0]
 		print "The second animal at the zoo is the " + zoo_animals[1]
@@ -298,6 +306,40 @@
 		'''
 
 		letters.remove('a')
+
+
+	#[List pop]
+		'''
+		n.pop(index) will remove the item at index from the list and return it to you:
+		'''
+
+		n = [1, 3, 5]
+		n.pop(1)
+		# Returns 3 (the item at index 1)
+		print n
+		# prints [1, 5]
+
+	#[List remove]
+		'''
+		n.remove(item) will remove the actual item if it finds it:
+		'''
+
+		n.remove(1)
+		# Removes 1 from the list,
+		# NOT the item at index 1
+		print n
+		# prints [3, 5]
+
+	#[List delete]	
+		'''
+		del(n[1]) is like .pop in that it will remove the item at the given
+		index, but it won't return it:
+		'''
+
+		del(n[1])
+		# Doesn't return anything
+		print n
+		# prints [1, 5]
 
 	#[List Slicing]
 
@@ -375,6 +417,7 @@
 
 		for i in names:
 			print i
+
 	#[Sorting the List]
 
 
@@ -411,7 +454,7 @@
 	login pages (pairing an e-mail address with a username), and more!
 	'''
 
-	# Assigning a dictionary with three key-value pairs to residents:
+	#[Assigning a dictionary with three key-value pairs to residents]
 
 		residents = {'Puffin' : 104, 'Sloth' : 105, 'Burmese Python' : 106}
 
@@ -457,6 +500,15 @@
 
 		dict_name[key] = new_value
 
+	#[Retrieve key and value]
+
+		knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+		for k, v in knights.iteritems():
+			print k, v
+
+		''' Prints the key and the value '''
+		gallahad the pure
+		robin the brave
 
 	#[Lists and Dictionaries]
 
@@ -484,4 +536,90 @@
 		print inventory['pouch']
 		print inventory['backpack']
 
+	#[Looping in dictionaries]
+		prices = {
+		    "banana" : 4,
+		    "apple"  : 2,
+		    "orange" : 1.5,
+		    "pear"   : 3,
+		}
+		stock = {
+		    "banana" : 6,
+		    "apple"  : 0,
+		    "orange" : 32,
+		    "pear"   : 15,
+		}
+
+		for key in prices:
+		    print key
+		    print "price: %s" % prices[key]
+		    print "stock: %s" % stock[key]
+
+		total = 0
+		for i in prices:
+		    total = total + prices[i] * stock[i]
+			print total
+
+	#[More Looping techniques]
+		'''
+		To loop over two or more sequences at the same time, the
+		entries can be paired with the zip() function.
+		'''
+		questions = ['name', 'quest', 'favorite color']
+		answers = ['lancelot', 'the holy grail', 'blue']
+		for q, a in zip(questions, answers):
+			print 'What is your {0}?  It is {1}.'.format(q, a)
+
+	#[List of Dictionaries]
+		'''
+		Iterating over a list of dictionaries
+		'''
+		lloyd = {
+		    "name": "Lloyd",
+		    "homework": [90.0,97.0, 75.0, 92.0],
+		    "quizzes": [88.0, 40.0, 94.0],
+		    "tests": [75.0, 90.0]
+		}
+		alice = {
+		    "name": "Alice",
+		    "homework": [100.0, 92.0, 98.0, 100.0],
+		    "quizzes": [82.0, 83.0, 91.0],
+		    "tests": [89.0, 97.0]
+		}
+		tyler = {
+		    "name": "Tyler",
+		    "homework": [0.0, 87.0, 75.0, 22.0],
+		    "quizzes": [0.0, 75.0, 78.0],
+		    "tests": [100.0, 100.0]
+		}
+
+		students = [lloyd, alice, tyler]
+
+		for n in [0,1,2]:
+		    for k, v in students[n].iteritems():
+			print k, v
+		#[OR]
+
+		for n in range(len(students)):
+		    for k, v in students[n].iteritems():
+			print k, v
+
+	#[Iterate over both keys and values]
+
+		>>> D = {'a': 1, 'b': 2, 'c': 3}
+		>>> for key in D:
+			print(key, '=>', D[key]) # Use dict keys iterator and index
+
+		a => 1
+		c => 3
+		b => 2
+
+		>>> list(D.items())
+		[('a', 1), ('c', 3), ('b', 2)]
+		>>> for (key, value) in D.items():
+			print(key, '=>', value)		# Iterate over both keys and values
+
+		a => 1
+		c => 3
+		b => 2
 

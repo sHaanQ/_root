@@ -1,0 +1,481 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.1.4.2 (Linux)"/>
+	<meta name="created" content="2016-11-22T22:37:43.929607792"/>
+	<meta name="changed" content="2016-11-22T23:06:18.229187768"/>
+	
+	<style type="text/css">
+		body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Liberation Sans"; font-size:x-small }
+		a.comment-indicator:hover + comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em;  } 
+		a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em;  } 
+		comment { display:none;  } 
+	</style>
+	
+</head>
+
+<body>
+<table cellspacing="0" border="0">
+	<colgroup width="482"></colgroup>
+	<colgroup width="660"></colgroup>
+	<tr>
+		<td height="25" align="left" valign=middle><b><font face="Courier New" size=3>Linux command syntax</font></b></td>
+		<td align="left" valign=middle><b><font face="Courier New" size=3>Linux command description</font></b></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/a//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove a specific character, say 'a'</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/^.//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove 1st character in every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/.$//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove last character of every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/.//;s/.$//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove the 1st and last character of every line in the same command</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/^F//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove first character only if it is a specific character</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/x$//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove last character only if it is a specific character</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/...//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove 1st 3 characters of every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -r 's/.{4}//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove 1st n characters of every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -r 's/.{3}$//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove last n characters of every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -r 's/(.{3}).*/\1/' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove everything except the 1st n characters in every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -r 's/.*(.{3})/\1/' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove everything except the last n characters in a file</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/[aoe]//g' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove multiple characters present in a file</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/lari//g' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove a pattern</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/u//2' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To delete only nth occurrence of a character in every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/a.*//' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To delete everything in a line followed by a character</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/[0-9]//g' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove all digits present in every line of a file</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/[a-z]//g' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove all lower case alphabets present in every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/[^a-z]//g' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove everything other than the lower case alphabets</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/[a-zA-Z0-9]//g' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove all alpha-numeric characters present in every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/[uU]//g' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>To remove a character irrespective of the case</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/Nick/John/g' report.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace every occurrence of Nick with John in report.txt</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed 's/Nick|nick/John/g' report.txt<br> </font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace every occurrence of Nick or nick with John.</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/^/ /' file.txt &gt;file_new.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Add 8 spaces to the left of a text for pretty printing.</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -n '/Of course/,/attention you \<br>pay/p' myfile</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Display only one paragraph, starting with &quot;Of course&quot;<br>and ending in &quot;attention you pay&quot;</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -n 12,18p file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Show only lines 12-18 of file.txt</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 12,18d file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Show all of file.txt&nbsp;except&nbsp;for lines from 12 to 18</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed G file.txt </font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Double-space file.txt</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -f script.sed file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Write all commands in script.sed and execute them</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '5!s/ham/cheese/' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace ham with cheese in file.txt except in the 5th line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '$d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete the last line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/[0-9]\{3\}/p' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print only lines with three consecutive digits</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/boom/!s/aaa/bb/' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Unless boom is found replace aaa with bb</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '17,/disk/d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all lines from line 17 to 'disk'</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>echo ONE TWO | sed &quot;s/one/unos/I&quot;</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replaces one with unos in a case-insensitive manner,<br>so it will print &quot;unos TWO&quot;</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 'G;G' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Triple-space a file</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/.$//' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>A way to replace dos2unix :)</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/^[ ^t]*//' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all spaces in front of every line of file.txt</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/[ ^t]*$//' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all spaces at the end of every line of file.txt</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed 's/^[ ^t]*//;s/[ ^]*$//' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all spaces in front and at the end of every line<br>of file.txt</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/foo/bar/' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace foo with bar only for the first instance in a line.</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/foo/bar/4' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace foo with bar only for the 4th instance in a line.</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/foo/bar/g' file.txt </font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace foo with bar for all instances in a line.</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/baz/s/foo/bar/g' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Only if line contains baz, substitute foo with bar</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/./,/^$/!d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all consecutive blank lines except for EOF</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed '/^$/N;/\n$/D' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all consecutive blank lines, but allows<br>only top blank line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/./,$!d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all leading blank lines</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -e :a -e '/^\n*$/{$d;N;};/\n$/ba' \<br>file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all trailing blank lines</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -e :a -e '/\\$/N; s/\\\n//; ta' \<br>file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>If a file ends in a backslash, join it with the next (useful<br>for shell scripts)</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/regex/,+5/expr/'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Match regex plus the next 5 lines</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '1~3d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete every third line, starting with the first</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -n '2~5p' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print every 5th line starting with the second</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed 's/[Nn]ick/John/g' report.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Another way to write some example above.<br>Can you guess which one?</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -n '/RE/{p;q;}' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print only the first match of<br>RE (regular expression)</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '0,/RE/{//d;}' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete only the first match</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '0,/RE/s//to_that/' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Change only the first match</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/^[^,]*,/9999,/' file.csv</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Change first field to 9999 in a CSV file</font></td>
+	</tr>
+	<tr>
+		<td height="211" align="left" valign=middle><font face="Courier New" size=3>s/^ *\(.*[^ ]\) *$/|\1|/;<br>s/&quot; *, */&quot;|/g;<br>: loop<br>s/| *\([^&quot;,|][^,|]*\) *, */|\1|/g;<br>s/| *, */|\1|/g;<br>t loop<br>s/ *|/|/g;<br>s/| */|/g;<br>s/^|\(.*\)|$/\1/;</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>sed script to convert CSV file to bar-separated<br>(works only on some types of CSV,<br>with embedded &quot;s and commas)</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed ':a;s/\(^\|[^0-9.]\)\([0-9]\+\)\\<br>([0-9]\{3\}\)/\1\2,\3/g;ta' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Change numbers from file.txt from 1234.56 form to 1.234.56</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -r &quot;s/\&lt;(reg|exp)[a-z]+/\U&amp;/g&quot;</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Convert any word starting with reg or exp to uppercase</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed '1,20 s/Johnson/White/g' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Do replacement of Johnson with White only on<br>lines between 1 and 20</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '1,20 !s/Johnson/White/g' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>The above reversed (match all except lines 1-20)</font></td>
+	</tr>
+	<tr>
+		<td height="72" align="left" valign=middle><font face="Courier New" size=3>sed '/from/,/until/ { s/\&lt;red\&gt;/magenta/g; \<br>s/\&lt;blue\&gt;/cyan/g; }' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace only between &quot;from&quot; and &quot;until&quot;</font></td>
+	</tr>
+	<tr>
+		<td height="72" align="left" valign=middle><font face="Courier New" size=3>sed '/ENDNOTES:/,$ { s/Schaff/Herzog/g; \<br>s/Kraft/Ebbing/g; }' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace only from the word &quot;ENDNOTES:&quot; until EOF</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/./{H;$!d;};x;/regex/!d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print paragraphs only if they contain regex</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3> sed -e '/./{H;$!d;}' -e 'x;/RE1/!d;\<br>/RE2/!d;/RE3/!d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print paragraphs only if they contain RE1,<br>RE2&nbsp;and&nbsp;RE3</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3> sed ':a; /\\$/N; s/\\\n//; ta' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Join two lines in the first ends in a backslash</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3> sed 's/14&quot;/fourteen inches/g' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>This is how you can use double quotes</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3> sed 's/\/some\/UNIX\/path/\/a\/new\\<br>/path/g' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Working with Unix paths</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3> sed 's/[a-g]//g' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Remove all characters from a to g from file.txt</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/\(.*\)foo/\1bar/' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace only the last match of foo with bar</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '1!G;h;$!d' </font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>A tac replacement</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed '/\n/!G;s/\(.\)\(.*\n\)/&amp;\2\1\<br>/;//D;s/.//'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>A rev replacement</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 10q file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>A head replacement</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -e :a -e '$q;N;11,$D;ba' \<br>file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>A tail replacement</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed '$!N; /^\(.*\)\n\1$/!P; D' \<br>file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>A uniq replacement</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed '$!N; s/^\(.*\)\n\1$/\1/;\<br> t; D' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>The opposite (or uniq -d equivalent)</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '$!N;$!D' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Equivalent to tail -n 2</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -n '$p' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>... tail -n 1 (or tail -1)</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/regexp/!d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>grep equivalent</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -n '/regexp/{g;1!p;};h' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print the line before the one matching regexp, but<br>not the one containing the regexp</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -n '/regexp/{n;p;}' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print the line after the one matching the regexp, but<br>not the one containing the regexp</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/pattern/d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete lines matching pattern</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/./!d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all blank lines from a file</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed '/^$/N;/\n$/N;//D' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete all consecutive blank lines<br>except for the first two</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -n '/^$/{p;h;};/./{x;/./p;}'\<br> file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Delete the last line of each paragraph</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/.\x08//g' file</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Remove nroff overstrikes</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/^$/q'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Get mail header</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '1,/^$/d'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Get mail body</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/^Subject: */!d; s///;q'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Get mail subject</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed 's/^/&gt; /'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Quote mail message by inserting a<br>&quot;&gt; &quot; in front of every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's/^&gt; //'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>The opposite (unquote mail message)</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -e :a -e 's/&lt;[^&gt;]*&gt;//g;/&lt;/N;//ba'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Remove HTML tags</font></td>
+	</tr>
+	<tr>
+		<td height="72" align="left" valign=middle><font face="Courier New" size=3>sed '/./{H;d;};x;s/\n/={NL}=/g'\<br> file.txt | sort \<br>| sed '1s/={NL}=//;s/={NL}=/\n/g'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Sort paragraphs of file.txt alphabetically</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's@/usr/bin@&amp;/local@g' path.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Replace /usr/bin with /usr/bin/local in path.txt</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed 's@^.*$@&lt;&lt;&lt;&amp;&gt;&gt;&gt;@g' path.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Try it and see :)</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed 's/\(\/[^:]*\).*/\1/g' path.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Provided path.txt contains $PATH, this will<br>echo only the first path on each line</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed 's/\([^:]*\).*/\1/' /etc/passwd</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>awk replacement - displays only the users<br>from the passwd file</font></td>
+	</tr>
+	<tr>
+		<td height="94" align="left" valign=middle><font face="Courier New" size=3>echo &quot;Welcome To The Geek Stuff&quot; | sed \<br>'s/\(\b[A-Z]\)/\(\1\)/g'<br>(W)elcome (T)o (T)he (G)eek (S)tuff</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Self-explanatory</font></td>
+	</tr>
+	<tr>
+		<td height="95" align="left" valign=middle><font face="Courier New" size=3>sed -e '/^$/,/^END/s/hills/\<br>mountains/g' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Swap 'hills' for 'mountains', but only on blocks<br>of text beginning<br>with a blank line, and ending with a line beginning<br>with the three characters 'END', inclusive</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -e '/^#/d' /etc/services | more</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>View the services file without the commented lines</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed '$s@\([^:]*\):\([^:]*\):\([^:]*\<br>\)@\3:\2:\1@g' path.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Reverse order of items in the last line of path.txt</font></td>
+	</tr>
+	<tr>
+		<td height="72" align="left" valign=middle><font face="Courier New" size=3>sed -n -e '/regexp/{=;x;1!p;g;$!N;p;D;}'\<br> -e h file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print 1 line of context before and after the line matching,<br>with a line number where the matching occurs</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/regex/{x;p;x;}' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Insert a new line above every line matching regex</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/AAA/!d; /BBB/!d; /CCC/!d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Match AAA, BBB and CCC in any order</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/AAA.*BBB.*CCC/!d' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Match AAA, BBB and CCC in that order</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -n '/^.\{65\}/p' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print lines 65 chars long or more</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed -n '/^.\{65\}/!p' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Print lines 65 chars long or less</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/regex/G' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Insert blank line below every line</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed '/regex/{x;p;x;G;}' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Insert blank line above and below</font></td>
+	</tr>
+	<tr>
+		<td height="25" align="left" valign=middle><font face="Courier New" size=3>sed = file.txt | sed 'N;s/\n/\t/'</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Number lines in file.txt</font></td>
+	</tr>
+	<tr>
+		<td height="48" align="left" valign=middle><font face="Courier New" size=3>sed -e :a -e 's/^.\{1,78\}$/\<br> &amp;/;ta' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Align text flush right</font></td>
+	</tr>
+	<tr>
+		<td height="72" align="left" valign=middle><font face="Courier New" size=3>sed -e :a -e 's/^.\{1,77\}$/ &amp;/;ta' -e \<br>'s/\( *\)\1/\1/' file.txt</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Align text center</font></td>
+	</tr>
+</table>
+<!-- ************************************************************************** -->
+</body>
+
+</html>
