@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Record Speakers
+Comment=Record your speakers
+Exec=python /home/bhargav/Templates/switch_v2/record_speakers.py
+Path=/home/bhargav/Templates/switch_v2/
+Icon=/home/bhargav/Templates/switch_v2/record-spreakers.svg
+Terminal=false
+Type=Application
+Categories=Utility;Application;
