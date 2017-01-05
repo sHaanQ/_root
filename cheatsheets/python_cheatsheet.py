@@ -341,6 +341,14 @@
 		print n
 		# prints [1, 5]
 
+	#[List concatenate]
+		a = [1, 2, 3]
+		b = [4, 5, 6]
+		print a + b
+		# prints [1, 2, 3, 4, 5, 6]
+
+		The example above is just a reminder of how to concatenate two lists.
+		
 	#[List Slicing]
 
 		'''
@@ -416,7 +424,23 @@
 		names = ["Adam","Alex","Mariah","Martine","Columbus"]
 
 		for i in names:
-			print i
+			print i	
+		
+		# Method 1 - for item in list:
+
+		for item in list:
+		    print item
+
+		# Method 2 - iterate through indexes:
+
+		for i in range(len(list)):
+		    print list[i]
+
+		Method 1 is useful to loop through the list, but it's not possible
+		to modify the list this way. Method 2 uses indexes to loop through
+		the list, making it possible to also modify the list if needed.
+		
+		Since we aren't modifying the list, feel free to use either one on this lesson! 
 
 	#[Sorting the List]
 
@@ -435,6 +459,61 @@
 
 		square_list.sort()
 		print square_list
+		
+	#[Range in lists]
+	
+		n = [3, 5, 7]
+
+		def double_list(x):
+		    for i in range(0, len(x)):
+			x[i] = x[i] * 2
+		    # Don't forget to return your new list!
+		    return x
+
+		print double_list(n)
+
+		# Passing a range into a function
+
+		Okay! Range time. The Python range() function is just a shortcut for generating a
+		list, so you can use ranges in all the same places you can use lists.
+
+		range(6) # => [0,1,2,3,4,5]
+		range(1,6) # => [1,2,3,4,5]
+		range(1,6,3) # => [1,4]
+
+		The range function has three different versions:
+
+		    range(stop)
+		    range(start, stop)
+		    range(start, stop, step)
+
+		In all cases, the range() function returns a list of numbers from start up to
+		(but not including) stop. Each item increases by step.
+
+		If omitted, start defaults to zero and step defaults to one.
+		
+		# Example 1
+		
+		def my_function(x):
+		    for i in range(0, len(x)):
+			x[i] = x[i] * 2
+		    return x
+
+		print my_function(range(2)) # Add your range between the parentheses!
+		
+		# Example 2
+		
+		n = ["Michael", "Lieberman"]
+		# Add your function here
+
+		def join_strings(words):
+		    result = ""
+		    for i in range(0, len(words)):
+			result = result + words[i]
+		    return result
+
+		print join_strings(n)
+
 
 #[Dictionary]
 
