@@ -450,14 +450,38 @@
 		for i in range(len(list)):
 		    print list[i]
 
+		'''
 		Method 1 is useful to loop through the list, but it's not possible
 		to modify the list this way. Method 2 uses indexes to loop through
 		the list, making it possible to also modify the list if needed.
+		'''
+
+	#[List of Lists]
 		
-		Since we aren't modifying the list, feel free to use either one on this lesson! 
+		'''
+		Single list that contains multiple lists and how to use them in a function
+		'''
+		
+		# Example One
+		list_of_lists = [[1,2,3], [4,5,6]]
 
+		for lst in list_of_lists:
+		    for item in lst:
+			print item
+
+		# Example Two
+		n = [[1, 2, 3], [4, 5, 6, 7, 8, 9]]
+		# Add your function here
+		def flatten(lists):
+		    results = []
+		    for numbers in lists:
+			for i in numbers:
+			    results.append(i)
+		    return results
+
+		print flatten(n)
+	
 	#[Sorting the List]
-
 
 		'''
 		Sorting can happen on numbers and strings. Others I do not know yet.
