@@ -9,6 +9,7 @@
 
 #[Print statement]
 
+	print "Turn", turn + 1
 	print '%s/%s/%s' % (now.year, now.month, now.day)
 	print "Let's not go to %s. 'Tis a silly %s." % (string_1, string_2)
 	print 'This isn\'t flying, this is falling with style!'
@@ -234,6 +235,17 @@
 
 	print "Ah, so your name is %s, your quest is %s, " \
 	"and your favorite color is %s." % (name, quest, color)
+	
+	# Example 
+	number = raw_input("Enter a number: ")
+	if int(number) == 0:
+	    print "You entered 0"
+
+	'''
+	raw_input asks the user for input and returns it as a string. But we're going to
+	want to use integers for our guesses! To do this, we'll wrap the raw_inputs with int()
+	to convert the string to an integer.
+	'''
 
 #[Comparators]
 
@@ -480,7 +492,46 @@
 		    return results
 
 		print flatten(n)
-	
+		
+		# Creates a list containing 5 lists, each of 8 items, all set to 0
+		w, h = 8, 5
+		Matrix = [[0 for x in range(w)] for y in range(h)]
+
+	#[Printing Pretty]
+
+		'''
+		We're getting pretty close to a playable board, but wouldn't it be nice to get
+		rid of those quote marks and commas?
+		'''
+
+		letters = ['a', 'b', 'c', 'd']
+		print " ".join(letters)
+		print "---".join(letters)
+
+		'''
+		In the example above, we create a list called letters.
+		Then, we print a b c d.
+
+		The .join method uses the string to combine the items in the list.
+
+		Finally, we print a---b---c---d.
+		We are calling the .join function on the "---" string.
+		'''
+
+		# Example
+
+		board = []
+		# Creates a list containing 5 lists, each of 5 items, all set to 0
+		w, h = 5, 5 
+		board = [['O' for x in range(w)] for y in range(h)] 
+
+		def print_board(board):
+		    for lst in board:
+			print " ".join(lst)
+
+		print_board(board)
+
+
 	#[Sorting the List]
 
 		'''
