@@ -235,8 +235,8 @@
 
 	print "Ah, so your name is %s, your quest is %s, " \
 	"and your favorite color is %s." % (name, quest, color)
-	
-	# Example 
+
+	# Example
 	number = raw_input("Enter a number: ")
 	if int(number) == 0:
 	    print "You entered 0"
@@ -344,7 +344,7 @@
 		print n
 		# prints [3, 5]
 
-	#[List delete]	
+	#[List delete]
 		'''
 		del(n[1]) is like .pop in that it will remove the item at the given
 		index, but it won't return it:
@@ -374,7 +374,7 @@
 
 		print join_lists(m, n)
 		# You want this to print [1, 2, 3, 4, 5, 6]
-		
+
 	#[List Slicing]
 
 		'''
@@ -450,8 +450,8 @@
 		names = ["Adam","Alex","Mariah","Martine","Columbus"]
 
 		for i in names:
-			print i	
-		
+			print i
+
 		# Method 1 - for item in list:
 
 		for item in list:
@@ -469,11 +469,11 @@
 		'''
 
 	#[List of Lists]
-		
+
 		'''
 		Single list that contains multiple lists and how to use them in a function
 		'''
-		
+
 		# Example One
 		list_of_lists = [[1,2,3], [4,5,6]]
 
@@ -492,7 +492,7 @@
 		    return results
 
 		print flatten(n)
-		
+
 		# Creates a list containing 5 lists, each of 8 items, all set to 0
 		w, h = 8, 5
 		Matrix = [[0 for x in range(w)] for y in range(h)]
@@ -522,8 +522,8 @@
 
 		board = []
 		# Creates a list containing 5 lists, each of 5 items, all set to 0
-		w, h = 5, 5 
-		board = [['O' for x in range(w)] for y in range(h)] 
+		w, h = 5, 5
+		board = [['O' for x in range(w)] for y in range(h)]
 
 		def print_board(board):
 		    for lst in board:
@@ -548,9 +548,9 @@
 
 		square_list.sort()
 		print square_list
-		
+
 	#[Range in lists]
-	
+
 		n = [3, 5, 7]
 
 		def double_list(x):
@@ -562,7 +562,7 @@
 		print double_list(n)
 
 		# Passing a range into a function
-		
+
 		'''
 		Okay! Range time. The Python range() function is just a shortcut for generating a
 		list, so you can use ranges in all the same places you can use lists.
@@ -584,16 +584,16 @@
 		'''
 
 		# Example 1
-		
+
 		def my_function(x):
 		    for i in range(0, len(x)):
 			x[i] = x[i] * 2
 		    return x
 
 		print my_function(range(2)) # Add your range between the parentheses!
-		
+
 		# Example 2
-		
+
 		n = ["Michael", "Lieberman"]
 		# Add your function here
 
