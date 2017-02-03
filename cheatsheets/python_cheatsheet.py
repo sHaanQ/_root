@@ -20,6 +20,40 @@
 		for i in id:
 			print "My name is {0}. ID {1}".format(name[i-1], id[i-1])
 
+
+	#[Comma after print]
+
+
+		'''
+		String manipulation is useful in for loops if you want to modify
+		some content in a string.
+		'''
+
+		word = "Marble"
+		for char in word:
+		    print char,
+
+		'''
+		The example above iterates through each character in word and,
+		in the end, prints out M a r b l e.
+
+		The , character after our print statement means that our next print
+		statement keeps printing on the same line.
+		'''
+
+		#[Example]
+			phrase = "A bird in the hand..."
+
+			# Add your for loop
+			for i in phrase:
+			    if i == 'A' or i == 'a':
+			        print 'X',
+			    else:
+			        print i,
+
+			#Don't delete this print statement!
+			print	
+
 #[Functions]
 
 	def shout(phrase):
@@ -247,6 +281,104 @@
 	to convert the string to an integer.
 	'''
 
+	guess = int(raw_input("Your guess: "))
+	'''
+	Remember, raw_input turns user input into a string, so we use int()
+	to make it a number again.
+	'''
+
+#[Loops]
+
+    #[While]
+	    loop_condition = True
+
+	    while loop_condition:
+	        print "I am a loop"
+	        loop_condition = False
+
+	    #[While / else]
+
+			'''
+			while/else is similar to if/else, but there is a difference: the else
+			block will execute anytime the loop condition is evaluated to False.
+
+			This means that it will execute if the loop is never entered or if the
+			loop exits normally. If the loop exits as the result of a break, the
+			else will not be executed.
+			'''
+
+			# Example One
+
+			'''
+			In this example, the loop will break if a 5 is generated, and the else
+			will not execute. Otherwise, after 3 numbers are generated, the loop
+			condition will become false and the else will execute.
+			'''
+
+			import random
+
+			print "Lucky Numbers! 3 numbers will be generated."
+			print "If one of them is a '5', you lose!"
+
+			count = 0
+			while count < 3:
+			    num = random.randint(1, 6)
+			    print num
+			    if num == 5:
+			        print "Sorry, you lose!"
+			        break
+			    count += 1
+			else:
+			    print "You win!"
+				
+			# Example Two 
+
+			from random import randint
+
+			# Generates a number from 1 through 10 inclusive
+			random_number = randint(1, 10)
+
+			guesses_left = 3
+			# Start your game!
+			while guesses_left > 0:
+			    guess = int(raw_input("Your Guess : " ))
+			    if guess == random_number:
+			        print "You Win"
+			        break
+			    else:
+			        guesses_left -= 1
+			else:
+			    print "You lose."
+		
+		
+	#[For Loops]
+
+		print "Counting..."
+
+		for i in range(20):
+		    print i
+
+		#[For / else]
+			'''
+			Just like with while, for loops may have an else associated with them.
+
+			In this case, the else statement is executed after the for, but only
+			if the for ends normally—that is, not with a break. This code will break
+			when it hits 'tomato', so the else block won't be executed.
+			'''
+
+			fruits = ['banana', 'apple', 'orange', 'tomato', 'pear', 'grape']
+
+			print 'You have...'
+			for f in fruits:
+			    if f == 'tomato':
+			        print 'A tomato is not a fruit!' # (It actually is.)
+			        break
+			    print 'A', f
+			else:
+			    print 'A fine selection of fruits!'
+
+
 #[Comparators]
 
 	3 < 4
@@ -270,6 +402,10 @@
 		print "None of the above."
 
 	"""Don't forget to include a : after your if statements!"""
+
+    # Example
+        if guess_row not in range(5) or guess_col not in range(5):
+            print "Oops, that's not even in the ocean."
 
 #[type()]
 
@@ -605,6 +741,47 @@
 
 		print join_strings(n)
 
+	#[Enumerate]
+
+		'''
+		enumerate works by supplying a corresponding index to each element in the list
+		that you pass it. Each time you go through the loop, index will be one greater,
+		and item will be the next item in the sequence. It's very similar to using a
+		normal for loop with a list, except this gives us an easy way to count how many
+		items we've seen so far.
+		'''
+
+		choices = ['pizza', 'pasta', 'salad', 'nachos']
+
+		print 'Your choices are:'
+		for index, item in enumerate(choices):
+		    print index, item
+
+	#[Iterating Multiple Lists]
+
+		'''
+		Multiple lists
+
+		It's also common to need to iterate over two lists at once. This is where
+		the built-in zip function comes in handy.
+
+		zip will create pairs of elements when passed two lists, and will stop at
+		the end of the shorter list.
+
+		zip can handle three or more lists as well!
+		'''
+
+		list_a = [3, 9, 17, 15, 19]
+		list_b = [2, 4, 8, 10, 30, 40, 50, 60, 70, 80, 90]
+
+		for a, b in zip(list_a, list_b):
+		    # Add your code here!
+		    if a > b:
+		        print a
+		    else:
+		        print b 
+
+
 #[Dictionary]
 
 	'''
@@ -671,6 +848,14 @@
 
 	#[Retrieve key and value]
 
+		#[Method One]
+		d = {'a': 'apple', 'b': 'berry', 'c': 'cherry'}
+
+		for key in d:
+		    # Your code here!
+		    print key, d[key]
+
+		#[Method Two]
 		knights = {'gallahad': 'the pure', 'robin': 'the brave'}
 		for k, v in knights.iteritems():
 			print k, v
@@ -791,4 +976,3 @@
 		a => 1
 		c => 3
 		b => 2
-
