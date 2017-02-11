@@ -52,7 +52,7 @@
 			        print i,
 
 			#Don't delete this print statement!
-			print	
+			print
 
 #[Functions]
 
@@ -249,6 +249,19 @@
 		    if letter == "i":
 			print letter
 
+    #[Reverse]
+
+        """
+        For example:
+            reverse("abcd") should return "dcba".
+
+            or
+
+            [::-1] to help you with this.
+            S = "hello"
+            S[::-1] will return "olleh"
+        """
+
 #[Reading input]
 
 	name = raw_input("What is your name?")
@@ -309,48 +322,66 @@
 
 			# Example One
 
-			'''
-			In this example, the loop will break if a 5 is generated, and the else
-			will not execute. Otherwise, after 3 numbers are generated, the loop
-			condition will become false and the else will execute.
-			'''
+				'''
+				In this example, the loop will break if a 5 is generated, and the else
+				will not execute. Otherwise, after 3 numbers are generated, the loop
+				condition will become false and the else will execute.
+				'''
 
-			import random
+				import random
 
-			print "Lucky Numbers! 3 numbers will be generated."
-			print "If one of them is a '5', you lose!"
+				print "Lucky Numbers! 3 numbers will be generated."
+				print "If one of them is a '5', you lose!"
 
-			count = 0
-			while count < 3:
-			    num = random.randint(1, 6)
-			    print num
-			    if num == 5:
-			        print "Sorry, you lose!"
-			        break
-			    count += 1
-			else:
-			    print "You win!"
-				
-			# Example Two 
+				count = 0
+				while count < 3:
+				    num = random.randint(1, 6)
+				    print num
+				    if num == 5:
+				        print "Sorry, you lose!"
+				        break
+				    count += 1
+				else:
+				    print "You win!"
 
-			from random import randint
+			# Example Two
 
-			# Generates a number from 1 through 10 inclusive
-			random_number = randint(1, 10)
+				from random import randint
 
-			guesses_left = 3
-			# Start your game!
-			while guesses_left > 0:
-			    guess = int(raw_input("Your Guess : " ))
-			    if guess == random_number:
-			        print "You Win"
-			        break
-			    else:
-			        guesses_left -= 1
-			else:
-			    print "You lose."
-		
-		
+				# Generates a number from 1 through 10 inclusive
+				random_number = randint(1, 10)
+
+				guesses_left = 3
+				# Start your game!
+				while guesses_left > 0:
+				    guess = int(raw_input("Your Guess : " ))
+				    if guess == random_number:
+				        print "You Win"
+				        break
+				    else:
+				        guesses_left -= 1
+				else:
+				    print "You lose."
+
+			# Example Three
+
+                # A nice use of while/else
+
+                def is_prime(x):
+                    if x < 2:
+                        return False
+                #    elif x == 2:
+                #        return True
+                    else:
+                        n = 2
+                        while n <= x-1:
+                            if x % n == 0:
+                                return False
+                                break
+                            n += 1
+                        else:
+                            return True
+
 	#[For Loops]
 
 		print "Counting..."
@@ -779,7 +810,7 @@
 		    if a > b:
 		        print a
 		    else:
-		        print b 
+		        print b
 
 
 #[Dictionary]
@@ -976,3 +1007,16 @@
 		a => 1
 		c => 3
 		b => 2
+
+
+# Errors
+
+	# local variable 's' referenced before assignment
+
+		def digit_sum(n):
+	    #s = 0
+	    while(n != 0):
+	        d = n % 10
+	        n = n / 10
+	        s = s + d
+	    return s
