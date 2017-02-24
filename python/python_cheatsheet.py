@@ -587,6 +587,21 @@
 		print join_lists(m, n)
 		# You want this to print [1, 2, 3, 4, 5, 6]
 
+	#[List Reverse]
+
+		# A negative stride progresses through the list from right to left.
+
+		letters = ['A', 'B', 'C', 'D', 'E']
+		print letters[::-1]
+		# => ['E', 'D', 'C', 'B', 'A'].
+
+		# Example Two
+		
+		my_list = range(1, 11)
+		backwards = my_list[::-1]
+		print backwards
+		# => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+		
 	#[List Slicing]
 
 		'''
@@ -602,9 +617,13 @@
 		the sliced list. For example, a stride of 2 would select every other
 		item from the original list to place in the sliced list.
 
-		We take a subsection and store it in the slice list.
-		We start at the index before the colon and continue up to
-		but not including the index after the colon.
+		Stride Length 
+		
+		A positive stride length traverses the list from left to right,
+		and a negative one traverses the list from right to left.
+
+		Further, a stride length of 1 traverses the list "by ones," a stride
+		length of 2 traverses the list "by twos," and so on.
 		'''
 
 		# Example 
@@ -619,8 +638,19 @@
 		slice = letters[1:3]
 		print slice
 		print letters
-
+		
 		# Example Three
+		to_21 = range(1,22)
+		odds = to_21[::2]
+		middle_third = to_21[7:14:1]
+		
+		print odds
+		print middle_third
+		
+		# => [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
+		# => [8, 9, 10, 11, 12, 13, 14]
+
+		# Example Fpur
 		suitcase = ["sunglasses", "hat", "passport", "laptop", "suit", "shoes"]
 
 		first  = suitcase[0:2]  # The first and second items (index zero and one)
@@ -650,6 +680,11 @@
 
 		print to_five[::2]
 		# print ['A', 'C', 'E']
+		
+		to_one_hundred = range(101)
+		backwards_by_tens = to_one_hundred[::-10]
+		print backwards_by_tens
+		# => [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
 
 
 	#[List Insertion & Indexing]
