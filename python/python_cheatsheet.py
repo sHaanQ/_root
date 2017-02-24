@@ -468,51 +468,50 @@
 		print "The third animal at the zoo is the " + zoo_animals[2]
 		print "The fourth animal at the zoo is the " + zoo_animals[3]
 
+	#[Building Lists/List Comprehension]
+		'''
+		Let's say you wanted to build a list of the numbers from 0 to 50
+		(inclusive). We could do this pretty easily:
+		'''
 
-    #[Building Lists/List Comprehension]
-        '''
-        Let's say you wanted to build a list of the numbers from 0 to 50
-        (inclusive). We could do this pretty easily:
-        '''
+		my_list = range(51)
 
-        my_list = range(51)
-
-        '''
-        But what if we wanted to generate a list according to some logic—for
-        example, a list of all the even numbers from 0 to 50?
+		'''
+		But what if we wanted to generate a list according to some logic—for
+		example, a list of all the even numbers from 0 to 50?
 
 
-        Python's answer to this is the list comprehension. List comprehensions
-        are a powerful way to generate lists using the keywords
-        '''
+		Python's answer to this is the list comprehension. List comprehensions
+		are a powerful way to generate lists using the keywords
+		'''
 
-        for/in & if
+		for/in & if
 
-        evens_to_50 = [i for i in range(51) if i % 2 == 0]
-        print evens_to_50
-	
-	# This will create a new_list populated by the numbers one to five. 
-	new_list = [x for x in range(1,6)]
-	# => [1, 2, 3, 4, 5]
-	
-	# If you want those numbers doubled, you could use:
-	doubles = [x*2 for x in range(1,6)]
-	# => [2, 4, 6, 8, 10]
+		evens_to_50 = [i for i in range(51) if i % 2 == 0]
+		print evens_to_50
 
-	# And if you only wanted the doubled numbers that are evenly divisible by three:
-	doubles_by_3 = [x*2 for x in range(1,6) if (x*2)%3 == 0]
-	# => [6]
+		# This will create a new_list populated by the numbers one to five. 
+		new_list = [x for x in range(1,6)]
+		# => [1, 2, 3, 4, 5]
 
-	# Even Squares
-	even_squares = [i*i for i in range(1,12) if i*i % 2 == 0]
-	
-	c = ['C' for x in range(5) if x < 3]
-	print c
-	# => ['C', 'C', 'C'].
-	
-	cubes_by_four = [x ** 3 for x in range(1, 11) if x ** 3 % 4 == 0]
-	print cubes_by_four
-	# => [8, 64, 216, 512, 1000]
+		# If you want those numbers doubled, you could use:
+		doubles = [x*2 for x in range(1,6)]
+		# => [2, 4, 6, 8, 10]
+
+		# And if you only wanted the doubled numbers that are evenly divisible by three:
+		doubles_by_3 = [x*2 for x in range(1,6) if (x*2)%3 == 0]
+		# => [6]
+
+		# Even Squares
+		even_squares = [i*i for i in range(1,12) if i*i % 2 == 0]
+
+		c = ['C' for x in range(5) if x < 3]
+		print c
+		# => ['C', 'C', 'C'].
+
+		cubes_by_four = [x ** 3 for x in range(1, 11) if x ** 3 % 4 == 0]
+		print cubes_by_four
+		# => [8, 64, 216, 512, 1000]
 
 	#[List Append]
 
