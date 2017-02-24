@@ -469,7 +469,7 @@
 		print "The fourth animal at the zoo is the " + zoo_animals[3]
 
 
-    #[Building Lists]
+    #[Building Lists/List Comprehension]
         '''
         Let's say you wanted to build a list of the numbers from 0 to 50
         (inclusive). We could do this pretty easily:
@@ -483,17 +483,36 @@
 
 
         Python's answer to this is the list comprehension. List comprehensions
-        are a powerful way to generate lists using the
+        are a powerful way to generate lists using the keywords
         '''
 
-        for/in and if
-
-        '''keywords we've learned.'''
+        for/in & if
 
         evens_to_50 = [i for i in range(51) if i % 2 == 0]
         print evens_to_50
+	
+	# This will create a new_list populated by the numbers one to five. 
+	new_list = [x for x in range(1,6)]
+	# => [1, 2, 3, 4, 5]
+	
+	# If you want those numbers doubled, you could use:
+	doubles = [x*2 for x in range(1,6)]
+	# => [2, 4, 6, 8, 10]
 
+	# And if you only wanted the doubled numbers that are evenly divisible by three:
+	doubles_by_3 = [x*2 for x in range(1,6) if (x*2)%3 == 0]
+	# => [6]
 
+	# Even Squares
+	even_squares = [i*i for i in range(1,12) if i*i % 2 == 0]
+	
+	c = ['C' for x in range(5) if x < 3]
+	print c
+	# => ['C', 'C', 'C'].
+	
+	cubes_by_four = [x ** 3 for x in range(1, 11) if x ** 3 % 4 == 0]
+	print cubes_by_four
+	# => [8, 64, 216, 512, 1000]
 
 	#[List Append]
 
@@ -574,34 +593,65 @@
 		'''
 		Access a portion of a list.
 
+		List slicing allows us to access elements of a list in a concise manner.
+		The syntax looks like this:
+
+		[start:end:stride]
+
+		Where start describes where the slice starts (inclusive), end is where 
+		it ends (exclusive), and stride describes the space between items in
+		the sliced list. For example, a stride of 2 would select every other
+		item from the original list to place in the sliced list.
+
 		We take a subsection and store it in the slice list.
 		We start at the index before the colon and continue up to
 		but not including the index after the colon.
 		'''
 
+		# Example 
+		l = [i ** 2 for i in range(1, 11)]
+		# Should be [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+		
+		print l[2:9:2]
+		# => [9, 25, 49, 81]
+		
+		# Example Two
 		letters = ['a', 'b', 'c', 'd', 'e']
 		slice = letters[1:3]
 		print slice
 		print letters
 
-		'''
-		Another exmaple
-		'''
-
+		# Example Three
 		suitcase = ["sunglasses", "hat", "passport", "laptop", "suit", "shoes"]
 
 		first  = suitcase[0:2]  # The first and second items (index zero and one)
 		middle = suitcase[2:4]  # Third and fourth items (index two and three)
 		last   = suitcase[4:6]  # The last two items (index four and five)
 
-		'''
-		Another one
-		'''
-
+		# Another one
 		animals = "catdogfrog"
 		cat  = animals[:3]   # The first three characters of animals
 		dog  = animals[3:6]  # The fourth through sixth characters
 		frog = animals[6:]   # From the seventh character to the end
+		
+		'''
+		Omitting Indices
+
+		If you don't pass a particular index to the list slice,
+		Python will pick a default.
+		'''
+
+		to_five = ['A', 'B', 'C', 'D', 'E']
+
+		print to_five[3:]
+		# prints ['D', 'E'] 
+
+		print to_five[:2]
+		# prints ['A', 'B']
+
+		print to_five[::2]
+		# print ['A', 'C', 'E']
+
 
 	#[List Insertion & Indexing]
 
