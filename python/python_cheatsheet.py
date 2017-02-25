@@ -54,6 +54,82 @@
 			#Don't delete this print statement!
 			print
 
+#[Reading input]
+
+	name = raw_input("What is your name?")
+	var = input("Enter a number")
+		OR
+	var = int(input("Enter a number"))
+
+	"""
+	There were two functions to get user input, called input and raw_input.
+	The difference between them is, "raw_input" doesn't evaluate the data and returns as it is,
+	in string form.
+	But, "input" will evaluate whatever you entered and the result of evaluation will be returned
+	"""
+
+	name = raw_input("What is your name?")
+	quest = raw_input("What is your quest?")
+	color = raw_input("What is your favorite color?")
+
+	print "Ah, so your name is %s, your quest is %s, " \
+	"and your favorite color is %s." % (name, quest, color)
+
+	# Example
+	number = raw_input("Enter a number: ")
+	if int(number) == 0:
+	    print "You entered 0"
+
+	'''
+	raw_input asks the user for input and returns it as a string. But we're going to
+	want to use integers for our guesses! To do this, we'll wrap the raw_inputs with int()
+	to convert the string to an integer.
+	'''
+
+	guess = int(raw_input("Your guess: "))
+	'''
+	Remember, raw_input turns user input into a string, so we use int()
+	to make it a number again.
+	'''
+
+#[Boolean operators]
+
+	True or False
+	(3 < 4) and (5 >= 5)
+	this() and not that()
+
+#[Conditional statements]
+
+	if this_might_be_true():
+		print "This really is true."
+	elif that_might_be_true():
+		print "That is true."
+	else:
+		print "None of the above."
+
+	"""Don't forget to include a : after your if statements!"""
+
+    # Example
+        if guess_row not in range(5) or guess_col not in range(5):
+            print "Oops, that's not even in the ocean."
+
+#[type()]
+
+	'''
+    Finally, the type() function returns the type of the data it receives as an
+    argument.
+    '''
+
+	print type(42)
+	print type(4.2)
+	print type('spam')
+
+	#Python will output:
+
+	<type 'int'>
+	<type 'float'>
+	<type 'str'>
+
 #[Functions]
 
 	def shout(phrase):
@@ -76,103 +152,164 @@
 	print small
 
 
-#[Function Imports]
+    #[Function Imports]
 
-	import math
-	print math.sqrt(25)
+    	import math
+    	print math.sqrt(25)
 
-	"""
-	Nice work! Now Python knows how to take the square root of a number.
+    	"""
+    	Nice work! Now Python knows how to take the square root of a number.
 
-	However, we only really needed the sqrt function, and it can be frustrating
-	to have to keep typing math.sqrt().
+    	However, we only really needed the sqrt function, and it can be frustrating
+    	to have to keep typing math.sqrt().
 
-	It's possible to import only certain variables or functions from a given module.
-	Pulling in just a single function from a module is called a function import, and
-	it's done with the from keyword:
-	"""
+    	It's possible to import only certain variables or functions from a given module.
+    	Pulling in just a single function from a module is called a function import, and
+    	it's done with the from keyword:
+    	"""
 
-	from module import function
+    	from module import function
 
-	"""
-	Now you can just type sqrt() to get the square root of a number—no more math.sqrt()!
-	"""
+    	"""
+    	Now you can just type sqrt() to get the square root of a number—no more math.sqrt()!
+        """
 
 	#[List all functions in a module]
 
-	import math            # Imports the math module
-	everything = dir(math) # Sets everything to a list of things from math
-	print everything       # Prints 'em all!
+    	import math            # Imports the math module
+    	everything = dir(math) # Sets everything to a list of things from math
+    	print everything       # Prints 'em all!
 
 	#[Universal Import]
 
-	'''
-	What if we still want all of the variables and functions in a module but don't want to
-	have to constantly type math.?
+    	'''
+    	What if we still want all of the variables and functions in a module but don't want to
+    	have to constantly type math.?
 
-	Universal import can handle this for you. The syntax for this is:
-	'''
+    	Universal import can handle this for you. The syntax for this is:
+    	'''
 
-	from module import *
+    	from module import *
 
-	Ex:
+    	Ex:
 
-	from math import *
-	print sqrt(25)
+    	from math import *
+    	print sqrt(25)
 
-	#[Don't use Universal Imports]
+    	#[Don't use Universal Imports]
 
-	'''
-	Here Be Dragons
+        	'''
+        	Here Be Dragons
 
-	Universal imports may look great on the surface, but they're not a good idea for one very
-	important reason:
-	they fill your program with a ton of variable and function names without the safety of
-	those names still being associated with the module(s) they came from.
+        	Universal imports may look great on the surface, but they're not a
+            good idea for one very important reason:
+        	they fill your program with a ton of variable and function names
+            without the safety of those names still being associated with the
+            module(s) they came from.
 
-	If you have a function of your very own named sqrt and you import math, your function
-	is safe: there is your sqrt and there is math.sqrt. If you do from math import *, however,
-	you have a problem: namely, two different functions with the exact same name.
+        	If you have a function of your very own named sqrt and you import math,
+            your function is safe: there is your sqrt and there is math.sqrt.
 
-	Even if your own definitions don't directly conflict with names from imported modules, if
-	you import * from several modules at once, you won't be able to figure out which
-	variable or function came from where.
+            If you do from math import *, however, you have a problem: namely,
+            two different functions with the exact same name.
 
-	For these reasons, it's best to stick with either import module and type module.name
-	or just import specific variables and functions from various modules as needed.
-	'''
+        	Even if your own definitions don't directly conflict with names from
+            imported modules, if you import * from several modules at once,
+            you won't be able to figure out which variable or function came
+            from where.
+
+        	For these reasons, it's best to stick with either import module and
+            type module.name or just import specific variables and functions
+            from various modules as needed.
+        	'''
 
 	#[Passing multiple arguments]
 
-	def biggest_number(*args):
-		print max(args)
-		return max(args)
+    	def biggest_number(*args):
+    		print max(args)
+    		return max(args)
 
-	def smallest_number(*args):
-		print min(args)
-		return min(args)
+    	def smallest_number(*args):
+    		print min(args)
+    		return min(args)
 
-	def distance_from_zero(arg):
-		print abs(arg)
-		return abs(arg)
+    	def distance_from_zero(arg):
+    		print abs(arg)
+    		return abs(arg)
 
 
-	biggest_number(-10, -5, 5, 10)
-	smallest_number(-10, -5, 5, 10)
-	distance_from_zero(-10)
+    	biggest_number(-10, -5, 5, 10)
+    	smallest_number(-10, -5, 5, 10)
+    	distance_from_zero(-10)
 
-	Ex:
-	def shut_down(s):
-		if s.lower() == "yes":
-			return "Shutting Down"
-		elif s.lower() == "no":
-			return "Shutdown aborted"
-		else:
-			return "Sorry"
+    	Ex:
+    	def shut_down(s):
+    		if s.lower() == "yes":
+    			return "Shutting Down"
+    		elif s.lower() == "no":
+    			return "Shutdown aborted"
+    		else:
+    			return "Sorry"
 
-	print shut_down("yEs")
-	print shut_down("nO")
-	print shut_down("bleh")
+    	print shut_down("yEs")
+    	print shut_down("nO")
+    	print shut_down("bleh")
+
+    #[Anonymous Functions / lambda Operator]
+
+        '''
+        One of the more powerful aspects of Python is that it allows for a style
+        of programming called functional programming, which means that you're
+        allowed to pass functions around just as if they were variables or values.
+
+
+        The lambda operator or lambda function is a way to create small anonymous
+        functions, i.e. functions without a name. These functions are throw-away
+        functions, i.e. they are just needed where they have been created.
+
+        Lambda functions are mainly used in combination with the functions
+        filter(), map() and reduce().
+        '''
+
+        # lambda
+        # lambda argument_list: expression
+
+        lambda x: x % 3 == 0
+
+
+        # Is the same as
+
+        def by_three(x):
+            return x % 3 == 0
+
+        '''
+        Only we don't need to actually give the function a name; it does its work
+        and returns a value without one. That's why the function the lambda
+        creates is an anonymous function.
+        '''
+
+        # filter
+            '''
+            The function filter(function, list) offers an elegant way to filter out
+            all the elements of a list, for which the function function returns True.
+
+            The function filter(f,l) needs a function f as its first argument.
+            f returns a Boolean value, i.e. either True or False.
+            This function will be applied to every element of the list l.
+            Only if f returns True will the element of the list be included in
+            the result list
+            '''
+
+            # Example One
+            fib = [0,1,1,2,3,5,8,13,21,34,55]
+            result = filter(lambda x: x % 2, fib)
+            print result
+            # => [1, 1, 3, 5, 13, 21, 55]
+
+            # Example Two
+            my_list = range(16)
+            print filter(lambda x: x % 3 == 0, my_list)
+            # => [0, 3, 6, 9, 12, 15]
 
 #[String methods]
 
@@ -261,44 +398,6 @@
             S = "hello"
             S[::-1] will return "olleh"
         """
-
-#[Reading input]
-
-	name = raw_input("What is your name?")
-	var = input("Enter a number")
-		OR
-	var = int(input("Enter a number"))
-
-	"""
-	There were two functions to get user input, called input and raw_input.
-	The difference between them is, "raw_input" doesn't evaluate the data and returns as it is,
-	in string form.
-	But, "input" will evaluate whatever you entered and the result of evaluation will be returned
-	"""
-
-	name = raw_input("What is your name?")
-	quest = raw_input("What is your quest?")
-	color = raw_input("What is your favorite color?")
-
-	print "Ah, so your name is %s, your quest is %s, " \
-	"and your favorite color is %s." % (name, quest, color)
-
-	# Example
-	number = raw_input("Enter a number: ")
-	if int(number) == 0:
-	    print "You entered 0"
-
-	'''
-	raw_input asks the user for input and returns it as a string. But we're going to
-	want to use integers for our guesses! To do this, we'll wrap the raw_inputs with int()
-	to convert the string to an integer.
-	'''
-
-	guess = int(raw_input("Your guess: "))
-	'''
-	Remember, raw_input turns user input into a string, so we use int()
-	to make it a number again.
-	'''
 
 #[Loops]
 
@@ -409,50 +508,6 @@
 			else:
 			    print 'A fine selection of fruits!'
 
-
-#[Comparators]
-
-	3 < 4
-	5 >= 5
-	10 == 10
-	12 != 13
-
-#[Boolean operators]
-
-	True or False
-	(3 < 4) and (5 >= 5)
-	this() and not that()
-
-#[Conditional statements]
-
-	if this_might_be_true():
-		print "This really is true."
-	elif that_might_be_true():
-		print "That is true."
-	else:
-		print "None of the above."
-
-	"""Don't forget to include a : after your if statements!"""
-
-    # Example
-        if guess_row not in range(5) or guess_col not in range(5):
-            print "Oops, that's not even in the ocean."
-
-#[type()]
-
-	'''Finally, the type() function returns the type of the data it receives as an argument.
-	If you ask Python to do the following:'''
-
-	print type(42)
-	print type(4.2)
-	print type('spam')
-
-	#Python will output:
-
-	<type 'int'>
-	<type 'float'>
-	<type 'str'>
-
 #[Lists]
 
 	'''
@@ -468,7 +523,7 @@
 		print "The third animal at the zoo is the " + zoo_animals[2]
 		print "The fourth animal at the zoo is the " + zoo_animals[3]
 
-	#[Building Lists/List Comprehension]
+	#[Building Lists / List Comprehension]
 		'''
 		Let's say you wanted to build a list of the numbers from 0 to 50
 		(inclusive). We could do this pretty easily:
@@ -490,7 +545,7 @@
 		evens_to_50 = [i for i in range(51) if i % 2 == 0]
 		print evens_to_50
 
-		# This will create a new_list populated by the numbers one to five. 
+		# This will create a new_list populated by the numbers one to five.
 		new_list = [x for x in range(1,6)]
 		# => [1, 2, 3, 4, 5]
 
@@ -596,12 +651,12 @@
 		# => ['E', 'D', 'C', 'B', 'A'].
 
 		# Example Two
-		
+
 		my_list = range(1, 11)
 		backwards = my_list[::-1]
 		print backwards
 		# => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-		
+
 	#[List Slicing]
 
 		'''
@@ -612,13 +667,13 @@
 
 		[start:end:stride]
 
-		Where start describes where the slice starts (inclusive), end is where 
+		Where start describes where the slice starts (inclusive), end is where
 		it ends (exclusive), and stride describes the space between items in
 		the sliced list. For example, a stride of 2 would select every other
 		item from the original list to place in the sliced list.
 
-		Stride Length 
-		
+		Stride Length
+
 		A positive stride length traverses the list from left to right,
 		and a negative one traverses the list from right to left.
 
@@ -626,27 +681,27 @@
 		length of 2 traverses the list "by twos," and so on.
 		'''
 
-		# Example 
+		# Example
 		l = [i ** 2 for i in range(1, 11)]
 		# Should be [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
-		
+
 		print l[2:9:2]
 		# => [9, 25, 49, 81]
-		
+
 		# Example Two
 		letters = ['a', 'b', 'c', 'd', 'e']
 		slice = letters[1:3]
 		print slice
 		print letters
-		
+
 		# Example Three
 		to_21 = range(1,22)
 		odds = to_21[::2]
 		middle_third = to_21[7:14:1]
-		
+
 		print odds
 		print middle_third
-		
+
 		# => [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
 		# => [8, 9, 10, 11, 12, 13, 14]
 
@@ -662,7 +717,7 @@
 		cat  = animals[:3]   # The first three characters of animals
 		dog  = animals[3:6]  # The fourth through sixth characters
 		frog = animals[6:]   # From the seventh character to the end
-		
+
 		'''
 		Omitting Indices
 
@@ -673,14 +728,14 @@
 		to_five = ['A', 'B', 'C', 'D', 'E']
 
 		print to_five[3:]
-		# prints ['D', 'E'] 
+		# prints ['D', 'E']
 
 		print to_five[:2]
 		# prints ['A', 'B']
 
 		print to_five[::2]
 		# print ['A', 'C', 'E']
-		
+
 		to_one_hundred = range(101)
 		backwards_by_tens = to_one_hundred[::-10]
 		print backwards_by_tens
