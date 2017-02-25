@@ -130,187 +130,6 @@
 	<type 'float'>
 	<type 'str'>
 
-#[Functions]
-
-	def shout(phrase):
-		if phrase == phrase.upper():
-			return "YOU'RE SHOUTING!"
-		else:
-			return "Can you speak up?"
-
-	shout("I'M INTERESTED IN SHOUTING")
-
-	def count_small(numbers):
-	    total = 0
-	    for n in numbers:
-		if n < 10:
-		    total = total + 1
-	    return total
-
-	lost = [4, 8, 15, 16, 23, 42]
-	small = count_small(lost)
-	print small
-
-
-    #[Function Imports]
-
-    	import math
-    	print math.sqrt(25)
-
-    	"""
-    	Nice work! Now Python knows how to take the square root of a number.
-
-    	However, we only really needed the sqrt function, and it can be frustrating
-    	to have to keep typing math.sqrt().
-
-    	It's possible to import only certain variables or functions from a given module.
-    	Pulling in just a single function from a module is called a function import, and
-    	it's done with the from keyword:
-    	"""
-
-    	from module import function
-
-    	"""
-    	Now you can just type sqrt() to get the square root of a number—no more math.sqrt()!
-        """
-
-	#[List all functions in a module]
-
-    	import math            # Imports the math module
-    	everything = dir(math) # Sets everything to a list of things from math
-    	print everything       # Prints 'em all!
-
-	#[Universal Import]
-
-    	'''
-    	What if we still want all of the variables and functions in a module but don't want to
-    	have to constantly type math.?
-
-    	Universal import can handle this for you. The syntax for this is:
-    	'''
-
-    	from module import *
-
-    	Ex:
-
-    	from math import *
-    	print sqrt(25)
-
-    	#[Don't use Universal Imports]
-
-        	'''
-        	Here Be Dragons
-
-        	Universal imports may look great on the surface, but they're not a
-            good idea for one very important reason:
-        	they fill your program with a ton of variable and function names
-            without the safety of those names still being associated with the
-            module(s) they came from.
-
-        	If you have a function of your very own named sqrt and you import math,
-            your function is safe: there is your sqrt and there is math.sqrt.
-
-            If you do from math import *, however, you have a problem: namely,
-            two different functions with the exact same name.
-
-        	Even if your own definitions don't directly conflict with names from
-            imported modules, if you import * from several modules at once,
-            you won't be able to figure out which variable or function came
-            from where.
-
-        	For these reasons, it's best to stick with either import module and
-            type module.name or just import specific variables and functions
-            from various modules as needed.
-        	'''
-
-	#[Passing multiple arguments]
-
-    	def biggest_number(*args):
-    		print max(args)
-    		return max(args)
-
-    	def smallest_number(*args):
-    		print min(args)
-    		return min(args)
-
-    	def distance_from_zero(arg):
-    		print abs(arg)
-    		return abs(arg)
-
-
-    	biggest_number(-10, -5, 5, 10)
-    	smallest_number(-10, -5, 5, 10)
-    	distance_from_zero(-10)
-
-    	Ex:
-    	def shut_down(s):
-    		if s.lower() == "yes":
-    			return "Shutting Down"
-    		elif s.lower() == "no":
-    			return "Shutdown aborted"
-    		else:
-    			return "Sorry"
-
-    	print shut_down("yEs")
-    	print shut_down("nO")
-    	print shut_down("bleh")
-
-    #[Anonymous Functions / lambda Operator]
-
-        '''
-        One of the more powerful aspects of Python is that it allows for a style
-        of programming called functional programming, which means that you're
-        allowed to pass functions around just as if they were variables or values.
-
-
-        The lambda operator or lambda function is a way to create small anonymous
-        functions, i.e. functions without a name. These functions are throw-away
-        functions, i.e. they are just needed where they have been created.
-
-        Lambda functions are mainly used in combination with the functions
-        filter(), map() and reduce().
-        '''
-
-        # lambda
-        # lambda argument_list: expression
-
-        lambda x: x % 3 == 0
-
-
-        # Is the same as
-
-        def by_three(x):
-            return x % 3 == 0
-
-        '''
-        Only we don't need to actually give the function a name; it does its work
-        and returns a value without one. That's why the function the lambda
-        creates is an anonymous function.
-        '''
-
-        # filter
-            '''
-            The function filter(function, list) offers an elegant way to filter out
-            all the elements of a list, for which the function function returns True.
-
-            The function filter(f,l) needs a function f as its first argument.
-            f returns a Boolean value, i.e. either True or False.
-            This function will be applied to every element of the list l.
-            Only if f returns True will the element of the list be included in
-            the result list
-            '''
-
-            # Example One
-            fib = [0,1,1,2,3,5,8,13,21,34,55]
-            result = filter(lambda x: x % 2, fib)
-            print result
-            # => [1, 1, 3, 5, 13, 21, 55]
-
-            # Example Two
-            my_list = range(16)
-            print filter(lambda x: x % 3 == 0, my_list)
-            # => [0, 3, 6, 9, 12, 15]
-
 #[String methods]
 
 	fifth_letter = "MONTY"[4]
@@ -508,6 +327,212 @@
 			else:
 			    print 'A fine selection of fruits!'
 
+#[Functions]
+
+	def shout(phrase):
+		if phrase == phrase.upper():
+			return "YOU'RE SHOUTING!"
+		else:
+			return "Can you speak up?"
+
+	shout("I'M INTERESTED IN SHOUTING")
+
+	def count_small(numbers):
+	    total = 0
+	    for n in numbers:
+		if n < 10:
+		    total = total + 1
+	    return total
+
+	lost = [4, 8, 15, 16, 23, 42]
+	small = count_small(lost)
+	print small
+
+
+    #[Function Imports]
+
+    	import math
+    	print math.sqrt(25)
+
+    	"""
+    	Nice work! Now Python knows how to take the square root of a number.
+
+    	However, we only really needed the sqrt function, and it can be frustrating
+    	to have to keep typing math.sqrt().
+
+    	It's possible to import only certain variables or functions from a given module.
+    	Pulling in just a single function from a module is called a function import, and
+    	it's done with the from keyword:
+    	"""
+
+    	from module import function
+
+    	"""
+    	Now you can just type sqrt() to get the square root of a number—no more math.sqrt()!
+        """
+
+	#[List all functions in a module]
+
+    	import math            # Imports the math module
+    	everything = dir(math) # Sets everything to a list of things from math
+    	print everything       # Prints 'em all!
+
+	#[Universal Import]
+
+    	'''
+    	What if we still want all of the variables and functions in a module but don't want to
+    	have to constantly type math.?
+
+    	Universal import can handle this for you. The syntax for this is:
+    	'''
+
+    	from module import *
+
+    	Ex:
+
+    	from math import *
+    	print sqrt(25)
+
+    	#[Don't use Universal Imports]
+
+        	'''
+        	Here Be Dragons
+
+        	Universal imports may look great on the surface, but they're not a
+            good idea for one very important reason:
+        	they fill your program with a ton of variable and function names
+            without the safety of those names still being associated with the
+            module(s) they came from.
+
+        	If you have a function of your very own named sqrt and you import math,
+            your function is safe: there is your sqrt and there is math.sqrt.
+
+            If you do from math import *, however, you have a problem: namely,
+            two different functions with the exact same name.
+
+        	Even if your own definitions don't directly conflict with names from
+            imported modules, if you import * from several modules at once,
+            you won't be able to figure out which variable or function came
+            from where.
+
+        	For these reasons, it's best to stick with either import module and
+            type module.name or just import specific variables and functions
+            from various modules as needed.
+        	'''
+
+	#[Passing multiple arguments]
+
+    	def biggest_number(*args):
+    		print max(args)
+    		return max(args)
+
+    	def smallest_number(*args):
+    		print min(args)
+    		return min(args)
+
+    	def distance_from_zero(arg):
+    		print abs(arg)
+    		return abs(arg)
+
+
+    	biggest_number(-10, -5, 5, 10)
+    	smallest_number(-10, -5, 5, 10)
+    	distance_from_zero(-10)
+
+    	Ex:
+    	def shut_down(s):
+    		if s.lower() == "yes":
+    			return "Shutting Down"
+    		elif s.lower() == "no":
+    			return "Shutdown aborted"
+    		else:
+    			return "Sorry"
+
+    	print shut_down("yEs")
+    	print shut_down("nO")
+    	print shut_down("bleh")
+
+    #[Anonymous Functions / lambda Operator]
+
+        '''
+        One of the more powerful aspects of Python is that it allows for a style
+        of programming called functional programming, which means that you're
+        allowed to pass functions around just as if they were variables or values.
+
+        The lambda operator or lambda function is a way to create small anonymous
+        functions, i.e. functions without a name. These functions are throw-away
+        functions, i.e. they are just needed where they have been created.
+
+        Lambda functions are mainly used in combination with the functions
+        filter(), map() and reduce().
+        '''
+
+        # lambda
+        # lambda argument_list: expression
+
+        lambda x: x % 3 == 0
+
+
+        # Is the same as
+
+        def by_three(x):
+            return x % 3 == 0
+
+        '''
+        Only we don't need to actually give the function a name; it does its work
+        and returns a value without one. That's why the function the lambda
+        creates is an anonymous function.
+        '''
+
+        # filter
+            '''
+            The function filter(function, list) offers an elegant way to filter out
+            all the elements of a list, for which the function function returns True.
+
+            The function filter(f,l) needs a function f as its first argument.
+            f returns a Boolean value, i.e. either True or False.
+            This function will be applied to every element of the list l.
+            Only if f returns True will the element of the list be included in
+            the result list
+            '''
+
+            # Example One
+                fib = [0,1,1,2,3,5,8,13,21,34,55]
+                result = filter(lambda x: x % 2, fib)
+                print result
+                # => [1, 1, 3, 5, 13, 21, 55]
+
+            # Example Two
+                my_list = range(16)
+                print filter(lambda x: x % 3 == 0, my_list)
+                # => [0, 3, 6, 9, 12, 15]
+
+            # Example Three
+                languages = ["HTML", "JavaScript", "Python", "Ruby"]
+                print filter(lambda x: 'Python' in x, languages)
+                # => ['Python']
+
+            # Example Four
+                lst = ['a', 'ab', 'abc', 'bac']
+                filter(lambda k: 'ab' in k, lst)
+                # => ['ab', 'abc']
+
+            # Example Five
+                cubes = [x**3 for x in range(1, 11)]    # List Comprehension
+                filter(lambda x: x % 3 == 0, cubes)
+                # => [27, 216, 729]
+
+            # Example Six
+                squares = [x**2 for x in range(1,11)]
+                print filter(lambda x: x > 30 and x < 70, squares)
+                # => [36, 49, 64]
+
+            # Example Seven
+                garbled = "IXXX aXXmX aXXXnXoXXXXXtXhXeXXXXrX sXXXXeXcXXXrXeXt mXXeXsXXXsXaXXXXXXgXeX!XX"
+                message = filter(lambda x: 'X' not in x, garbled)
+                print message
+                # => "I am another secret message!"
+
 #[Lists]
 
 	'''
@@ -567,6 +592,10 @@
 		cubes_by_four = [x ** 3 for x in range(1, 11) if x ** 3 % 4 == 0]
 		print cubes_by_four
 		# => [8, 64, 216, 512, 1000]
+
+        threes_and_fives = [x for x in range(1,16) if x % 3 == 0 or x % 5 == 0]
+        print threes_and_fives
+        # => [3, 5, 6, 9, 10, 12, 15]
 
 	#[List Append]
 
@@ -741,6 +770,10 @@
 		print backwards_by_tens
 		# => [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
 
+        garbled = "!XeXgXaXsXsXeXmX XtXeXrXcXeXsX XeXhXtX XmXaX XI"
+        message = garbled[::-2]
+        print message
+        # => 'I am the secret message!'
 
 	#[List Insertion & Indexing]
 
@@ -1061,6 +1094,24 @@
 		gallahad the pure
 		robin the brave
 
+        # Example
+		>>> D = {'a': 1, 'b': 2, 'c': 3}
+		>>> for key in D:
+			print(key, '=>', D[key]) # Use dict keys iterator and index
+
+		a => 1
+		c => 3
+		b => 2
+
+		>>> list(D.items())
+		[('a', 1), ('c', 3), ('b', 2)]
+    		>>> for (key, value) in D.items():
+			print(key, '=>', value)		# Iterate over both keys and values
+
+		a => 1
+		c => 3
+		b => 2
+
 	#[Lists and Dictionaries]
 
 		inventory = {
@@ -1149,31 +1200,12 @@
 		for n in [0,1,2]:
 		    for k, v in students[n].iteritems():
 			print k, v
-		#[OR]
+
+        #[OR]
 
 		for n in range(len(students)):
 		    for k, v in students[n].iteritems():
 			print k, v
-
-	#[Iterate over both keys and values]
-
-		>>> D = {'a': 1, 'b': 2, 'c': 3}
-		>>> for key in D:
-			print(key, '=>', D[key]) # Use dict keys iterator and index
-
-		a => 1
-		c => 3
-		b => 2
-
-		>>> list(D.items())
-		[('a', 1), ('c', 3), ('b', 2)]
-		>>> for (key, value) in D.items():
-			print(key, '=>', value)		# Iterate over both keys and values
-
-		a => 1
-		c => 3
-		b => 2
-
 
 # Errors
 
