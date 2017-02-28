@@ -107,6 +107,47 @@
     print 12 ^ 42 # Bitwise XOR
     print ~88     # Bitwise NOT
 
+    print bin(4)
+    # => 0b100
+
+    print int("0b11001001", 2)
+    # => 201
+
+    print int("111",2)
+    # => 7
+
+    print int(bin(5),2)
+    # => 5
+
+    #[Shift Operatons]
+
+        # Example One
+
+        shift_right = 0b1100
+        shift_left = 0b1
+
+        # Your code here!
+        shift_right >>= 2
+        shift_left <<= 2
+
+        print bin(shift_right)
+        print bin(shift_left)
+
+        # => 0b11
+        # => 0b100
+
+    #[NOT Operator]
+
+        print ~2
+        # => -3
+
+    #[Flip Bit]
+
+        def flip_bit(number, n):
+            result = 0b0
+            result = number ^ (1 << (n-1))
+            return bin(result)
+
 #[Conditional statements]
 
 	if this_might_be_true():
@@ -1215,6 +1256,62 @@
 		for n in range(len(students)):
 		    for k, v in students[n].iteritems():
 			print k, v
+
+
+#[Classes]
+
+    '''
+    You can think of an object as a single data structure that contains data as
+    well as functions; functions of objects are called methods
+
+    Python is an object-oriented programming language, which means it
+    manipulates programming constructs called objects.
+
+    len("Eric")
+
+    Python is checking to see whether the string object you passed it has a
+    length, and if it does, it returns the value associated with that attribute
+
+    my_dict.items()
+
+    Python checks to see if my_dict has an items() method (which all dictionaries
+    have) and executes that method if it finds it.
+
+    But what makes "Eric" a string and my_dict a dictionary? The fact that
+    they're instances of the str and dict classes, respectively. A class is
+    just a way of organizing and producing objects with similar attributes
+    and methods
+
+    '''
+
+    # Example One
+
+    '''
+    Check out the code in the editor to the right. We've defined our own
+    class, Fruit, and created a lemon instance
+    '''
+
+        class Fruit(object):
+            """A class that makes various tasty fruits."""
+            def __init__(self, name, color, flavor, poisonous):
+                self.name = name
+                self.color = color
+                self.flavor = flavor
+                self.poisonous = poisonous
+
+            def description(self):
+                print "I'm a %s %s and I taste %s." % (self.color, self.name, self.flavor)
+
+            def is_edible(self):
+                if not self.poisonous:
+                    print "Yep! I'm edible."
+                else:
+                    print "Don't eat me! I am super poisonous."
+
+        lemon = Fruit("lemon", "yellow", "sour", False)
+
+        lemon.description()
+        lemon.is_edible()
 
 # Errors
 
