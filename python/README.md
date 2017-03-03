@@ -27,7 +27,7 @@
 	 7.1.1 [List all functions in a module](#711-list-all-functions-in-a-module)  
 	 7.1.2 [Universal Import](#712-universal-import)  
 	7.2 [Passing multiple arguments](#72-passing-multiple-arguments)  
-	7.3 [Anonymous Functions / lambda Operator](#73-anonymous-functions-lambda-operator)  
+	7.3 [Anonymous Functions / lambda Operator](#73-anonymous-functions-/-lambda-operator)  
 	7.4 [Filter](#74-filter)   
 8. [Lists](#8-lists)  
   8.1 [Building Lists / List Comprehension](#81-building-lists-list-comprehension)  
