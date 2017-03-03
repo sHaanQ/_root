@@ -1,10 +1,4 @@
 
-```
- _                    __
-|_) \/_|_|_  _ __    /  |_  _  _ _|_    _ |_  _  _ _|_
-|   /  |_| |(_)| |   \__| |(/_(_| |_   _> | |(/_(/_ |_
-```
-
 1. [Print statement](#1-print-statement)  
   1.1 [Printing a List](#11-printing-a-list)   
   1.2 [Comma after print](#12-comma-after-print)  
@@ -27,10 +21,10 @@
 	 7.1.1 [List all functions in a module](#711-list-all-functions-in-a-module)  
 	 7.1.2 [Universal Import](#712-universal-import)  
 	7.2 [Passing multiple arguments](#72-passing-multiple-arguments)  
-	7.3 [Anonymous Functions / lambda Operator](#73-anonymous-functions-/-lambda-operator)  
+	7.3 [Anonymous Functions / lambda Operator](#73-anonymous-functionslambda-operator)  
 	7.4 [Filter](#74-filter)   
 8. [Lists](#8-lists)  
-  8.1 [Building Lists / List Comprehension](#81-building-lists-list-comprehension)  
+  8.1 [Building Lists / List Comprehension](#81-building-listslist-comprehension)  
   8.2 [List Append](#82-list-append)   
   8.3 [List remove](#83-list-remove)   
   8.4 [List pop](#84-list-pop)   
@@ -53,7 +47,7 @@
   9.5 [Lists and Dictionaries](#95-lists-and-dictionaries)  
   9.6 [Looping in dictionaries](#96-looping-in-dictionaries)   
   9.7 [List of Dictionaries](#97-list-of-dictionaries)  
-10. [Class ? Get some...](#10-class-get-some)   
+10. [Class ? Get some...](#10-class-get-some...)   
   10.1 [Creating object instances](#101-creating-object-instances)   
   10.2 [Every method’s first argument is self.](#102-every-methods-first-argument-is-self)   
   10.3 [Extending the class to store values](#103-extending-the-class-to-store-values)   
