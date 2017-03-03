@@ -815,9 +815,10 @@ We insert `dog` at index 1, which moves everything down by 1
 animals will be `["ant", "dog", "bat", "cat"]`
 
 ### 8.10 Looping in lists
-
+```python
 for variable in list_name:
-# Do stuff!
+    # Do stuff!
+```
 
 A `variable` name follows the `for` keyword; it will be assigned the value
 of each list item in turn. Then in `list_name` designates list_name as the
@@ -1177,20 +1178,20 @@ for n in range(len(students)):
 ## 10. Class ? Get some...
 
 Python follows the standard object-oriented programming model of
-providing a means for you to define the code and the data it works on as a
-class. Once this definition is in place, you can use it to create (or instantiate)
-__data objects__ , which inherit their characteristics from your class.
+_providing a means for you to define the code and the data it works on as a
+class_. Once this definition is in place, you can use it to create (or instantiate)
+__data objects__ , which inherit their characteristics from your `class`.
 
-Within the object-oriented world, your code is often referred to as the class’s
-__methods__, and your data is often referred to as its __attributes__. Instantiated
-data objects are often referred to as __instances__.
+Within the object-oriented world, __your code__ is often referred to as the class’s
+__methods__, and __your data__ is often referred to as its __attributes__. Instantiated
+__data objects__ are often referred to as __instances__.
 
 Each object is created from the class and shares a similar set of
 characteristics. The methods (your code) are the same in each instance, but
 each object’s attributes (your data) differ because they were created from your
 raw data.
 
-Python uses class to create objects. Every defined class has a special method
+Python uses `class` to create objects. Every defined `class` has a special method
 called `__init__()`, which allows you to control how objects are initialized.
 Methods within your class are defined in much the same way as functions,
 that is, using `def`.
@@ -1216,7 +1217,7 @@ c = Athlete()
 d = Athlete()
 ```
 
-`a,b,c & d` are called target identifiers, they hold the reference to your instance.
+`a,b,c & d` are called __target identifiers__, they hold the reference to your instance.
 When Python processes the above lines of code.
 
 `a = Athlete()` becomes `Athlete().__init__(a)`
@@ -1224,11 +1225,11 @@ When Python processes the above lines of code.
 which identifies the class, the method (which is automatically
 set to `__init__()`), and the object instance being operated on i.e. `a`.
 
-`Athlete` - *Name of the class*  
-`__init__` - *Name of the method*  
-`a` - *The target Identifier of the object instance*
+`Athlete` - __*Name of the class*__     
+`__init__` - __*Name of the method*__      
+`a` - __*The target Identifier of the object instance*__      
 
-The target identifer is assigned to the `self` argument. Without it, the Python interpreter
+The __target identifer__ is assigned to the `self` argument. Without it, the Python interpreter
 can’t work out which object instance to apply the method invocation to. Note
 that the class code is designed to be shared among all of the object instances:
 the methods are shared, the attributes are __not__. The `self` argument helps
