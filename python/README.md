@@ -100,6 +100,15 @@ for i in phrase:
 #Don't delete this print statement!
 print
 ```
+Printing on the same line without spaces
+
+```python
+for i in range(1, 11):
+    print(i, end='')
+
+# => 12345678910
+```
+
 ## 2. Reading input
 
 There were two functions to get user input, called `input` and `raw_input`.
