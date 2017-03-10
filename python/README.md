@@ -113,7 +113,7 @@ for i in range(1, 11):
 
 There were two functions to get user input, called `input` and `raw_input`.
 The difference between them is, `raw_input` *doesn't evaluate the data and returns as it is,
-in __string form__*. But, `input` will evaluate whatever you entered and the result of evaluation will be returned
+in __string form__*. But, `input` *will evaluate whatever you entered and the result of evaluation will be returned*
 
 ```python
 name = raw_input("What is your name?")
@@ -141,9 +141,18 @@ var = int(input("Enter a number"))
       number = raw_input("Enter a number: ")
       if int(number) == 0:
           print "You entered 0"
-```
+  ```
   ```python
       guess = int(raw_input("Your guess: "))
+  ```
+###### Example Three
+  Reading an input of n space-separated integers `0 1 2 3 4 5 6 7 8 9`.
+
+  ```python
+  integer_list = map(int, raw_input().split())
+  print integer_list
+
+  # => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   ```
 
 ## 3. Bitwise Operators
