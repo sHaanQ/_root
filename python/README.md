@@ -17,7 +17,7 @@ Table of Contents
  * [5.4 Reverse](#54-reverse)
 * [6. Loops - While](#6-loops---while)
  * [6.1 While / else](#61-while--else)
-* [6.2 For Loops](#62-for-loops)
+ * [6.2 For Loops](#62-for-loops)
  * [For / else](#for--else)
 * [7. Functions](#7-functions)
  * [7.1 Function Imports](#71-function-imports)
@@ -651,6 +651,14 @@ print cubes_by_four
 threes_and_fives = [x for x in range(1,16) if x % 3 == 0 or x % 5 == 0]
 print threes_and_fives
 # => [3, 5, 6, 9, 10, 12, 15]
+
+# This listcomp combines the elements of two lists if they are not equal
+[(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
+# => [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+
+# Lexicographic increasing order (Hackerrank)
+lst = [[x, y, z] for x in range(x+1) for y in range(y+1) for z in range(z+1) if x+y+z != n]
+# => [[0, 0, 0], [0, 0, 1], [0, 1, 0], [1, 0, 0], [1, 1, 1]]
 ```
 
 ### 8.2 List Append
