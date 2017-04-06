@@ -2,8 +2,9 @@
 1. [Cloning tools and code](#1-cloning-tools-and-code)
 2. [SD card setup](#2-sd-card-setup)   
 	2.1 [Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)	   
-	2.2	[Cloning SD cards](#22-cloning-sd-cards)	
-	2.3 [Building a custom kernel](#23-building-a-custom-kernel)	
+	2.2 [Cloning SD cards](#22-cloning-sd-cards)	
+	2.3 [Moving to a newer branch](#23-moving-to-a-newer-branch)
+	2.4 [Building a custom kernel](#24-building-a-custom-kernel)	
 3. [Setting up a Git repository](#3-setting-up-a-git-repository)   
     3.1 [Generating SSH keys](#31-generating-ssh-keys)   
     3.2 [Initialize repository](#32-initialize-repository)   
@@ -31,7 +32,7 @@ git clone https://github.com/raspberrypi/tools
 
 Get the Kernel sources 
 ```
-git clone https://github.com/raspberrypi/linux
+git clone --depth=1 https://github.com/raspberrypi/linux
 ```
 
 The bootloader and other configs
@@ -56,13 +57,43 @@ Cloning a 4GB SD card into a 8GB SD card
 time sudo dd bs=64K conv=sync,noerror if=/dev/sdc of=/dev/sdb
 ```
 
-### 2.3 Building a custom kernel
+### 2.3 Moving to a newer branch
+
+List references(branches, tags, etc.,) in a local repository
+```
+git show-ref
+	...
+	...
+	b6cafbf16c095a671b1a5e90dd734390f53046b2 refs/remotes/origin/rpi-4.4.y_rebase
+	237402141fd74ca989bd86ebb76d834cb6fa5454 refs/remotes/origin/rpi-4.5.y
+	2b1791a6693b0e22568426a5c99efa92403f3ffe refs/remotes/origin/rpi-4.6.y
+	c2cbd9c611256e7b957f75c23d9f76d58a4893c1 refs/remotes/origin/rpi-4.7.y
+	061dccce6cf6705bbb5da29a643f4b0ad1d11630 refs/remotes/origin/rpi-4.8.y
+	3f53e7886737a975e3fe76bc8ae6cc78f33c8cf8 refs/remotes/origin/rpi-4.9.y
+	ad9d278a772d0f725126f1d947427e1947d7a39a refs/remotes/origin/rpi-4.9.y-rebase
+	8fa2e19c4fdbe17704947e444674e19ea47c8ddd refs/remotes/origin/rpi-patches
+	935c7ce84c982a26f567a03a58a1537424569938 refs/remotes/origin/rpi-r.9.y
+	...
+	...
+```
+
+Checkout the branch of interest
+```
+git checkout 3f53e7886737a975e3fe76bc8ae6cc78f33c8cf8
+```
+
+Switch to that branch from the existing one
+```
+git checkout rpi-4.9.y
+```
+
+### 2.4 Building a custom kernel
 
 Export the toolchain
 ```
 export PATH=$PATH:/data/raspberry-pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
 ```
-Raspberry Pi 1
+Raspberry Pi
 ```
 cd linux
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcmrpi_defconfig
