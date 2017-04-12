@@ -1,43 +1,57 @@
+###### 1. Install the TightVNC server software
 
- 1. Install the TightVNC server software
-		$ sudo apt-get install tightvncserver
- 2. Start server and configure a password
+```
+$ sudo apt-get install tightvncserver
+```    
 
-		/usr/bin/tightvncserver
+###### 2. Start server and configure a password
 
-		There is no need to create a view only password, unless you have a specific need.
+```
+/usr/bin/tightvncserver
+```
 
-		When the server starts it will tell you which virtual desktop has been setup. 
-		In this case: New 'X' desktop is raspberrypi:1
+There is no need to create a view only password, unless you have a specific need.
 
-		says that it's virtual desktop 1. You would connect to this using :1 at the end of
-		the IP address in the client, this is the one we will setup to start automatically later.
+When the server starts it will tell you which virtual desktop has been setup. 
+In this case: New 'X' desktop is raspberrypi:1
 
-		You can run multiple instances. Each time you start tightvncserver it will use
-		the next available desktop, but in most cases you will just need one.
+says that it's virtual desktop 1. You would connect to this using :1 at the end of
+the IP address in the client, this is the one we will setup to start automatically later.
 
- 3. Adding TightVNC to systemd startup
+You can run multiple instances. Each time you start tightvncserver it will use
+the next available desktop, but in most cases you will just need one.
 
-		[Unit]
-		Description=TightVNC remote desktop server
-		After=sshd.service
+###### 3. Adding TightVNC to systemd startup
+```
+[Unit]
+Description=TightVNC remote desktop server
+After=sshd.service
 
-		[Service]
-		Type=dbus
-		ExecStart=/usr/bin/tightvncserver :1
-		User=pi
-		Type=forking
+[Service]
+Type=dbus
+ExecStart=/usr/bin/tightvncserver :1
+User=pi
+Type=forking
 
-		[Install]
-		WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target
+```
 
- 4. Change the file so it is owned by root
-		$ sudo chown root:root /etc/systemd/system/tightvncserver.service
- 5. Make the file executable by running
-		$ sudo chmod 755 /etc/systemd/system/tightvncserver.service
- 6. Enable startup at boot using
-		$ sudo systemctl enable tightvncserver.service
- 7. Reboot. Check if VNCserver is listed in the running units
-		$ systemctl list-units | grep vnc
-		   tightvncserver.service     loaded active running   TightVNC remote desktop server
+###### 4. Change the file so it is owned by root
+```
+$ sudo chown root:root /etc/systemd/system/tightvncserver.service
+```
+###### 5. Make the file executable by running
+```
+$ sudo chmod 755 /etc/systemd/system/tightvncserver.service
+```
+###### 6. Enable startup at boot using
+```
+$ sudo systemctl enable tightvncserver.service
+```
+###### 7. Reboot. Check if VNCserver is listed in the running units
+```
+$ systemctl list-units | grep vnc
+  tightvncserver.service     loaded active running   TightVNC remote desktop server
+```
 
