@@ -7,16 +7,14 @@
 
 		There is no need to create a view only password, unless you have a specific need.
 
-		When the server starts it will tell you which virtual desktop has been setup. In this case:
-			New 'X' desktop is raspberrypi:1
+		When the server starts it will tell you which virtual desktop has been setup. 
+		In this case: New 'X' desktop is raspberrypi:1
 
-		says that it's virtual desktop 1. You would connect to this using :1 at the end of the IP address
-		in the client, this is the one we will setup to start automatically later.
+		says that it's virtual desktop 1. You would connect to this using :1 at the end of
+		the IP address in the client, this is the one we will setup to start automatically later.
 
-		You can run multiple instances. Each time you start tightvncserver it will use the next available desktop,
-		but in most cases you will just need one.
-
-
+		You can run multiple instances. Each time you start tightvncserver it will use
+		the next available desktop, but in most cases you will just need one.
 
  3. Adding TightVNC to systemd startup
 
@@ -35,7 +33,6 @@
 
  4. Change the file so it is owned by root
 		$ sudo chown root:root /etc/systemd/system/tightvncserver.service
-
  5. Make the file executable by running
 		$ sudo chmod 755 /etc/systemd/system/tightvncserver.service
  6. Enable startup at boot using
