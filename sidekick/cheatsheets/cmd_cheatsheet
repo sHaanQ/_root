@@ -128,6 +128,9 @@ git commands
 > [ Remove commit msg and keep the files added in staging area ]
 	git reset --soft HEAD~
 
+> [ Remove a file ]
+	git reset HEAD -- <file-to-exclude>
+
 > [There is no tracking information for the current branch.]
 	git pull https://kernel.googlesource.com/pub/scm/linux/kernel/git/torvalds/linux master
 
