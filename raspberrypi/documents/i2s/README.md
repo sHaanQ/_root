@@ -4,7 +4,7 @@ The default ALSA sound devices supported by the Raspberry Pi 3 are PWM audio out
 To run this demonstration I2S input and output needs to be enabled. _The goal is to use a simple I2S
 interface that does not depend on a particular DAC or CODEC device that requires configuration over I2C or SPI._
 
-###### RPi <-> Dummy_SND_Card <-> I2S/PCM Data Generator
+##### RPi <-> Dummy_SND_Card <-> I2S/PCM Data Generator
 
 ASoC basically splits an embedded audio system into 3 components:
 
