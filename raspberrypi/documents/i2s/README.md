@@ -203,6 +203,23 @@ This should generate a list of available ALSA captures devices something like th
          Subdevices: 1/1
          Subdevice #0: subdevice #0
 
+Following the instructions given so far will enable the I2S soundcard in the current session. To make
+it available after reach reboot, it is necessary to load the modules at boot time. You can do this by
+adding a boot-time `cron` job to run the following script. Save this script as ``load_i2s_driver.sh``
+in your home directory::
+
+      cd ~
+      sudo insmod snd-soc-simple-card-utils.ko
+      sudo insmod snd-soc-simple-card.ko
+      sudo insmod loader/loader.ko
+
+The script can be auto-run at boot time by adding the following line in the editor window that
+appears after typing ``crontab -e``
+
+      @reboot /home/pi/load_i2s_driver.sh
+
+#### Interfacing a mono Mic
+
 The physical sound card device presents a stereo I2S device to Linux. _However, some Voice Assistant software
 such as Amazon's Alexa, requires access to a mono capture device. **To present the stereo sound card as a mono**
 device it is necessary to create a virtual mono capture device connected to the physical stereo capture device
@@ -210,7 +227,7 @@ in ALSA. The microphone audio sent from the Microphone is a mono signal repeated
 so either channel will provide the required signal. The virtual mono capture device then needs to be set as
 the default device so that the client software picks it first when searching for input devices._
 
-To setup the virtual capture device, modify the file ``.asoundrc`` found in the home directory as follows::
+To setup the virtual capture device, modify the file ``.asoundrc`` found in the home directory as follows:
 
        pcm.monocard {
          type plug
@@ -248,7 +265,6 @@ To setup the virtual capture device, modify the file ``.asoundrc`` found in the 
              slave.pcm "monocard"
           }
        }
-
 The above configuration keeps the default playback device as the 3.5mm jack on the Raspberry Pi however
 this can be changed to the I2S bus by changing the contents of for both
 ``pcm.!default {`` and ``ctl.!default {`` so that the ``playback.pcm {`` entries match ``capture.pcm``.
@@ -256,23 +272,9 @@ this can be changed to the I2S bus by changing the contents of for both
 To apply the changes made in ``.asoundrc`` and enable the virtual capture device either reboot the
 Raspberry Pi or use the following command::
 
-       sudo /etc/init.d/alsa-utils restart
+      sudo /etc/init.d/alsa-utils restart
 
-Following the instructions given so far will enable the I2S soundcard in the current session. To make
-it available after reach reboot, it is necessary to load the modules at boot time. You can do this by
-adding a boot-time cron job to run the following script. Save this script as ``load_i2s_driver.sh``
-in your home directory::
 
-       cd ~
-       sudo insmod snd-soc-simple-card-utils.ko
-       sudo insmod snd-soc-simple-card.ko
-       sudo insmod loader/loader.ko
-
-The script can be auto-run at boot time by adding the following line in the editor window that
-appears after typing ``crontab -e``
-
-@reboot /home/pi/load_i2s_driver.sh
-
-[References]   
-	https://www.raspberrypi.org/forums/viewtopic.php?f=44&t=91237    
-	http://www.peteronion.org.uk/I2S/
+>[References]   
+>	  https://www.raspberrypi.org/forums/viewtopic.php?f=44&t=91237    
+>	  http://www.peteronion.org.uk/I2S/
