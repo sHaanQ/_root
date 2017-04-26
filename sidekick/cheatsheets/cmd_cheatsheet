@@ -44,7 +44,9 @@ grep and find
        grep -rnw --color 'spinlock_t' ../../../../.. | grep --color "typedef"
        grep "word1" FILE | grep "word2"
 
-> [GREP only .mk and .h files]
+> [GREP only specific files]
+       grep -rn --include=\*.{dts,dtsi} "brcm,bcm2835-i2s" ./
+       grep -rn  --include=*.dts --include=*.dtsi "brcm,bcm2835-i2s" ./
        grep --color -rn --include \*.mk --include \*.h "kernel-headers"
        grep -rnw --include=*.c --include \*.S s_init
 
