@@ -1,0 +1,79 @@
+set t_Co=256
+set number 
+set tags=./tags,tags;$HOME
+"colorscheme desert
+set title
+set mouse=a
+set mousefocus
+set backupdir=/tmp
+set backup
+set tabstop=8
+set shiftwidth=8
+set cursorline
+set showmatch
+
+" make search work a bit more like tab completion in bash
+set hlsearch
+set incsearch
+"set wildmode=longest:full
+set wildmenu
+
+
+" let backspace work more naturally
+set backspace=start,indent,eol
+
+" C programming hacks
+"set cindent 
+"set comments=sl:/*,mb:\ *,elx:\ */
+"set formatoptions+=r
+
+
+:command RemoveBlankLines g/^$/d
+:command RemoveTrailWhiteSpace %s/\s\+$//gc
+:command TabToSpace set tabstop=4 shiftwidth=4 expandtab | retab
+:command SpaceToTab set noexpandtab | retab!
+
+" C Programming Shortcuts
+iab #i          #include <.h>
+iab #s          #include <stdio.h><CR>
+iab #d          #define 
+iab mn          int main(int argc, char * argv[])<CR>{<CR>return 0;<CR>}
+iab frl		for (i=;i<;i++) {
+iab pf          printf("\n");
+iab sf          scanf("",);
+iab dpvi        #define pvi(V)     printf("%-15s=%-12d\n",#V,V);<CR>
+iab dpviu       #define pviu(V)    printf("%-15s=%-12u\n",#V,V);<CR>
+iab dpvix       #define pvix(V)    printf("%-15s=%#010x\n",#V,V);<CR>
+iab dpvs        #define pvs(V)     printf("%-15s=%-12hd\n",#V,V);<CR>
+iab dpvsu       #define pvsu(V)    printf("%-15s=%-12hu\n",#V,V);<CR>
+iab dpvsx       #define pvsx(V)    printf("%-15s=%#06hx\n",#V,V);<CR>
+iab dpvf        #define pvf(V)     printf("%-15s=%-12f\n",#V,V);<CR>
+iab dpvll       #define pvll(V)    printf("%-20s=%-20lld\n", #V,V);<CR>
+iab dpvstr      #define pvstr(V)   printf("%-20s=%-20s\n", #V,V);<CR>
+iab dpvp        #define pvp(V)     printf("%-15s=%-12p\n",#V,V);<CR>
+iab dpvc        #define pvc(V)     printf("%-15s=%-12c\n",#V,V);<CR>
+iab dpvcx       #define pvcx(V)    printf("%-15s=%-12hhx\n",#V,V);<CR>
+iab svi         printf("Enter value for :",); scanf("%d",);<CR>
+
+
+" General Key Mappings  
+map <F2> :se nu<CR>
+imap <F2> <ESC>:se nu<CR>i
+cmap <F2> se nu<CR>:
+
+map <F3> :se nonu<CR>
+imap <F3> <ESC>:se nonu<CR>i
+cmap <F3> se nonu<CR>:
+
+map <F4> :wq<CR>
+imap <F4> <ESC>:wq<CR>
+cmap <F4> wq<CR>
+
+map <F5> :w<CR>
+imap <F5> <ESC>:w<CR>
+cmap <F5> w<CR>:
+
+cs add $CSCOPE_DB
+cs add $CSCOPE_DB
+cs add $CSCOPE_DB2
+cs add $CSCOPE_DB
