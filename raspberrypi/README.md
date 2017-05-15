@@ -57,6 +57,16 @@ Cloning a 4GB SD card into a 8GB SD card
 time sudo dd bs=64K conv=sync,noerror if=/dev/sdc of=/dev/sdb
 ```
 
+Cloning a 32GB SD card into a 16GB SD card
+1. Partition the 16GB with two partitions FAT(lba) and EXT4
+2. Mount both the cards and use rsync to copy data
+```
+cd /meddia/bhargav
+rsync -ah --info=progress2 --partial ./boot/ ./boot1/
+sudo rsync -ah --info=progress2 --partial ./7f593562-9f68-4bb9-a7c9-2b70ad620873/ ./4d7d6d24-a608-46fb-9b39-a4f30ddb8902/
+```
+
+
 ### 2.3 Moving to a newer branch
 
 List references(branches, tags, etc.,) in a local repository
