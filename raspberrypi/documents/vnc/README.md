@@ -56,6 +56,11 @@ $ sudo systemctl enable tightvncserver.service
 $ systemctl list-units | grep vnc
   tightvncserver.service     loaded active running   TightVNC remote desktop server
 ```
+###### 8. Changing and reloading the service
+```
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart  tightvncserver.service
+```
 
 
 #### System LAN Settings
