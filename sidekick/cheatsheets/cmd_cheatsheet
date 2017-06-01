@@ -145,7 +145,13 @@ converting video to mp3 - avconv video converter
 sudo apt-get install libavcodec-extra libav-tools
 avconv -i video.mp4 -b 256K audio.mp3
 
+Multiple lines into one line 
+----------------------------
 
+	ls -1 | paste -sd " " -
+	ls -1 | tr '\n' ' '
+	ls -m
+	
 for looping for batch processing
 --------------------------------
 for input in *.mp4; do avconv -i "$input" -b 256K "${input}.mp3"; done
