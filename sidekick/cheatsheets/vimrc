@@ -1,7 +1,7 @@
 set t_Co=256
 set number 
 set tags=./tags,tags;$HOME
-"colorscheme desert
+colo torte
 set title
 set mouse=a
 set mousefocus
