@@ -65,7 +65,20 @@ cd /meddia/bhargav
 rsync -ah --info=progress2 --partial ./boot/ ./boot1/
 sudo rsync -ah --info=progress2 --partial ./7f593562-9f68-4bb9-a7c9-2b70ad620873/ ./4d7d6d24-a608-46fb-9b39-a4f30ddb8902/
 ```
+##### Better Way 
+1. Shrink the 32 GiB card
+![](documents/images/32gb_to_16gb.png?raw=true)
 
+2. Make this calculation to get the end of the 16 GiB space.
+```
+Total Size in MiB = 14.77 * 1024 + 4 + 63 = 15192
+bs (in dd command) = 4M. So 15192/4 = 3798 blocks
+```
+3. Hit the command
+```
+sudo dd bs=4M of=dapm-91.img if=/dev/mmcblk0 count=3798
+```
+4. Copy the image to the smaller SD card.
 
 ### 2.3 Moving to a newer branch
 
