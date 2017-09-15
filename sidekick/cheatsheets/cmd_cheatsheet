@@ -108,7 +108,7 @@ Inside (parted) prompt
 sudo mount -o loop,ro,offset=4194304 ~/rpi/ubuntu-15.04-snappy-armhf-rpi2.img /tmp/ubuntu-snappy/
 
 Mouting a ext4 partition
-sudo mount -o ext4,loop,rw,offset=67108864 back-up-32-gib-RPi-audio.img /tmp/rootfs
+sudo mount -o loop,rw,offset=67108864 back-up-32-gib-RPi-audio.img /tmp/rootfs
 
 
 Symbolic links
