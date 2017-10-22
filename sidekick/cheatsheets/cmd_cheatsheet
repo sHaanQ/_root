@@ -371,4 +371,18 @@ sudo arp-scan  --localnet
 > With names
 	sudo nmap -sP --disable-arp-ping 192.168.0.0/24
 	
+SSID and Password of all networks
+=================================
+sudo grep -r '^psk=' /etc/NetworkManager/system-connections/
+
+Output:
+	This will give you output like this:
+	/etc/NetworkManager/system-connections/MyExampleSSID:psk=12345
+	/etc/NetworkManager/system-connections/AnotherSSID:psk=password
+
+Find the SSID I'm connected to
+==============================
+iwgetid -r
+iwconfig
+
 
