@@ -364,25 +364,34 @@ Set Minicom width
 =================
 stty cols 140 rows 60
 
-Find all IPs connected to the router
-====================================
-sudo arp-scan  --localnet
+Wi-Fi Things
+============
 
-> With names
-	sudo nmap -sP --disable-arp-ping 192.168.0.0/24
+	Find all IPs connected to the router
+	====================================
+	sudo arp-scan  --localnet
+
+	> With names
+		sudo nmap -sP --disable-arp-ping 192.168.0.0/24
+
+	SSID and Password of all networks
+	=================================
+	sudo grep -r '^psk=' /etc/NetworkManager/system-connections/
+
+	Output:
+		This will give you output like this:
+		/etc/NetworkManager/system-connections/MyExampleSSID:psk=12345
+		/etc/NetworkManager/system-connections/AnotherSSID:psk=password
+
+	Find the SSID I'm connected to
+	==============================
+	iwgetid -r
+	iwconfig
+
+	Scan all wireless networks
+	==========================
+	sudo iwlist <interface> scan
+		> interface = wlo1, wlan0, wlan1
 	
-SSID and Password of all networks
-=================================
-sudo grep -r '^psk=' /etc/NetworkManager/system-connections/
-
-Output:
-	This will give you output like this:
-	/etc/NetworkManager/system-connections/MyExampleSSID:psk=12345
-	/etc/NetworkManager/system-connections/AnotherSSID:psk=password
-
-Find the SSID I'm connected to
-==============================
-iwgetid -r
-iwconfig
-
+	
 
