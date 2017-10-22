@@ -85,7 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -95,11 +95,14 @@ alias lt='ls -lth'
 alias install='sudo apt-get install'
 alias search='sudo apt-cache search'
 alias remove='sudo apt-get remove'
+alias update='sudo apt-get update'
 alias build='sudo echo "Build" && time make -j8 && sudo make modules_install && sudo make install && echo "Done"'
 alias cheat='git add python/python_cheatsheet.py  && git commit -m "Updated python_cheatsheet.py" && git push -u origin master'
 alias eudy='cd /home/bhargav/Coder/eudyptula/linux'
 alias work='cd /home/bhargav/Coder/scratch-pad'
 alias rasp='cd /home/bhargav/Coder/raspberrypi'
+alias ssid_print='sudo grep -r '^psk=' /etc/NetworkManager/system-connections/' 
+alias wifi_reboot='sudo systemctl restart network-manager.service'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -124,5 +127,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
 export CSCOPE_DB=/home/bhargav/Coder/raspberrypi/linux/cscope.out
 export PATH=$PATH:/home/bhargav/Coder/raspberrypi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
