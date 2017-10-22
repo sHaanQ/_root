@@ -367,3 +367,8 @@ stty cols 140 rows 60
 Find all IPs connected to the router
 ====================================
 sudo arp-scan  --localnet
+
+> With names
+	sudo nmap -sP --disable-arp-ping 192.168.0.0/24
+	
+
