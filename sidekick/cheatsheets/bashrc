@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -89,21 +89,36 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # some more ls aliases
 alias ll='ls -alF'
+alias llh='ls -alFh'
+alias lth='ls -lth'
+alias lssort='ls --sort=size -lh'
 alias la='ls -A'
 alias l='ls -CF'
-alias lt='ls -lth'
+alias documents='cd ~/Documents'
+alias downloads='cd ~/Downloads'
+alias desktop='cd ~/Desktop'
+alias music='cd ~/Music'
+alias videos='cd ~/Videos'
+alias coder='cd ~/Coder'
+alias camera='cd ~/Camera'
+alias public='cd ~/Public'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 alias install='sudo apt-get install'
 alias search='sudo apt-cache search'
 alias remove='sudo apt-get remove'
 alias update='sudo apt-get update'
-alias build='sudo echo "Build" && time make -j8 && sudo make modules_install && sudo make install && echo "Done"'
-alias cheat='git add python/python_cheatsheet.py  && git commit -m "Updated python_cheatsheet.py" && git push -u origin master'
+alias build='sudo echo "Build" && time make -j8 && sudo make modules_install && sudo make install && echo "Done"' 
+alias cheat='git add python/python_cheatsheet.py  && git commit -m "Updated python_cheatsheet.py" && git push -u origin master' 
 alias eudy='cd /home/bhargav/Coder/eudyptula/linux'
 alias work='cd /home/bhargav/Coder/scratch-pad'
 alias rasp='cd /home/bhargav/Coder/raspberrypi'
 alias ssid_print='sudo grep -r '^psk=' /etc/NetworkManager/system-connections/' 
 alias wifi_reboot='sudo systemctl restart network-manager.service'
 alias rsync='rsync -ah --info=progress2 --partial'
+alias diskspace='du -h --max-depth=1'
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -128,6 +143,47 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte.sh; fi # Ubuntu Budgie END
 
-export CSCOPE_DB=/home/bhargav/Coder/raspberrypi/linux/cscope.out
+
 export PATH=$PATH:/home/bhargav/Coder/raspberrypi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+
+
+# extract 
+extract () {
+   if [ -f $1 ] ; then
+       case $1 in
+           *.tar.bz2)   tar xvjf $1    ;;
+           *.tar.gz)    tar xvzf $1    ;;
+           *.bz2)       bunzip2 $1     ;;
+           *.rar)       unrar x $1     ;;
+           *.gz)        gunzip $1      ;;
+           *.tar)       tar xvf $1     ;;
+           *.tbz2)      tar xvjf $1    ;;
+           *.tgz)       tar xvzf $1    ;;
+           *.zip)       unzip $1       ;;
+           *.Z)         uncompress $1  ;;
+           *.7z)        7z x $1        ;;
+           *)           echo "don't know how to extract '$1'..." ;;
+       esac
+   else
+       echo "'$1' is not a valid file!"
+   fi
+ }
+
+# No more cd ../../..
+# cd ../../../.. 	= up 4
+# cd ../../../../../ 	= up 5
+up() {
+  local d=""
+  limit=$1
+  for ((i=1 ; i <= limit ; i++))
+    do
+      d=$d/..
+    done
+  d=$(echo $d | sed 's/^\///')
+  if [ -z "$d" ]; then
+    d=..
+  fi
+  cd $d
+}
