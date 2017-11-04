@@ -132,6 +132,8 @@ function copy_kernel(){
 	sudo cp arch/arm/boot/dts/*.dtb "$FAT"
 	sudo cp arch/arm/boot/dts/overlays/*.dtb* "$FAT/overlays/"
 	sudo cp arch/arm/boot/dts/overlays/README "$FAT/overlays/"
+	ls -lth $FAT
+	ls -lth $EXT
 	sudo umount "$FAT"
 	sudo umount "$EXT"
 
