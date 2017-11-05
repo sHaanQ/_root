@@ -1,19 +1,17 @@
-<!-- MarkdownTOC -->
+ 
 
-- Table of Contents
-- I2S - Inter-IC Sound Bus
-	- 1. I2S vs PCM
-		- I2S
-		- PCM
-		- Variants in Digital Audio Transmission
-			- TDM
-			- RPI-TDM ?
-	- 2. Digital Audio Clocking
-		- Master Clock
-		- DAI Clocks
-		- BCLK Calculation
+   * [Table of Contents](#table-of-contents)
+      * [1. I2S vs PCM](#1-i2s-vs-pcm)
+         * [I2S](#i2s)
+         * [PCM](#pcm)
+         * [Variants in Digital Audio Transmission](#variants-in-digital-audio-transmission)
+            * [TDM](#tdm)
+            * [RPI-TDM ?](#rpi-tdm-)
+      * [2. Digital Audio Clocking](#2-digital-audio-clocking)
+         * [Master Clock](#master-clock)
+         * [DAI Clocks](#dai-clocks)
+         * [BCLK Calculation](#bclk-calculation)
 
-<!-- /MarkdownTOC -->
 
 
 
