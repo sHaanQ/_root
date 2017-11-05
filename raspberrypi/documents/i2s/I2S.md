@@ -99,11 +99,12 @@ Digital Audio Signal Chain
 Interfaces for Audio Data
 Transfer](http://www.analog.com/media/en/technical-documentation/technical-articles/MS-2275.pdf)
 
-#### RPI-TDM ?
+#### RPI-TDM, Possible ?
+
+> Koalo's Idea
 
 > Standard I2S can only transmit two channels per direction (i.e. stereo). 
 > There are other standards (e.g. TDM) that can transmit more channels, but there is no support for them by the Raspberry Pi.
-
 > I want to have in the best case four input channels and six output channels. 
   There are not even many audio codecs (ICs) that support that much channels.
    
@@ -112,7 +113,7 @@ Transfer](http://www.analog.com/media/en/technical-documentation/technical-artic
   For the hardware of the Raspberry Pi this seems like a stereo audio stream with a high sampling rate, 
   but the software will then distribute the stereo signal into the multiple channels again.
 
-  [Reference - TDM on RPi](https://github.com/Guzunty/Pi/issues/11)
+  [Reference - TDM on RPi](https://github.com/Guzunty/Pi/issues/11)    
   [Koalo's Github Page](https://github.com/koalo)
 
 ## 2. Digital Audio Clocking
@@ -131,7 +132,7 @@ Some master clocks (e.g. PLLs and CPU based clocks) are configurable in that
 their speed can be altered by software (depending on the system use and to save
 power). Other master clocks are fixed at a set frequency (i.e. crystals).
 
-On my TLV it derived from a 12 MHz on-board crystal
+`On my TLV it is derived from a 12 MHz on-board crystal`
 
 ###	DAI Clocks
 
@@ -145,15 +146,15 @@ runs at exactly the sample rate (LRC = Rate).
 
 Bit Clock can be generated as follows:-
 
-BCLK = MCLK / x
+	BCLK = MCLK / x
 
- or
+	 or
 
-BCLK = LRC * x
+	BCLK = LRC * x
 
- or
+	 or
 
-BCLK = LRC * Channels * Word Size
+	BCLK = LRC * Channels * Word Size
 
 This relationship depends on the codec or SoC CPU in particular. In general
 it is best to configure BCLK to the lowest possible speed (depending on your
@@ -214,3 +215,4 @@ since I²S allows two channels to be sent on the same data line.
 For stereo material, the I²S specification states that left audio is transmitted on the low cycle
 of the word select clock and the right channel is transmitted on the high cycle. 
 The word select clock is a 50% duty-cycle signal that has the same frequency as the sample frequency.		
+
