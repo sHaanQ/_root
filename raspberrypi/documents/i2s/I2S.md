@@ -95,7 +95,7 @@ _TDM is commonly used for a system with multiple sources feeding one input, or o
 multiple devices_. In the former case, each TDM source shares a common data bus.
 
 Digital Audio Signal Chain
-![](../images/audio-signal-chain.png?raw=true)
+!["Traditional Audio Signal Chain"](../images/audio-signal-chain.png?raw=true)
 
 [Common Inter-IC Digital
 Interfaces for Audio Data
