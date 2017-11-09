@@ -1,27 +1,26 @@
-## *Raspberry Pi generic*
-1. [Cloning tools and code](#1-cloning-tools-and-code)
-2. [SD card setup](#2-sd-card-setup)   
-	2.1 [Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)	   
-	2.2 [Cloning SD cards](#22-cloning-sd-cards)     
-	2.3 [Moving to a newer branch](#23-moving-to-a-newer-branch)       
-	2.4 [Building a custom kernel](#24-building-a-custom-kernel)     	
-3. [Setting up a Git repository](#3-setting-up-a-git-repository)   
-    3.1 [Generating SSH keys](#31-generating-ssh-keys)   
-    3.2 [Initialize repository](#32-initialize-repository)   
-    3.3 [Committing to the repo](#33-committing-to-the-repo)   
-4. [How does Pi boot](#4-how-does-pi-boot)  
-5. [Making our own minimalistic kernel](#5-making-our-own-minimalistic-kernel)   
-	5.1 [Booting the Operating System](#51-booting-the-operating-system)   
-	5.2 [Kernel Implementation](#52-kernel-implementation)   
-	5.3 [Linking the Kernel](#53-linking-the-kernel)    
-	5.4 [Booting the Kernel](#54-booting-the-kernel)
-
-## *Raspberry Pi 2, Model B*
-1. [Kernel compilation](#1-kernel-compilation)
-2. [U-Boot compilation](#2-u-boot-compilation) 
-3. [Raspberry Pi 2 bootstrap](#3-raspberry-pi-2-bootstrap)
-4. [Booting Snappy ubuntu on RPi 2](#4-booting-snappy-ubuntu-on-rpi-2)   
-	4.1 [Recreating snappy ubuntu files](#41-recreating-snappy-ubuntu-files)
+  ## Table of Contents   
+  * [1. Cloning tools and code](#1-cloning-tools-and-code)   
+  * [2. SD card setup](#2-sd-card-setup)   
+     * [2.1 Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)   
+     * [2.2 Cloning SD cards](#22-cloning-sd-cards)
+           * [Better Way](#better-way)
+     * [2.3 Moving to a newer branch](#23-moving-to-a-newer-branch)
+     * [2.4 Building a custom kernel](#24-building-a-custom-kernel)
+  * [3. Setting up a Git repository](#3-setting-up-a-git-repository)
+     * [3.1 Generating SSH keys](#31-generating-ssh-keys)
+     * [3.2 Initialize repository](#32-initialize-repository)
+     * [3.3 Committing to the repo](#33-committing-to-the-repo)
+  * [4. How does Pi boot](#4-how-does-pi-boot)
+  * [5. Making our own minimalistic kernel](#5-making-our-own-minimalistic-kernel)
+     * [5.1 Booting the Operating System](#51-booting-the-operating-system)
+     * [5.2 Kernel Implementation](#52-kernel-implementation)
+     * [5.3 Linking the Kernel](#53-linking-the-kernel)
+     * [5.4 Booting the Kernel](#54-booting-the-kernel)
+  * [6. RPi - Ubuntu Snappy Core](#6-rpi---ubuntu-snappy-core)
+  * [6.1 U-Boot compilation](#61-u-boot-compilation)
+  * [6.2 Raspberry Pi 2 bootstrap](#62-raspberry-pi-2-bootstrap)
+  * [6.3 Booting Snappy ubuntu on RPi 2](#63-booting-snappy-ubuntu-on-rpi-2)
+     * [6.3.1 Recreating snappy ubuntu files](#631-recreating-snappy-ubuntu-files)
 
 ## 1. Cloning tools and code
 
@@ -135,11 +134,11 @@ tar -cvzf modules.tar.gz *
 mv modules.tar.gz /media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/tmp/
 ```
 
-Raspberry Pi 2
+Raspberry Pi 2/3
 ```
 cd linux
 KERNEL=kernel7
-make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- bcm2709_defconfig
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs -j 4
 
 sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/media/bhargav/13d368bf-6dbf-4751-8ba1-88bed06bef77/ modules_install
@@ -303,20 +302,9 @@ We use it to copy our linked program into an IMG file.
 
 Put the SD card into the Pi. It should work.
 
-# *Raspberry Pi 2, Model B*
+## 6. RPi - Ubuntu Snappy Core 
 
-## 1. Kernel compilation
-
-* Raspbian toolchain didn't work on one ocasion.   
-* I guess it's specific to raspbian kernel sources (must verify this claim). 	
-`export PATH=$PATH:~/rpi/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin/`
-
-`make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi- bcm2709_defconfig`   
-`make ARCH=arm CROSS_COMPILE=arm-bcm2708-linux-gnueabi-`
-
-*Copy the zImage to the boot partition (flags=boot,lba)*
-
-## 2. U-Boot compilation
+## 6.1 U-Boot compilation
 
 ```
 git clone git://git.denx.de/u-boot.git
@@ -329,7 +317,7 @@ echo 'kernel=u-boot.bin' > /media/bhargav/boot/config.txt
 
 [RPi U-Boot](http://elinux.org/RPi_U-Boot)
 
-## 3. Raspberry Pi 2 bootstrap
+## 6.2 Raspberry Pi 2 bootstrap
 
 1. Format a micro-SD card with a legacy (PC/MBR/BIOS/legacy) partition table -- Raspberry Pi 2's 
    ROM doesn't support GPT.
@@ -358,7 +346,7 @@ Run these U-Boot commands
 This should boot up to the linux kernel.
 
 
-## 4. Booting Snappy ubuntu on RPi 2
+## 6.3 Booting Snappy ubuntu on RPi 2
 
 ```
 wget http://people.canonical.com/~platform/snappy/raspberrypi2/ubuntu-15.04-snappy-armhf-rpi2.img.xz
@@ -366,7 +354,7 @@ xzcat ubuntu-15.04-snappy-armhf-rpi2.img.xz | sudo dd of=/dev/sdc bs=32M
 sync
 ```
 
-### 4.1 Recreating snappy ubuntu files
+### 6.3.1 Recreating snappy ubuntu files
 
 
 [bootcode.bin and start.elf are SPL bits and is available under LICENCE.broadcom](https://github.com/raspberrypi/firmware/tree/master/boot)
@@ -397,3 +385,5 @@ importbootenv=
 importbootenv=echo Importing environment from mmc ...; env import -t -r $loadaddr $filesize
 ```
 
+
+[END]
