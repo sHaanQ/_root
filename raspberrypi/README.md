@@ -151,6 +151,9 @@ sudo umount /media/bhargav/*
 
 ```
 
+Or
+
+Use the script [RPi 3 kernel builder](../sidekick/scripts/rpi3-kernel-builder.sh)
 
 ## 3. Setting up a Git repository
 

@@ -151,6 +151,11 @@ fi
 KDIR=$2
 cd $KDIR
 
+echo "================================================================="
+echo "This script will build the RPi kernel and flash it onto a SD card"
+echo "It runs dangerous commands, be sure of what you are doing before"
+echo "you start proceed any further"
+echo "================================================================="
 mount_sdcard "$1"
 sleep 2
 build_kernel
