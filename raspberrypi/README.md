@@ -1,7 +1,7 @@
   ## Table of Contents   
-  * [1. Cloning tools and code](#1-cloning-tools-and-code)   
-  * [2. SD card setup](#2-sd-card-setup)   
-     * [2.1 Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)   
+  * [1. Cloning tools and code](#1-cloning-tools-and-code)
+  * [2. SD card setup](#2-sd-card-setup)
+     * [2.1 Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)
      * [2.2 Cloning SD cards](#22-cloning-sd-cards)
            * [Better Way](#better-way)
      * [2.3 Moving to a newer branch](#23-moving-to-a-newer-branch)
@@ -17,10 +17,10 @@
      * [5.3 Linking the Kernel](#53-linking-the-kernel)
      * [5.4 Booting the Kernel](#54-booting-the-kernel)
   * [6. RPi - Ubuntu Snappy Core](#6-rpi---ubuntu-snappy-core)
-  * [6.1 U-Boot compilation](#61-u-boot-compilation)
-  * [6.2 Raspberry Pi 2 bootstrap](#62-raspberry-pi-2-bootstrap)
-  * [6.3 Booting Snappy ubuntu on RPi 2](#63-booting-snappy-ubuntu-on-rpi-2)
-     * [6.3.1 Recreating snappy ubuntu files](#631-recreating-snappy-ubuntu-files)
+     * [6.1 U-Boot compilation](#61-u-boot-compilation)
+     * [6.2 Raspberry Pi 2 bootstrap](#62-raspberry-pi-2-bootstrap)
+     * [6.3 Booting Snappy ubuntu on RPi 2](#63-booting-snappy-ubuntu-on-rpi-2)
+        * [6.3.1 Recreating snappy ubuntu files](#631-recreating-snappy-ubuntu-files)
 
 ## 1. Cloning tools and code
 
@@ -304,7 +304,7 @@ Put the SD card into the Pi. It should work.
 
 ## 6. RPi - Ubuntu Snappy Core 
 
-## 6.1 U-Boot compilation
+### 6.1 U-Boot compilation
 
 ```
 git clone git://git.denx.de/u-boot.git
@@ -317,7 +317,7 @@ echo 'kernel=u-boot.bin' > /media/bhargav/boot/config.txt
 
 [RPi U-Boot](http://elinux.org/RPi_U-Boot)
 
-## 6.2 Raspberry Pi 2 bootstrap
+### 6.2 Raspberry Pi 2 bootstrap
 
 1. Format a micro-SD card with a legacy (PC/MBR/BIOS/legacy) partition table -- Raspberry Pi 2's 
    ROM doesn't support GPT.
@@ -346,7 +346,7 @@ Run these U-Boot commands
 This should boot up to the linux kernel.
 
 
-## 6.3 Booting Snappy ubuntu on RPi 2
+### 6.3 Booting Snappy ubuntu on RPi 2
 
 ```
 wget http://people.canonical.com/~platform/snappy/raspberrypi2/ubuntu-15.04-snappy-armhf-rpi2.img.xz
@@ -354,7 +354,7 @@ xzcat ubuntu-15.04-snappy-armhf-rpi2.img.xz | sudo dd of=/dev/sdc bs=32M
 sync
 ```
 
-### 6.3.1 Recreating snappy ubuntu files
+#### 6.3.1 Recreating snappy ubuntu files
 
 
 [bootcode.bin and start.elf are SPL bits and is available under LICENCE.broadcom](https://github.com/raspberrypi/firmware/tree/master/boot)
