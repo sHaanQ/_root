@@ -70,7 +70,7 @@ cd /meddia/bhargav
 rsync -ah --info=progress2 --partial ./boot/ ./boot1/
 sudo rsync -ah --info=progress2 --partial ./7f593562-9f68-4bb9-a7c9-2b70ad620873/ ./4d7d6d24-a608-46fb-9b39-a4f30ddb8902/
 ```
-#### Better Way 
+#### 2.2.1 Better Way 
 1. Shrink the 32 GiB card
 ![](documents/images/32gb_to_16gb.png?raw=true)
 
