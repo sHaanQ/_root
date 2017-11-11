@@ -21,6 +21,12 @@
      * [6.2 Raspberry Pi 2 bootstrap](#62-raspberry-pi-2-bootstrap)
      * [6.3 Booting Snappy ubuntu on RPi 2](#63-booting-snappy-ubuntu-on-rpi-2)
         * [6.3.1 Recreating snappy ubuntu files](#631-recreating-snappy-ubuntu-files)
+  * [7. Wi-Fi on RPi](#7-wi-fi-on-rpi)
+     * [7.1 Connecting to Wi-Fi](#71-connecting-to-wi-fi)
+     * [7.2 VNC Server on RPi](#72-vnc-server-on-rpi)
+     * [7.3 VNC Client/Viewer](#73-vnc-clientviewer)
+     * [7.4 Autostart VNC server at boot time](#74-autostart-vnc-server-at-boot-time)
+
 
 ## 1. Cloning tools and code
 
@@ -64,7 +70,7 @@ cd /meddia/bhargav
 rsync -ah --info=progress2 --partial ./boot/ ./boot1/
 sudo rsync -ah --info=progress2 --partial ./7f593562-9f68-4bb9-a7c9-2b70ad620873/ ./4d7d6d24-a608-46fb-9b39-a4f30ddb8902/
 ```
-##### Better Way 
+#### Better Way 
 1. Shrink the 32 GiB card
 ![](documents/images/32gb_to_16gb.png?raw=true)
 
@@ -386,6 +392,76 @@ bootenv=uEnv.txt
 loadbootenv=load ${devtype} ${devnum} ${loadaddr} ${bootenv}
 importbootenv=
 importbootenv=echo Importing environment from mmc ...; env import -t -r $loadaddr $filesize
+```
+
+## 7. Wi-Fi on RPi
+
+### 7.1 Connecting to Wi-Fi
+
+1. Setup a hotspot on your phones or connect to a local router
+2. Modify the wpa_supplicant   
+  `sudo vi /etc/wpa_supplicant/wpa_supplicant.conf`
+  ```
+  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+  update_config=1
+  country=GB
+
+  network={
+          ssid="TP-LINK"
+          psk="12345678"
+          key_mgmt=WPA-PSK
+          priority=1
+          id_str="homeFlash"
+  }
+
+  network={
+          ssid="slyfox"
+          psk="grapesaresour"
+          key_mgmt=WPA-PSK
+          priority=2
+          id_str="Nexus"
+  }
+  ```
+
+
+### 7.2 VNC Server on RPi
+
+1. Install VNC server on RPi   
+  `sudo apt-get install tightvncserver`
+2. Run `tightvncserver` in the terminal and setup passwords
+3. Creating a view only password is optional
+
+### 7.3 VNC Client/Viewer
+
+1. Install `RealVNC Viewer`
+2. Find RPi’s IP address   
+`sudo arp-scan --localnet` or `sudo nmap -sP --disable-arp-ping 192.168.43.0/24`
+3. Connect to raspberry pi using RealVNC
+
+### 7.4 Autostart VNC server at boot time
+
+1. Copy the systemd service file [tightvncserver.service](./documents/vnc/tightvncserver.service) to /etc/systemd/system
+2. Change the file so it is owned by root
+```
+$ sudo chown root:root /etc/systemd/system/tightvncserver.service
+```
+3. Make the file executable by running
+```
+$ sudo chmod 755 /etc/systemd/system/tightvncserver.service
+```
+4. Enable startup at boot using
+```
+$ sudo systemctl enable tightvncserver.service
+```
+6. Reboot. Check if VNCserver is listed in the running units
+```
+$ systemctl list-units | grep vnc
+  tightvncserver.service     loaded active running   TightVNC remote desktop server
+```
+7. If the script is changed, reload the service
+```
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart  tightvncserver.service
 ```
 
 
