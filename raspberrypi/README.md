@@ -3,7 +3,7 @@
   * [2. SD card setup](#2-sd-card-setup)
      * [2.1 Using the raspbian wheezy image](#21-using-the-raspbian-wheezy-image)
      * [2.2 Cloning SD cards](#22-cloning-sd-cards)    
-           * [Better Way](#better-way)
+        * [2.2.1 Better Way](#221-better-way)
      * [2.3 Moving to a newer branch](#23-moving-to-a-newer-branch)
      * [2.4 Building a custom kernel](#24-building-a-custom-kernel)
   * [3. Setting up a Git repository](#3-setting-up-a-git-repository)
