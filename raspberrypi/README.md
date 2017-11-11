@@ -440,7 +440,7 @@ importbootenv=echo Importing environment from mmc ...; env import -t -r $loadadd
 
 ### 7.4 Autostart VNC server at boot time
 
-1. Copy the systemd service file [tightvncserver.service](./documents/vnc/tightvncserver.service) to /etc/systemd/system
+1. Copy the systemd service file [tightvncserver.service](./documents/vnc/tightvncserver.service) to `/etc/systemd/system`
 2. Change the file so it is owned by root
 ```
 $ sudo chown root:root /etc/systemd/system/tightvncserver.service
