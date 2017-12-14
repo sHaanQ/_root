@@ -53,6 +53,13 @@ grep and find
 > [GREP exclude c and h files]
        grep –color -rn --exclude=*.c --exclude=*.h “omap4xxx”
 
+> [GREP exclude directory]
+	grep -rn --include=*.c --exclude-dir=codecs "bias_level" ./sound/soc/
+	
+> [GREP two different lines]
+	cat /sys/kernel/debug/1-0018/regmap | grep -e 51 -e b3 -e b6 -e b9
+	watch -n1 "cat /sys/kernel/debug/1-0018/regmap | grep -e 51 -e b3 -e b6 -e b9"
+
 > [This is returning duplicates]
        find ./ -name “*.[c|h]” | xargs grep --color -n -A4 “CONFIG_SPLASH”
 
