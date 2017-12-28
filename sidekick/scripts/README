@@ -14,3 +14,6 @@ What these scripts do
 	Remove old installed kernels on ubuntu
 	Usage: ./kernel-cleanup.sh <kernel-version-to-remove>
 
+3. rpi3.-kernel-builder.sh
+	Build and Flash Linux kernel onto a SD Card
+	Usage: ./rpi3-kernel-builder.sh </dev/{sdX | mmcblkX}> <Kernel-Root-Directory>

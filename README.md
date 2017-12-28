@@ -14,3 +14,7 @@
 [Cheats](sidekick/cheatsheets)
 #### 7. Scripts - RPi Kernel Builder, CScope with VIM, etc.,
 [Scripts](sidekick/scripts)
+
+Lots More...   
+
+Up Next - Open Hardware, Eagle Libraries/Schematics and Board files...
