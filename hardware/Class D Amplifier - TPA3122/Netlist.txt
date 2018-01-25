@@ -1,0 +1,135 @@
+Netlist
+
+Exported from TPA3122_Class-D.sch at 25/01/18 9:06 PM
+
+EAGLE Version 8.4.0 Copyright (c) 1988-2017 Autodesk, Inc.
+
+Net              Part     Pad      Pin        Sheet
+
+BSL              C12      1        1          1
+                 U1       18       BSL        1
+
+BSR              C13      1        1          1
+                 U1       13       BSR        1
+
+BYPASS           C4       +        +          1
+                 U1       6        BYPASS     1
+
+EXT-POWER        CN3      1        1_VCC      1
+                 J4       PWR      PWR        1
+                 Q1       D        D          1
+
+GAIN0            R4       1        1          1
+                 S1       2_OFF    2_OFF      1
+                 U1       15       GAIN0      1
+
+GAIN1            R5       1        1          1
+                 S1       1_OFF    1_OFF      1
+                 U1       14       GAIN1      1
+
+GND              C10      2        2          1
+                 C11      -        -          1
+                 C14      2        2          1
+                 C15      1        1          1
+                 C3       -        -          1
+                 C4       -        -          1
+                 C5       -        -          1
+                 C6       -        -          1
+                 C7       -        -          1
+                 C8       2        2          1
+                 C9       2        2          1
+                 CN1      2        2_GND      1
+                 CN2      2        2_GND      1
+                 CN3      2        2_GND      1
+                 GND      TP       TP         1
+                 J1       S1       S1         1
+                 J4       GND@2    GND        1
+                 Q1       G        G          1
+                 R2       1        1          1
+                 R3       1        1          1
+                 R6       1        1          1
+                 R7       2        2          1
+                 S1       1_ON     1_ON       1
+                 S1       2_ON     2_ON       1
+                 U1       11       PGNDR      1
+                 U1       20       PGNDL      1
+                 U1       7        AGND_2     1
+                 U1       8        AGND       1
+
+LED_K            D1       K        C          1
+                 R3       2        2          1
+
+LEFT             C1       -        -          1
+                 J1       T2       T2         1
+                 L        TP       TP         1
+
+LOUT             C12      2        2          1
+                 L1       1        1          1
+                 LOUT     TP       TP         1
+                 U1       19       LOUT       1
+
+L_FILTERED       C14      1        1          1
+                 C16      +        +          1
+                 L1       3        3          1
+                 L_FIL    TP       TP         1
+                 R6       2        2          1
+
+L_IN             C1       +        +          1
+                 U1       4        LIN        1
+
+L_OUT            C16      -        -          1
+                 CN1      1        1_VCC      1
+
+MUTE             R2       2        2          1
+                 U1       3        MUTE       1
+
+PMOS_VOLTAGE_SRC Q1       S        S          1
+                 S2       2        P          1
+
+RIGHT            C2       -        -          1
+                 J1       R3       R3         1
+                 R        TP       TP         1
+
+ROUT             C13      2        2          1
+                 L2       1        1          1
+                 ROUT     TP       TP         1
+                 U1       12       ROUT       1
+
+R_FILTERED       C15      2        2          1
+                 C17      +        +          1
+                 L2       3        3          1
+                 R7       1        1          1
+                 R_FIL    TP       TP         1
+
+R_IN             C2       +        +          1
+                 U1       5        RIN        1
+
+R_OUT            C17      -        -          1
+                 CN2      1        1_VCC      1
+
+SD               R1       1        1          1
+                 U1       2        !SD        1
+
+VCC              C10      1        1          1
+                 C11      +        +          1
+                 C3       +        +          1
+                 C6       +        +          1
+                 C7       +        +          1
+                 C8       1        1          1
+                 C9       1        1          1
+                 D1       A        A          1
+                 J3       1        1          1
+                 J6       1        1          1
+                 R1       2        2          1
+                 R4       2        2          1
+                 R5       2        2          1
+                 S2       1        O          1
+                 U1       1        PVCCL      1
+                 U1       10       PVCCR      1
+                 U1       16       AVCC_2     1
+                 U1       17       AVCC       1
+                 VCC      TP       TP         1
+
+VCLAMP           C5       +        +          1
+                 U1       9        VCLAMP     1
+

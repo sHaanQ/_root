@@ -1,0 +1,56 @@
+Partlist
+
+Exported from TPA3122_Class-D.sch at 25/01/18 9:06 PM
+
+EAGLE Version 8.4.0 Copyright (c) 1988-2017 Autodesk, Inc.
+
+Assembly variant: 
+
+Part     Value          Device          Package         Library                    Sheet
+
+C1       1uF/16V        CPOL-USE2.5-5   E2,5-5          rcl                        1
+C2       1uF/16V        CPOL-USE2.5-5   E2,5-5          rcl                        1
+C3       2200uF/25V     CPOL-USE5-13    E5-13           rcl                        1
+C4       1uF/16V        CPOL-USE2.5-5   E2,5-5          rcl                        1
+C5       1uF/16V        CPOL-USE2.5-5   E2,5-5          rcl                        1
+C6       470uF/25V      CPOL-USE5-10.5  E5-10,5         rcl                        1
+C7       470uF/25V      CPOL-USE5-10.5  E5-10,5         rcl                        1
+C8       0.1uF/50V      C-EU050-024X044 C050-024X044    rcl                        1
+C9       0.1uF/50V      C-EU050-024X044 C050-024X044    rcl                        1
+C10      0.1uF/50V      C-EU050-024X044 C050-024X044    rcl                        1
+C11      10uF/50V       CPOL-USE2.5-5   E2,5-5          rcl                        1
+C12      0.22uF/16V     C-EU050-024X044 C050-024X044    rcl                        1
+C13      0.22uF/16V     C-EU050-024X044 C050-024X044    rcl                        1
+C14      0.68uF/50V     C-EU050-024X044 C050-024X044    rcl                        1
+C15      0.68uF/50V     C-EU050-024X044 C050-024X044    rcl                        1
+C16      1000uF/25V     CPOL-USE5-10.5  E5-10,5         rcl                        1
+C17      1000uF/25V     CPOL-USE5-10.5  E5-10,5         rcl                        1
+CN1      Left_Speaker   JST_2PIN-THM    JST-PH-2-THM    TPA3122                    1
+CN2      Right_Speaker  JST_2PIN-THM    JST-PH-2-THM    TPA3122                    1
+CN3      Power_Supply   JST_2PIN-THM    JST-PH-2-THM    TPA3122                    1
+D1                      LED3MM          LED_3MM         SparkFun-LED               1
+GND      TPB2,54        TPB2,54         B2,54           tlv                        1
+J1       SJ-3523-SMT    SJ-3523-SMT     SJ-3523-SMT     TLV                        1
+J3                      CONN_01         1X01            SparkFun-Connectors        1
+J4       POWER_JACKSLT  POWER_JACKSLT   POWER_JACK_SLOT SparkFun-Connectors        1
+J6                      CONN_01         1X01            SparkFun-Connectors        1
+L        TPB2,54        TPB2,54         B2,54           tlv                        1
+L1       22uH           MURATA_1200RS   MURATA_1200RS   TPA3122                    1
+L2       22uH           MURATA_1200RS   MURATA_1200RS   TPA3122                    1
+LOUT     TPB2,54        TPB2,54         B2,54           tlv                        1
+L_FIL    TPB2,54        TPB2,54         B2,54           tlv                        1
+Q1       FQP47P06       FQP47P06        TO220           TPA3122                    1
+R        TPB2,54        TPB2,54         B2,54           tlv                        1
+R1       10K            R-US_0309/10    0309/10         rcl                        1
+R2       10K            R-US_0309/10    0309/10         rcl                        1
+R3       1K             R-US_0309/10    0309/10         rcl                        1
+R4       100K           R-US_0309/10    0309/10         rcl                        1
+R5       100K           R-US_0309/10    0309/10         rcl                        1
+R6       4.7K           R-US_0309/10    0309/10         rcl                        1
+R7       4.7K           R-US_0309/10    0309/10         rcl                        1
+ROUT     TPB2,54        TPB2,54         B2,54           tlv                        1
+R_FIL    TPB2,54        TPB2,54         B2,54           tlv                        1
+S1       209-2LPST      209-2LPST       209-2LPST       TPA3122                    1
+S2                      SWITCH-SPDTPTH  SWITCH-SPDT     SparkFun-Electromechanical 1
+U1       TPA3122D2_N_20 TPA3122D2_N_20  N20             TPA3122                    1
+VCC      TPB2,54        TPB2,54         B2,54           tlv                        1
