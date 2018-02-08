@@ -22085,6 +22085,10 @@ GAIN0 GAIN1   dB
 <pinref part="GND9" gate="1" pin="GND"/>
 <wire x1="15.24" y1="127" x2="20.32" y2="127" width="0.1524" layer="91"/>
 <wire x1="20.32" y1="127" x2="20.32" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="J4" gate="G$1" pin="GNDBREAK"/>
+<wire x1="15.24" y1="129.54" x2="20.32" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="20.32" y1="129.54" x2="20.32" y2="127" width="0.1524" layer="91"/>
+<junction x="20.32" y="127"/>
 </segment>
 </net>
 <net name="LED_K" class="0">
