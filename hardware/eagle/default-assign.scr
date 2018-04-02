@@ -18,8 +18,8 @@ ASSIGN CS+P POLYGON;
 #ASSIGN C+F 'RUN find.ulp';
 ASSIGN C+F 'run ulp';
 ASSIGN BS Mark
-ASSIGN CS+G 'grid mm 0.05';
-ASSIGN CS+L 'grid mm 0.5';
+ASSIGN CS+G 'grid mm 0.05 alt mm 0.01';
+ASSIGN CS+L 'grid mm 0.5 alt mm 0.05';
 #ASSIGN C+X CHANGE;
 #ASSIGN A+A ATTRIBUTE;
 
