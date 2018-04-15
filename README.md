@@ -14,7 +14,7 @@
 [Cheats](sidekick/cheatsheets)
 #### 7. Scripts - RPi Kernel Builder, CScope with VIM, etc.,
 [Scripts](sidekick/scripts)
-
-Lots More...   
-
-Up Next - Open Hardware, Eagle Libraries/Schematics and Board files...
+#### 8. Class D amplifier 
+[Class D Amplifier](hardware/Class D Amplifier - TPA3122/)   
+![Amplifier Board](https://drive.google.com/file/d/1-sfB23P__nK_pkOJcBKkV6rWGH6FoORLDg/view)   
+![Populated Board](https://drive.google.com/file/d/1yer1wIxfirDNcYtMMFefMVNUnTH80nLTAg/view)   
