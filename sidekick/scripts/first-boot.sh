@@ -1,10 +1,10 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/bhargav-ak/scratchpad/master/sidekick/cheatsheets/bashrc -O .bashrc
-wget https://raw.githubusercontent.com/bhargav-ak/scratchpad/master/sidekick/cheatsheets/bash_aliases -O .bash_aliases
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/bashrc -O .bashrc
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/bash_aliases -O .bash_aliases
 source ~/.bashrc
 
-wget https://raw.githubusercontent.com/bhargav-ak/scratchpad/master/sidekick/cheatsheets/vimrc -O .vimrc
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/vimrc -O .vimrc
 
 
 echo "Pull Sublime text"
@@ -22,6 +22,20 @@ chmod +x ~/.local/share/applications/sublime_text.desktop
 sudo apt-get -y install vim git meld gnome-tweak-tool nmap net-tools make gparted synaptic gcc libncurses5-dev libncurses5 libncurses5-dbg gksu minicom cscope
 mkdir ~/Camera
 mkdir ~/Coder
+
+
+echo "APT-VIM Tools"
+curl -sL https://raw.githubusercontent.com/egalpin/apt-vim/master/install.sh | sh
+source ~/.bashrc || source ~/.bash_profile
+echo "Install NERDTree Plugin"
+apt-vim install -y https://github.com/scrooloose/nerdtree.git
+
+echo "Pathogen"
+mkdir -p ~/.vim/autoload ~/.vim/bundle
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+echo "Install Tabbar"
+cd ~/.vim/bundle
+git clone git://github.com/drmingdrmer/vim-tabbar.git
 
 
 # Stop screen rotation in Budgie
@@ -45,7 +59,7 @@ select yn in "Yes" "No"; do
 			cd ~/Coder/raspberrypi;
 			git clone https://github.com/raspberrypi/tools;
 			git clone --depth=1 https://github.com/raspberrypi/linux;
-			git clone https://github.com/bhargav-ak/scratchpad.git;
+			git clone https://github.com/bhargav-ak/_root.git;
 			alert;
 			break;;
 		No  ) break;;
