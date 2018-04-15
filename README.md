@@ -15,6 +15,6 @@
 #### 7. Scripts - RPi Kernel Builder, CScope with VIM, etc.,
 [Scripts](sidekick/scripts)
 #### 8. Class D amplifier 
-[Class D Amplifier](hardware/Class-D-Amplifier---TPA3122)   
-![Un-populated PCB](hardware/Class-D-Amplifier---TPA3122/IMG_20180415_122305-01.jpeg)   
-![Populated Board](hardware/Class-D-Amplifier---TPA3122/IMG_20180415_214748-01.jpeg)   
+[Class D Amplifier](hardware/TPA3122/)   
+![Un-populated PCB](hardware/TPA3122/un-populated.jpg)   
+![Populated Board](hardware/TPA3122/populated.jpg)   
