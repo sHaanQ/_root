@@ -1,7 +1,7 @@
 set t_Co=256
 set number 
 set tags=./tags,tags;$HOME
-"colo torte
+"colo desert
 set title
 set mouse=a
 set mousefocus
@@ -17,6 +17,7 @@ set hlsearch
 set incsearch
 "set wildmode=longest:full
 set wildmenu
+set wildignore=*.o,*.obj,*~
 
 
 " let backspace work more naturally
@@ -26,7 +27,7 @@ set backspace=start,indent,eol
 "set cindent 
 "set comments=sl:/*,mb:\ *,elx:\ */
 "set formatoptions+=r
-
+map <C-n> :NERDTreeToggle<CR>
 
 :command RemoveBlankLines g/^$/d
 :command RemoveTrailWhiteSpace %s/\s\+$//gc
@@ -73,7 +74,19 @@ map <F5> :w<CR>
 imap <F5> <ESC>:w<CR>
 cmap <F5> w<CR>:
 
+" Map Ctrl-c and Ctrl-v to copy and paste from clipboard 
+set clipboard=unnamed
+vmap <C-c> "+y 
+nmap <C-v> "+p 
+nmap <C-V> "+P
+
+
 cs add $CSCOPE_DB
 cs add $CSCOPE_DB
 cs add $CSCOPE_DB2
 cs add $CSCOPE_DB
+cs add $CSCOPE_DB
+
+
+execute pathogen#infect()
+call pathogen#helptags()
