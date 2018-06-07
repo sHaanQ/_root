@@ -1,5 +1,7 @@
 Record what's being played on your speakers
 
+![Speaker Recorder Window](./img.png)
+
 Setup
 -----
 1. Run ./install.sh
