@@ -85,4 +85,12 @@ select yn in "Yes" "No"; do
 	esac
 done
 
+#Zsh
+sudo apt -y install zsh
+sudo apt -y install fonts-powerline
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/zshrc -O .zshrc
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/aliases.zsh -O ~/.oh-my-zsh/custom/aliases.zsh
+cd ~/.oh-my-zsh/custom/plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions
 

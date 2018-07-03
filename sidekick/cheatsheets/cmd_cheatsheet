@@ -72,6 +72,13 @@ grep and find
 > [Find file serial.c]
        find ./ -name 'serial.c'
 
+> [Permission denied errors]
+		find / -name art  2>&1 | grep -v "Permission denied"
+
+		[Will filter out error messages also
+			find / -name art 2>/dev/null]
+
+
 > nproc – shows the number of cores available
 > lscpu – gathers CPU info in readable format
 
