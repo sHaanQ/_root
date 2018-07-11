@@ -931,6 +931,14 @@ print_board(board)
 #    O O O O O
 
 ```
+Printing a list of strings on a single line
+
+```python
+title_names = ['Filename', 'Duration', 'Inference Time', 'Model Load Time', 'Remarks']
+print(*title_names, sep='\t\t')
+
+# Filename		Duration		Inference Time		Model Load Time		Remarks
+```
 
 ### 8.12 Sorting the List
 
