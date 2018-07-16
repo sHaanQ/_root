@@ -1315,3 +1315,60 @@ method you write:
 | -------------               |:-------------:                          |
 | `d = Athlete("Holy Grail")` | `Athlete.__init__(d, "Holy Grail")`     |
 | `d.how_big()`               | `Athlete.how_big(d)`                    |
+
+
+```python
+class Car(object):
+  condition = "new"
+  def __init__(self, model, color, mpg):
+    self.model = model
+    self.color = color
+    self.mpg   = mpg
+
+my_car = Car("DeLorean", "silver", 88)
+
+print my_car.model
+print my_car.color
+print my_car.mpg
+```
+
+### 10.4 Class or Static Variables in Python
+
+Class or static variables are shared by all objects.
+Instance or non-static variables are different for different
+objects (every object has a copy of it).
+
+*Modifying member variables*
+
+We can modify variables that belong to a class the same way that we
+initialize those member variables. This can be useful when we want
+to change the value a variable takes on based on something that happens
+inside of a class method.
+
+All variables which are assigned a value in class declaration are
+class variables. And variables which are assigned values inside
+class methods are instance variables.
+
+
+```python
+class Car(object):
+  condition = "new"
+  def __init__(self, model, color, mpg):
+    self.model = model
+    self.color = color
+    self.mpg   = mpg
+  def drive_car(self):
+    self.condition = "used......"
+
+my_car = Car("DeLorean", "silver", 88)
+
+Car.condition = "Used"
+print my_car.model
+print my_car.color
+print my_car.mpg
+print("cond: ", my_car.condition)
+
+
+my_car.drive_car()
+print("cond: ", my_car.condition)
+```
