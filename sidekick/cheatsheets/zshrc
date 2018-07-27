@@ -62,6 +62,7 @@ ZSH_THEME="agnoster"
 plugins=(
   git
   zsh-autosuggestions
+  last-working-dir
 )
 
 source $ZSH/oh-my-zsh.sh
