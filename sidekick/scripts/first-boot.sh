@@ -4,7 +4,7 @@ wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatshe
 wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/bash_aliases -O ~/.bash_aliases
 source ~/.bashrc
 
-wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/vimrc -O .vimrc
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/vimrc -O ~/.vimrc
 
 
 echo "Pull Sublime text"
