@@ -1,7 +1,7 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/bashrc -O .bashrc
-wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/bash_aliases -O .bash_aliases
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/bashrc -O ~/.bashrc
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/bash_aliases -O ~/.bash_aliases
 source ~/.bashrc
 
 wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/vimrc -O .vimrc
@@ -89,7 +89,7 @@ done
 sudo apt -y install zsh
 sudo apt -y install fonts-powerline
 sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/zshrc -O .zshrc
+wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/zshrc -O ~/.zshrc
 wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/aliases.zsh -O ~/.oh-my-zsh/custom/aliases.zsh
 cd ~/.oh-my-zsh/custom/plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions
