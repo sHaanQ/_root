@@ -10,13 +10,13 @@ wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatshe
 echo "Pull Sublime text"
 cd ~/Downloads
 wget https://download.sublimetext.com/sublime_text_3_build_3143_x64.tar.bz2
-tar -xvjf -C sublime_text sublime_text_3_build_3143_x64.tar.bz2
+tar -xvjf sublime_text_3_build_3143_x64.tar.bz2
 mv sublime_text_3 sublime_text
 sudo mv sublime_text /opt
 cd /opt
 sudo chown -R bhargav:bhargav sublime_text/
 sudo ln -s /opt/sublime_text/sublime_text /usr/bin/sublime
-cp /opt/sublime_text/sublime_text/sublime_text.desktop ~/.local/share/applications/
+cp /opt/sublime_text/sublime_text.desktop ~/.local/share/applications/
 chmod +x ~/.local/share/applications/sublime_text.desktop 
 
 sudo apt-get -y install vim git meld gnome-tweak-tool nmap net-tools make gparted synaptic gcc libncurses5-dev libncurses5 libncurses5-dbg gksu minicom cscope
@@ -85,12 +85,23 @@ select yn in "Yes" "No"; do
 	esac
 done
 
-#Zsh
-sudo apt -y install zsh
-sudo apt -y install fonts-powerline
-sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/zshrc -O ~/.zshrc
-wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/aliases.zsh -O ~/.oh-my-zsh/custom/aliases.zsh
-cd ~/.oh-my-zsh/custom/plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions
+# Pull Zsh
+# Pull root
+echo y"--------------------------------------------------------------------"
+echo "Pull zsh sources and dependancies ?"
+echo "--------------------------------------------------------------------"
+select yn in "Yes" "No"; do
+        case $yn in
+                Yes )   echo "Pulling oh-my-zsh";
+			sudo apt -y install zsh
+			sudo apt -y install fonts-powerline
+			sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+			wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/zshrc -O ~/.zshrc
+			wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatsheets/aliases.zsh -O ~/.oh-my-zsh/custom/aliases.zsh
+			cd ~/.oh-my-zsh/custom/plugins
+			git clone https://github.com/zsh-users/zsh-autosuggestions
+			break;;
+		No  )	break;;
+	esac
+done
 
