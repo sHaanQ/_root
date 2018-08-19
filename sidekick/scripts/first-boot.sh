@@ -9,7 +9,7 @@ wget https://raw.githubusercontent.com/bhargav-ak/_root/master/sidekick/cheatshe
 
 echo "Pull Sublime text"
 cd ~/Downloads
-wget https://download.sublimetext.com/sublime_text_3_build_3143_x64.tar.bz2
+wget https://download.sublimetext.com/sublime_text_3_build_3176_x64.tar.bz2
 tar -xvjf sublime_text_3_build_3143_x64.tar.bz2
 mv sublime_text_3 sublime_text
 sudo mv sublime_text /opt
