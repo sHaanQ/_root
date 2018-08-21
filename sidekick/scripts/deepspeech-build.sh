@@ -102,7 +102,6 @@ cd ./tensorflow
 
 # Using CPU optimizations:
 # -mtune=generic -march=x86-64 -msse -msse2 -msse3 -msse4.1 -msse4.2 -mavx.
-# Adding --config=cuda flag to build using CUDA.
 
 # passing LD_LIBRARY_PATH is required cause Bazel doesn't pickup it from environment
 
@@ -120,8 +119,8 @@ bazel build --jobs 4 --config=monolithic  -c opt --copt=-O3 --copt="-D_GLIBCXX_U
 ln -s ../DeepSpeech/native_client/ ./
 
 # Build TF pip package
-bazel build --jobs 4 --config=opt --copt="-D_GLIBCXX_USE_CXX11_ABI=0" --copt=-mtune=generic --copt=-march=x86-64 --copt=-msse --copt=-msse2 --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx //tensorflow/tools/pip_package:build_pip_package --verbose_failures --action_env=LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
 ./configure
+bazel build --jobs 4 --config=opt --copt="-D_GLIBCXX_USE_CXX11_ABI=0" --copt=-mtune=generic --copt=-march=x86-64 --copt=-msse --copt=-msse2 --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx //tensorflow/tools/pip_package:build_pip_package --verbose_failures --action_env=LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 pip install /tmp/tensorflow_pkg/*.whl
 
