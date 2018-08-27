@@ -33,7 +33,8 @@ echo "Install dependancies ?"
 echo "--------------------------------------------------------------------"
 select yn in "Yes" "No"; do
 	case $yn in
-		Yes )	sudo apt-get install pkg-config zip g++ openjdk-8-jdk zlib1g-dev unzip python realpath libsox-dev coreutils \
+		Yes )	sudo apt-get update
+			sudo apt-get install pkg-config zip g++ openjdk-8-jdk zlib1g-dev unzip python libsox-dev coreutils \
 								python-numpy python-dev python-pip python-wheel \
 								python3-numpy python3-dev python3-pip python3-wheel
 				pip install six numpy wheel
@@ -66,6 +67,10 @@ select yn in "Yes" "No"; do
 	esac
 done
 
+# All generated libs @ location 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`/tensorflow/bazel-bin/native_client
+
 echo "--------------------------------------------------------------------"
 echo "Get back to building DeepSpeech"
 echo "Before building the DeepSpeech client libraries, you will need to prepare your"
@@ -80,8 +85,6 @@ cd ./tensorflow
 
 
 # Build LM Prefix Decoder, CPU only - no need for CUDA flag
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/:/home/bhargav/Coder/nlp/tensorflow/bazel-bin/native_client
-
 bazel build --jobs 4 -c opt --copt=-O3 --copt="-D_GLIBCXX_USE_CXX11_ABI=0" --copt=-mtune=generic --copt=-march=x86-64 \
 	--copt=-msse --copt=-msse2 --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx --copt=-mavx2 --copt=-mfma \
 	//native_client:libctc_decoder_with_kenlm.so  --verbose_failures --action_env=LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
