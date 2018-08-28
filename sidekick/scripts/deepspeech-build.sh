@@ -163,7 +163,7 @@ else
    	echo "DeepSpeech build SUCCESSFUL"
 	echo "--------------*****************------------------"
 	echo "Build Completed, switch to ~/nlp/DeepSpeech/native_client/ directory and Run"
-	echo "./deepspeech --model ../../models/output_graph.pb --alphabet ../../models/alphabet.txt"
-	echo "--lm ../../models/lm.binary  --trie ../../models/trie --audio ../../audio/8455-210777-0068.wav -t"
+	echo "./deepspeech --model <path-to>/output_graph.pb --alphabet <path-to>/models/alphabet.txt"
+	echo "--lm <path-to>/models/lm.binary  --trie <path-to>/models/trie --audio .<path-to>/audio/8455-210777-0068.wav -t"
 fi
 
