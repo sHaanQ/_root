@@ -12,6 +12,7 @@ echo "--------------------------------------------------------------------"
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes ) git clone https://github.com/mozilla/DeepSpeech.git
+			git checkout tags/v0.2.0-alpha.8
 			  break;;
 		No  ) break;;
 	esac
