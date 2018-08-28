@@ -2,9 +2,9 @@
 
 
 if [ -z "$1" ]; then
-	echo "Specify the number of cores to use for building"
-	echo "Usage: $0 <no-of-cores>"
-	echo "Ex: $0 4"
+	echo "Specify the number of jobs to Run for building"
+	echo "Usage: $0 <no-of-jobs>"
+	echo "Ex: $0 300"
 	exit 1
 fi
 
