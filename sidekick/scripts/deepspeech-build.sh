@@ -103,7 +103,7 @@ echo "Get back to building DeepSpeech"
 echo "Before building the DeepSpeech client libraries, you will need to prepare your"
 echo "environment to configure and build TensorFlow."
 echo "--------------------------------------------------------------------"
-cd ./tensorflow
+cd ~/nlp/tensorflow
 
 # Using CPU optimizations:
 # -mtune=generic -march=x86-64 -msse -msse2 -msse3 -msse4.1 -msse4.2 -mavx.
