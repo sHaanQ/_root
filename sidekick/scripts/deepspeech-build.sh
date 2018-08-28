@@ -64,18 +64,22 @@ then
 		sudo apt-get -y install python3-numpy python3-dev python3-pip python3-wheel
 		pip install six numpy wheel
 		pip3 install six numpy wheel
-		 
+
 		# Install Bazel
 		echo "Pull Bazel 0.11.1"
 		wget --no-check-certificate https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel_0.11.1-linux-x86_64.deb
 		sudo dpkg -i bazel_0.11.1-linux-x86_64.deb
 		export PATH="$PATH:$HOME/bin"
-	else
-		# Packages are present
+
 		echo "--------------------------------------------------------------------"
-	 	echo "All packages are present"
+	 	echo "ALL Packages installed"
 		echo "--------------------------------------------------------------------"
-	fi
+	fi	 
+else
+	# Packages are present
+	echo "--------------------------------------------------------------------"
+ 	echo "All packages are present"
+	echo "--------------------------------------------------------------------"
 fi
 
 # # Proxy settings
@@ -96,7 +100,7 @@ fi
 
 # All generated libs @ location 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`/tensorflow/bazel-bin/native_client
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/nlp/tensorflow/bazel-bin/native_client
 
 echo "--------------------------------------------------------------------"
 echo "Get back to building DeepSpeech"
@@ -129,7 +133,7 @@ bazel build --jobs $1 --config=monolithic  -c opt --copt=-O3 --copt="-D_GLIBCXX_
 	//native_client:generate_trie --verbose_failures --action_env=LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
 
 # Build Tensorflow
-ln -s ../DeepSpeech/native_client/ ./
+ln -s ~/nlp/DeepSpeech/native_client/ ./
 
 # Build TF pip package
 echo "--------------------------------------------------------------------"
@@ -146,6 +150,7 @@ cd ../DeepSpeech/native_client
 echo "--------------------------------------------------------------------"
 echo "Make DeepSpeech"
 echo "--------------------------------------------------------------------"
+make clean
 make deepspeech
 
 if [ ! -f ~/nlp/DeepSpeech/native_client/deepspeech ]; then
@@ -157,7 +162,7 @@ else
 	echo "--------------*****************------------------"
    	echo "DeepSpeech build SUCCESSFUL"
 	echo "--------------*****************------------------"
-	echo "Build Completed, swicth to ~/nlp/DeepSpeech/native_client/ directory and Run"
+	echo "Build Completed, switch to ~/nlp/DeepSpeech/native_client/ directory and Run"
 	echo "./deepspeech --model ../../models/output_graph.pb --alphabet ../../models/alphabet.txt"
 	echo "--lm ../../models/lm.binary  --trie ../../models/trie --audio ../../audio/8455-210777-0068.wav -t"
 fi
