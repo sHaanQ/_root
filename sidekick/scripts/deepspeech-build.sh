@@ -139,7 +139,11 @@ ln -s ~/nlp/DeepSpeech/native_client/ ./
 echo "--------------------------------------------------------------------"
 echo "Building TensorFlow"
 echo "--------------------------------------------------------------------"
-./configure
+if [ ! -f ~/nlp/tensorflow/.tf_configure.bazelrc ]; then
+	# Control will enter here if file doesn't exist.
+	echo "Running Configure Script for Tensorflow"
+	./configure
+fi
 bazel build --jobs $1 --config=opt --copt="-D_GLIBCXX_USE_CXX11_ABI=0" --copt=-mtune=generic --copt=-march=x86-64 --copt=-msse \
 	 --copt=-msse2 --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx --copt=-mavx2 --copt=-mfma \
 	 //tensorflow/tools/pip_package:build_pip_package --verbose_failures --action_env=LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
