@@ -8,43 +8,60 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
-# Prepare system
-echo "****************************"
-echo "DeepSpeech Native Builder"
-echo "Running from ~/nlp directory"
-echo "****************************"
-
-DIRECTORY=~/nlp
-if [ ! -d "$DIRECTORY" ]; then
-   # Control will enter here if $DIRECTORY doesn't exist.
-   mkdir ~/nlp
+if [ -z "$NLP" ]; then
+	# Enter here if NLP is Blank
+	echo "Let's set your workspace..."
+	echo "Mention a directory path to setup everything or I'll panic"
+	echo "I'm not very smart..."
+	read -p "Enter workspace path: " NLP_PATH
+	#eval NLP_PATH=$NLP_PATH		# Do Not Use This !!
+	NLP_PATH="${NLP_PATH/#\~/$HOME}"
+	echo "Workspace @ $NLP_PATH"
+	echo ""
+	echo "export NLP=$NLP_PATH" >> ~/.zshrc
+	echo "export NLP=$NLP_PATH" >> ~/.bashrc
+	NLP=$NLP_PATH
+else
+	echo "Environment variable NLP is set to"
+	echo $NLP
 fi
 
+if [ ! -d "$NLP" ]; then
+   # Control will enter here if DIRECTORY doesn't exist @ NLP_PATH.
+   mkdir $NLP
+fi
+
+# Prepare system
+echo "********************************************************************"
+echo "DeepSpeech Native Builder"
+echo "Running from $NLP directory"
+echo "********************************************************************"
+
 # Switch to nlp directory
-cd ~/nlp
+cd $NLP
 
 echo "--------------------------------------------------------------------"
 echo "Pull DeepSpeech ?"
 echo "--------------------------------------------------------------------"
-DIRECTORY=~/nlp/DeepSpeech
+DIRECTORY=$NLP/DeepSpeech
 if [ ! -d "$DIRECTORY" ]; then
 	# Control will enter here if DeepSpeech repository is not found
 	echo "Cloning DeepSpeech"
 	git clone https://github.com/mozilla/DeepSpeech.git
-	cd ~/nlp/DeepSpeech
+	cd $DIRECTORY
 	git checkout tags/v0.2.0-alpha.8
-	cd ~/nlp	
+	cd $NLP
 else
 	echo "DeepSpeech Repo found"
-	cd ~/nlp/DeepSpeech
+	cd $DIRECTORY
 	git checkout tags/v0.2.0-alpha.8
-	cd ~/nlp
+	cd $NLP
 fi
 
 echo "--------------------------------------------------------------------"
 echo "Pull Mozilla Tensorflow ?"
 echo "--------------------------------------------------------------------"
-DIRECTORY=~/nlp/tensorflow
+DIRECTORY=$NLP/tensorflow
 if [ ! -d "$DIRECTORY" ]; then
 	echo "Cloning mozilla/TensorFlow"
 	git clone https://github.com/mozilla/tensorflow.git
@@ -58,23 +75,34 @@ then
 	if [ $(dpkg-query -W -f='${Status}' openjdk-8-jdk 2>/dev/null | grep -c "ok installed") -eq 0 ];
 	then
 	  	# Fetch Packages
+		echo "--------------------------------------------------------------------"
+	  	echo "Fetching Packages"
+		echo "--------------------------------------------------------------------"
 		sudo apt-get update
 		sudo apt-get -y install pkg-config zip g++ openjdk-8-jdk zlib1g-dev unzip python libsox-dev coreutils
 		sudo apt-get -y install python-numpy python-dev python-pip python-wheel
 		sudo apt-get -y install python3-numpy python3-dev python3-pip python3-wheel
 		pip install six numpy wheel
 		pip3 install six numpy wheel
+	fi
 
-		# Install Bazel
-		echo "Pull Bazel 0.11.1"
+	echo "--------------------------------------------------------------------"
+	echo "ALL Packages installed"
+	echo "--------------------------------------------------------------------"
+
+	# Install Bazel
+	echo "Pull Bazel 0.11.1"
+	if [ ! -f ./bazel_0.11.1-linux-x86_64.deb ]; then
+		# Control will enter here if file doesn't exist.
 		wget --no-check-certificate https://github.com/bazelbuild/bazel/releases/download/0.11.1/bazel_0.11.1-linux-x86_64.deb
-		sudo dpkg -i bazel_0.11.1-linux-x86_64.deb
-		export PATH="$PATH:$HOME/bin"
+	fi
+	sudo dpkg -i bazel_0.11.1-linux-x86_64.deb
+	export PATH="$PATH:$HOME/bin"
 
-		echo "--------------------------------------------------------------------"
-	 	echo "ALL Packages installed"
-		echo "--------------------------------------------------------------------"
-	fi	 
+	echo "--------------------------------------------------------------------"
+	echo "Bazel installed"
+	echo "--------------------------------------------------------------------"
+
 else
 	# Packages are present
 	echo "--------------------------------------------------------------------"
@@ -100,14 +128,17 @@ fi
 
 # All generated libs @ location 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/nlp/tensorflow/bazel-bin/native_client
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NLP/tensorflow/bazel-bin/native_client
+echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NLP/tensorflow/bazel-bin/native_client" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NLP/tensorflow/bazel-bin/native_client" >> ~/.zshrc
 
 echo "--------------------------------------------------------------------"
 echo "Get back to building DeepSpeech"
 echo "Before building the DeepSpeech client libraries, you will need to prepare your"
 echo "environment to configure and build TensorFlow."
 echo "--------------------------------------------------------------------"
-cd ~/nlp/tensorflow
+cd $NLP/tensorflow
+echo "Working @ $PWD"
 
 # Using CPU optimizations:
 # -mtune=generic -march=x86-64 -msse -msse2 -msse3 -msse4.1 -msse4.2 -mavx.
@@ -133,13 +164,13 @@ bazel build --jobs $1 --config=monolithic  -c opt --copt=-O3 --copt="-D_GLIBCXX_
 	//native_client:generate_trie --verbose_failures --action_env=LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
 
 # Build Tensorflow
-ln -s ~/nlp/DeepSpeech/native_client/ ./
+ln -s $NLP/DeepSpeech/native_client/ ./
 
 # Build TF pip package
 echo "--------------------------------------------------------------------"
 echo "Building TensorFlow"
 echo "--------------------------------------------------------------------"
-if [ ! -f ~/nlp/tensorflow/.tf_configure.bazelrc ]; then
+if [ ! -f $NLP/tensorflow/.tf_configure.bazelrc ]; then
 	# Control will enter here if file doesn't exist.
 	echo "Running Configure Script for Tensorflow"
 	./configure
@@ -150,14 +181,14 @@ bazel build --jobs $1 --config=opt --copt="-D_GLIBCXX_USE_CXX11_ABI=0" --copt=-m
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 pip install /tmp/tensorflow_pkg/*.whl
 
-cd ../DeepSpeech/native_client
+cd $NLP/DeepSpeech/native_client
 echo "--------------------------------------------------------------------"
 echo "Make DeepSpeech"
 echo "--------------------------------------------------------------------"
 make clean
 make deepspeech
 
-if [ ! -f ~/nlp/DeepSpeech/native_client/deepspeech ]; then
+if [ ! -f $NLP/DeepSpeech/native_client/deepspeech ]; then
    	# Control will enter here if file doesn't exist.
 	echo "--------------*************----------------------"
    	echo "DeepSpeech build FAILED"
@@ -166,7 +197,7 @@ else
 	echo "--------------*****************------------------"
    	echo "DeepSpeech build SUCCESSFUL"
 	echo "--------------*****************------------------"
-	echo "Build Completed, switch to ~/nlp/DeepSpeech/native_client/ directory and Run"
+	echo "Build Completed, switch to $NLP/DeepSpeech/native_client/ directory and Run"
 	echo "./deepspeech --model <path-to>/output_graph.pb --alphabet <path-to>/models/alphabet.txt"
 	echo "--lm <path-to>/models/lm.binary  --trie <path-to>/models/trie --audio .<path-to>/audio/8455-210777-0068.wav -t"
 fi
